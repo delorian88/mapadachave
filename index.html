@@ -299,8 +299,19 @@ const q = new URLSearchParams(location.search), fwd = new URLSearchParams();
 if (p && !fwd.get("utm_content")) fwd.set("utm_content", p);
 document.querySelectorAll("[data-checkout]").forEach(a => {
   a.href = CHECKOUT_URL + (fwd.toString() ? "?" + fwd : "");
-  a.addEventListener("click", () => { if (window.fbq) fbq("track", "InitiateCheckout", {value: 47, currency: "BRL"}); });
+  a.addEventListener("click", () => { if (window.fbq) fbq("track", "InitiateCheckout", {value: 47, currency: "BRL"}); bater("comprar"); });
 });
+function bater(ev) {
+  try {
+    const PAINEL = "https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec";
+    let s = sessionStorage.getItem("mc_s"); if (!s) { s = Math.random().toString(36).slice(2, 12); sessionStorage.setItem("mc_s", s); }
+    const b = new URLSearchParams({t: "acesso", k: "4693750f13", ev, pg: location.pathname + (p ? "?publico=" + p : ""), ref: document.referrer,
+      src: q.get("utm_source") || "", med: q.get("utm_medium") || "", cmp: q.get("utm_campaign") || "", cnt: q.get("utm_content") || "", pub: p || "",
+      gc: q.get("gclid") ? "1" : "", fb: q.get("fbclid") ? "1" : "", dv: /Mobi|Android|iPhone/i.test(navigator.userAgent) ? "celular" : "computador", s});
+    navigator.sendBeacon ? navigator.sendBeacon(PAINEL + "?" + b) : fetch(PAINEL + "?" + b, {method: "POST", mode: "no-cors", keepalive: true});
+  } catch (e) {}
+}
+bater("visita");
 </script>
 </body>
 </html>
