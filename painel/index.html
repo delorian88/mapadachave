@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#05070c">
+<title>Observatório · Mapa da Chave</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icone-192.png">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link rel="preconnect" href="https://script.google.com"><link rel="preconnect" href="https://script.googleusercontent.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cinzel+Decorative:wght@700&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070c;--bg2:#0a0f17;--pn:rgba(13,19,28,.82);--ln:rgba(140,220,205,.13);--ln2:rgba(232,194,122,.22);
+  --tx:#e9edf2;--tx2:#9aa8b6;--tx3:#5d6b7a;
+  --ouro:#e8c27a;--brasa:#ff9a3c;--meta:#5aa9ff;--google:#f7d154;--site:#3ef0d8;--elfo:#7cf0b0;--viol:#b48cff;--stop:#ff6b6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--tx);font-family:'Chakra Petch',system-ui,sans-serif;font-size:13px}
+body::before{content:"";position:fixed;inset:0;z-index:-2;
+  background:radial-gradient(900px 600px at 8% -10%,rgba(62,240,216,.10),transparent 60%),
+             radial-gradient(800px 600px at 105% 110%,rgba(180,140,255,.12),transparent 60%),
+             radial-gradient(600px 400px at 60% 40%,rgba(232,194,122,.05),transparent 70%),var(--bg)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(140,220,205,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(140,220,205,.035) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 85%)}
+.app{display:grid;grid-template-columns:224px 1fr;min-height:100vh}
+
+/* ── barra lateral ── */
+nav{position:sticky;top:0;height:100vh;padding:26px 16px;border-right:1px solid var(--ln);background:linear-gradient(180deg,rgba(10,15,23,.92),rgba(5,7,12,.92))}
+.selo{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:30px}
+.selo .anel{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--ln2);
+  box-shadow:0 0 24px rgba(255,154,60,.25),inset 0 0 18px rgba(255,154,60,.12);background:radial-gradient(circle,rgba(255,154,60,.12),transparent 70%)}
+.selo b{font-family:Cinzel,serif;font-weight:600;letter-spacing:.32em;font-size:12px;color:var(--ouro)}
+.selo i{font-style:normal;font-size:9.5px;letter-spacing:.4em;color:var(--tx3)}
+.fil{height:14px;margin:6px 4px 14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14'%3E%3Cpath d='M0 7H86M114 7H200' stroke='%23e8c27a' stroke-opacity='.35'/%3E%3Cpath d='M100 1 106 7 100 13 94 7Z' fill='none' stroke='%23e8c27a' stroke-opacity='.7'/%3E%3Ccircle cx='100' cy='7' r='1.6' fill='%23e8c27a'/%3E%3Cpath d='M86 7q4-4 8 0M114 7q-4-4-8 0' fill='none' stroke='%23e8c27a' stroke-opacity='.5'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+nav a{display:flex;align-items:center;gap:12px;padding:11px 14px;margin:3px 0;border-radius:4px;color:var(--tx2);cursor:pointer;
+  font-weight:500;letter-spacing:.04em;position:relative;border:1px solid transparent;transition:.2s}
+nav a:hover{color:var(--tx);background:rgba(140,220,205,.04)}
+nav a.on{color:var(--tx);border-color:var(--ln);background:linear-gradient(90deg,rgba(62,240,216,.10),transparent)}
+nav a.on::before{content:"";position:absolute;left:-1px;top:8px;bottom:8px;width:2px;background:var(--site);box-shadow:0 0 10px var(--site)}
+nav a svg{width:16px;height:16px;flex:none;opacity:.85}
+.rod{position:absolute;bottom:22px;left:16px;right:16px;font-size:10.5px;color:var(--tx3);letter-spacing:.08em;text-align:center}
+
+/* ── topo ── */
+main{padding:26px 30px 48px;max-width:1320px}
+.topo{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+.topo h1{font-family:Cinzel,serif;font-weight:600;font-size:26px;letter-spacing:.14em;color:var(--tx);text-shadow:0 0 22px rgba(232,194,122,.18)}
+.topo small{display:block;font-size:10.5px;letter-spacing:.38em;color:var(--tx3);margin-top:4px}
+.per{display:flex;border:1px solid var(--ln);border-radius:4px;overflow:hidden}
+.per button{background:transparent;border:0;border-right:1px solid var(--ln);color:var(--tx2);padding:8px 16px;font:500 12px 'Chakra Petch';letter-spacing:.06em;cursor:pointer}
+.per button:last-child{border-right:0}
+.per button.on{color:#05070c;background:var(--site);box-shadow:0 0 14px rgba(62,240,216,.5)}
+
+/* ── painéis ── */
+.gr{display:grid;gap:16px;margin-bottom:16px}
+.g5{grid-template-columns:repeat(5,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}.g21{grid-template-columns:2fr 1fr}.g12{grid-template-columns:1fr 2fr}
+.p{position:relative;background:var(--pn);border:1px solid var(--ln);border-radius:6px;padding:18px 20px;backdrop-filter:blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.03)}
+.p::before,.p::after{content:"";position:absolute;width:14px;height:14px;border:1px solid var(--ouro);opacity:.55}
+.p::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-top-left-radius:6px}
+.p::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-bottom-right-radius:6px}
+.p h3{font-family:'Cinzel Decorative',Cinzel,serif;font-size:11.5px;font-weight:600;letter-spacing:.24em;color:var(--ouro);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.p h3 .dot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 10px currentColor}
+.chip{position:absolute;top:16px;right:18px;font-size:10px;letter-spacing:.14em;color:var(--tx3);text-transform:uppercase}
+
+/* KPI */
+.k{min-height:112px;display:flex;flex-direction:column}
+.k .t{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--tx2);white-space:nowrap}
+.k .v{font-size:28px;font-weight:600;margin:10px 0 4px;letter-spacing:.01em;line-height:1}
+.k .d{margin-top:auto;font-size:11px;color:var(--tx3);white-space:nowrap;letter-spacing:.03em}
+.d.up{color:var(--elfo)}.d.dn{color:var(--stop)}
+.k .barra{position:absolute;left:20px;right:20px;bottom:0;height:2px;border-radius:2px;opacity:.85}
+
+/* plataforma */
+.plat .cab{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.plat .cab .nm{display:flex;align-items:center;gap:12px;font-family:Cinzel,serif;font-size:15px;letter-spacing:.2em;font-weight:600}
+.plat .cab .inv{text-align:right}
+.plat .cab .inv b{font-size:26px;font-weight:600;display:block;line-height:1}
+.plat .cab .inv>span{font-size:10px;letter-spacing:.2em;color:var(--tx3);text-transform:uppercase}
+.mg{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ln)}
+.mg div{padding:12px 0 10px;border-bottom:1px solid var(--ln)}
+.mg div:not(:nth-child(4n+1)){padding-left:14px;border-left:1px solid var(--ln)}
+.mg span{display:block;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:6px;white-space:nowrap}
+.mg b{font-size:17px;font-weight:600}
+.spark{margin-top:14px;height:46px}
+
+/* barras */
+.bar{display:grid;grid-template-columns:132px 1fr 92px;gap:12px;align-items:center;margin:9px 0}
+.bar:first-child{margin-top:0}
+.bar .n{color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .tr{height:6px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
+.bar .tr i{display:block;height:100%;border-radius:3px}
+.bar .x{text-align:right;white-space:nowrap;color:var(--tx)}
+.bar .x small{color:var(--tx3);margin-left:4px}
+
+/* tabela */
+table{width:100%;border-collapse:collapse}
+th{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--tx3);font-weight:500;text-align:right;padding:0 8px 10px;border-bottom:1px solid var(--ln)}
+td{padding:10px 8px;text-align:right;border-bottom:1px solid rgba(140,220,205,.06);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;padding-left:0}
+th:last-child,td:last-child{padding-right:0}
+td:first-child{white-space:normal;color:var(--tx)}
+.rol{max-height:300px;overflow-y:auto}
+.rol::-webkit-scrollbar{width:4px}.rol::-webkit-scrollbar-thumb{background:var(--ln)}
+.vazio{color:var(--tx3);text-align:center;padding:26px 0;letter-spacing:.12em;font-size:11px;text-transform:uppercase}
+
+/* funil */
+.fn{display:flex;flex-direction:column;gap:10px}
+.fe{display:grid;grid-template-columns:190px 1fr 120px 110px 140px;gap:18px;align-items:center}
+.fe.h span{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--tx3);text-align:right}.fe.h span:first-child{text-align:left}
+.fe .lb{font-family:Cinzel,serif;letter-spacing:.14em;font-size:12px;color:var(--tx2)}
+.fe .tr{height:34px;position:relative}
+.fe .tr i{position:absolute;left:50%;transform:translateX(-50%);height:100%;border-radius:3px;
+  background:linear-gradient(90deg,rgba(62,240,216,.08),rgba(62,240,216,.55),rgba(62,240,216,.08));border:1px solid rgba(62,240,216,.5);box-shadow:0 0 16px rgba(62,240,216,.25)}
+.fe:last-child .tr i{background:linear-gradient(90deg,rgba(255,154,60,.1),rgba(255,154,60,.7),rgba(255,154,60,.1));border-color:rgba(255,154,60,.7);box-shadow:0 0 20px rgba(255,154,60,.45)}
+.fe .vv{font-size:20px;font-weight:600;text-align:right}
+.fe .tx{text-align:right;font-size:15px;font-weight:500}.fe .tx.c{color:var(--site)}
+
+.leg{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:10.5px;letter-spacing:.1em;color:var(--tx2)}
+.leg span{display:flex;align-items:center;gap:7px}.leg i{width:8px;height:8px;border-radius:2px}
+svg text{font-family:'Chakra Petch',sans-serif;font-size:10px;fill:var(--tx3)}
+.sec{display:none}.sec.on{display:block;animation:sobe .35s ease}
+@keyframes sobe{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.btn{background:transparent;border:1px solid var(--site);color:var(--site);padding:10px 18px;border-radius:4px;font:500 12px 'Chakra Petch';letter-spacing:.12em;cursor:pointer;text-transform:uppercase}
+.btn:hover{background:rgba(62,240,216,.1);box-shadow:0 0 14px rgba(62,240,216,.3)}
+.st{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.st.OK{color:var(--elfo)}.st.ERRO{color:var(--stop)}.st.PENDENTE,.st.AVISO{color:var(--brasa)}
+#carga{position:fixed;inset:0;display:grid;place-items:center;background:rgba(5,7,12,.75);font-family:Cinzel,serif;letter-spacing:.4em;color:var(--ouro);z-index:9}
+
+.fxg{display:grid;grid-template-columns:repeat(6,1fr);text-align:center}
+.fxl{font-family:Cinzel,serif;letter-spacing:.16em;font-size:11.5px;color:var(--ouro);padding:4px 0 14px;text-transform:uppercase}
+.fxv{padding-top:16px;display:flex;flex-direction:column;gap:6px}.fxv b{font-size:24px;font-weight:600}
+.fxv span{font-size:12px;color:var(--tx2);min-height:15px}.fxv span.c{color:var(--site);font-weight:600}
+.fio{stroke-dasharray:3 14;animation:corre 6s linear infinite}@keyframes corre{to{stroke-dashoffset:-170}}
+.p:not(.plat):not(.orn)::before,.p:not(.plat):not(.orn)::after{display:none}
+.runas{animation:runa 14s linear infinite}
+@keyframes runa{to{background-position-x:264px}}
+.elfico{font-family:'Cinzel Decorative',Cinzel,serif;font-style:italic;color:var(--ouro);opacity:.75;letter-spacing:.12em}
+#frase{font-size:12.5px;margin-top:6px;text-shadow:0 0 12px rgba(232,194,122,.35)}
+.rod .elfico{display:block;font-size:11px;margin-bottom:10px;opacity:.6}
+[data-dica]{position:relative;cursor:help;border-bottom:1px dotted rgba(232,194,122,.45)}
+[data-dica]:hover::after{content:attr(data-dica);position:absolute;left:0;top:calc(100% + 8px);z-index:20;width:max-content;max-width:240px;white-space:normal;
+  padding:9px 12px;background:#0b1119;border:1px solid var(--ln2);border-radius:4px;box-shadow:0 8px 24px rgba(0,0,0,.6),0 0 14px rgba(232,194,122,.12);
+  font:500 11.5px/1.45 'Chakra Petch',sans-serif;letter-spacing:.02em;text-transform:none;color:var(--tx);text-align:left}
+th[data-dica]:hover::after{left:auto;right:0}
+#porta{position:fixed;inset:0;display:none;place-items:center;z-index:10;background:rgba(5,7,12,.92)}
+#porta form{display:flex;flex-direction:column;align-items:center;gap:18px}
+#porta input{background:transparent;border:0;border-bottom:1px solid var(--ln2);color:var(--ouro);font:600 18px 'Chakra Petch';letter-spacing:.4em;text-align:center;width:260px;padding:8px;outline:none}
+#porta input:focus{border-color:var(--ouro);box-shadow:0 8px 16px -10px rgba(232,194,122,.6)}
+#carga .runas{width:220px;margin-top:16px}
+/* ── ornamentos élficos ── */
+nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:330px;z-index:0;opacity:1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20520%27%20fill%3D%27none%27%20stroke%3D%27%23e8c27a%27%20stroke-linecap%3D%27round%27%3E%3Cg%20stroke-opacity%3D%27.42%27%3E%3Cpath%20d%3D%27M200%20520V300%27/%3E%3Cpath%20d%3D%27M200%20300C200%20220%20140%20200%20120%20130M200%20300C200%20220%20260%20200%20280%20130M200%20330C160%20300%2090%20300%2050%20240M200%20330C240%20300%20310%20300%20350%20240M200%20270C200%20200%20200%20140%20200%2060M120%20130C110%2090%20130%2060%20150%2040M280%20130C290%2090%20270%2060%20250%2040M50%20240C30%20210%2040%20180%2060%20160M350%20240C370%20210%20360%20180%20340%20160%27/%3E%3Cpath%20d%3D%27M200%20520c-30-20-70-20-110-10M200%20520c30-20%2070-20%20110-10%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.3%27%20stroke%3D%27none%27%3E%3Cellipse%20cx%3D%27150%27%20cy%3D%2740%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-40%20150%2040%29%27/%3E%3Cellipse%20cx%3D%27250%27%20cy%3D%2740%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2840%20250%2040%29%27/%3E%3Cellipse%20cx%3D%27200%27%20cy%3D%2760%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%280%20200%2060%29%27/%3E%3Cellipse%20cx%3D%2760%27%20cy%3D%27160%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-60%2060%20160%29%27/%3E%3Cellipse%20cx%3D%27340%27%20cy%3D%27160%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2860%20340%20160%29%27/%3E%3Cellipse%20cx%3D%27120%27%20cy%3D%27130%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-30%20120%20130%29%27/%3E%3Cellipse%20cx%3D%27280%27%20cy%3D%27130%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2830%20280%20130%29%27/%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%27240%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-80%2050%20240%29%27/%3E%3Cellipse%20cx%3D%27350%27%20cy%3D%27240%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2880%20350%20240%29%27/%3E%3Cellipse%20cx%3D%27170%27%20cy%3D%2790%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-20%20170%2090%29%27/%3E%3Cellipse%20cx%3D%27230%27%20cy%3D%2790%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2820%20230%2090%29%27/%3E%3Cellipse%20cx%3D%27100%27%20cy%3D%27190%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-50%20100%20190%29%27/%3E%3Cellipse%20cx%3D%27300%27%20cy%3D%27190%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2850%20300%20190%29%27/%3E%3Cellipse%20cx%3D%27140%27%20cy%3D%2760%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-60%20140%2060%29%27/%3E%3Cellipse%20cx%3D%27260%27%20cy%3D%2760%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2860%20260%2060%29%27/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
+.p::before,.p::after{width:58px;height:58px;border:0!important;opacity:.9;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2060%2060%27%20fill%3D%27none%27%20stroke%3D%27%23e8c27a%27%20stroke-linecap%3D%27round%27%3E%3Cpath%20d%3D%27M1%2059V22C1%2010%2010%201%2022%201h37%27%20stroke-opacity%3D%27.75%27/%3E%3Cpath%20d%3D%27M6%2052V25C6%2015%2014%206%2025%206h26%27%20stroke-opacity%3D%27.35%27/%3E%3Cpath%20d%3D%27M6%2030C12%2028%2015%2023%2015%2016%27%20stroke-opacity%3D%27.7%27/%3E%3Cpath%20d%3D%27M15%2016c4-1%207%201%208%205-4%201-7-1-8-5z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.35%27/%3E%3Cpath%20d%3D%27M30%206c-1%206-6%209-12%209%27%20stroke-opacity%3D%27.7%27/%3E%3Cpath%20d%3D%27M18%2015c-1-4%201-7%205-8%201%204-1%207-5%208z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.25%27/%3E%3Cpath%20d%3D%27M6%2040c-3-3-3-7%200-10%203%203%203%207%200%2010z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.3%27/%3E%3Cpath%20d%3D%27M40%206c-3-3-7-3-10%200%203%203%207%203%2010%200z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.3%27/%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%271.6%27%20fill%3D%27%23e8c27a%27/%3E%3C/svg%3E") center/contain no-repeat}
+.p::before{top:-10px;left:-10px}
+.p::after{bottom:-10px;right:-10px;transform:rotate(180deg)}
+.runas{height:18px;margin:12px 0 0;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20132%2028%27%20fill%3D%27none%27%20stroke%3D%27%23e8c27a%27%20stroke-width%3D%271.3%27%20stroke-linecap%3D%27round%27%20stroke-opacity%3D%27.55%27%3E%3Cg%20transform%3D%27translate%280%200%29%27%3E%3Cpath%20d%3D%27M6%204v20M6%206c6%200%206%208%200%208%27/%3E%3C/g%3E%3Cg%20transform%3D%27translate%2822%200%29%27%3E%3Cpath%20d%3D%27M4%2024V8c0-4%208-4%208%200v16%27/%3E%3C/g%3E%3Cg%20transform%3D%27translate%2844%200%29%27%3E%3Cpath%20d%3D%27M8%204v20M3%2010c3%203%207%203%2010%200%27/%3E%3C/g%3E%3Cg%20transform%3D%27translate%2866%200%29%27%3E%3Cpath%20d%3D%27M5%204c6%204%206%2016%200%2020M11%204v20%27/%3E%3C/g%3E%3Cg%20transform%3D%27translate%2888%200%29%27%3E%3Cpath%20d%3D%27M8%202v24M4%208c2%202%206%202%208%200M4%2018c2-2%206-2%208%200%27/%3E%3C/g%3E%3Cg%20transform%3D%27translate%28110%200%29%27%3E%3Cpath%20d%3D%27M4%2024c0-10%208-10%208-20M4%206h8%27/%3E%3C/g%3E%3C/svg%3E") left center/auto 18px repeat-x;opacity:.8;mask-image:linear-gradient(90deg,#000 40%,transparent)}
+.selo .runas{width:150px;margin:2px auto 0;mask-image:linear-gradient(90deg,transparent,#000 25%,#000 75%,transparent)}
+.p h3::before{content:"";width:12px;height:12px;flex:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2012%2012%27%3E%3Cpath%20d%3D%27M6%200C9%203%209%209%206%2012%203%209%203%203%206%200z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.8%27/%3E%3Cpath%20d%3D%27M6%201v10%27%20stroke%3D%27%2305070c%27%20stroke-width%3D%27.6%27/%3E%3C/svg%3E") center/contain no-repeat}
+.p h3:has(.dot)::before{display:none}
+.selo .anel{position:relative}
+.selo .anel::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px dashed rgba(232,194,122,.35);animation:gira 60s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.topo h1,.selo b{font-family:'Cinzel Decorative',Cinzel,serif}
+@media(max-width:1000px){.app{grid-template-columns:1fr}nav{display:none}.g5,.g4,.g3,.g2,.g21,.g12{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<nav>
+  <div class="selo">
+    <div class="anel"><svg width="30" height="30" viewBox="0 0 40 40"><g transform="translate(9 28) rotate(-38)" fill="none" stroke="#ff9a3c" stroke-width="2.6" stroke-linecap="round" style="filter:drop-shadow(0 0 4px #ff9a3c)"><circle r="6.5"/><circle r="2"/><path d="M6.5 0H25M20 0V4.5M23.5 0V5.5"/></g></svg></div>
+    <b>MAPA DA CHAVE</b><div class="runas"></div>
+  </div>
+  <div class="fil"></div>
+  <a data-s="geral" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg>Visão geral</a>
+  <a data-s="funil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg>Funil</a>
+  <a data-s="publico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-4 3.4-6 6.5-6s5.7 2 6.5 6"/><path d="M16 4.5a3.5 3.5 0 010 7M18.5 14c1.7.8 2.7 3 3 6"/></svg>Público</a>
+  <a data-s="vendas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9z"/><path d="M12 11l8-4.5M12 11L4 6.5M12 11v9"/></svg>Vendas</a>
+  <div class="fil"></div>
+  <a data-s="dados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>Dados</a>
+  <div class="rod"><span class="elfico">Elen síla lúmenn' omentielvo</span><span id="gerado"></span></div>
+</nav>
+<main>
+  <div class="topo"><div><h1 id="tit">VISÃO GERAL</h1><small id="sub">ÚLTIMOS 14 DIAS</small><div class="elfico" id="frase">Mae govannen</div><div class="runas" style="width:260px"></div></div>
+    <div class="per"><button data-d="7">7D</button><button data-d="14" class="on">14D</button><button data-d="30">30D</button><button data-d="90">90D</button></div></div>
+
+  <!-- VISÃO GERAL -->
+  <section class="sec on" id="s-geral">
+    <div class="gr g5" id="kGeral"></div>
+    <div class="gr g2"><div class="p plat" id="pGoogle"></div><div class="p plat" id="pMeta"></div></div>
+    <div class="gr g2">
+      <div class="p"><h3>Acessos ao site</h3><span class="chip pchip"></span><div id="gAcessos"></div><div class="leg" id="legAc"></div></div>
+      <div class="p"><h3>De onde vêm</h3><span class="chip pchip"></span><div class="rol" id="bOrigem"></div></div>
+    </div>
+    <div class="gr g2">
+      <div class="p"><h3>Páginas</h3><span class="chip pchip"></span><div class="rol"><table id="tPag"></table></div></div>
+      <div class="p"><h3>Investimento × vendas</h3><span class="chip pchip"></span><div id="gSerie"></div>
+        <div class="leg"><span><i style="background:var(--google)"></i>Google</span><span><i style="background:var(--meta)"></i>Meta</span><span><i style="background:var(--brasa)"></i>Vendas</span></div></div>
+    </div>
+  </section>
+
+  <!-- FUNIL -->
+  <section class="sec" id="s-funil">
+    <div class="gr g5" id="kFunil"></div>
+    <div class="p orn" style="margin-bottom:16px"><h3>Jornada completa</h3><span class="chip" id="desde"></span><div class="fn" id="fnTotal"></div></div>
+    <div class="gr g3" id="destaques"></div>
+  </section>
+
+  <!-- PÚBLICO -->
+  <section class="sec" id="s-publico">
+    <div class="gr g2"><div class="p"><h3><span class="dot" style="background:var(--meta);color:var(--meta)"></span>Idade · Meta</h3><span class="chip pchip"></span><div id="pMidade"></div></div>
+      <div class="p"><h3><span class="dot" style="background:var(--google);color:var(--google)"></span>Idade · Google</h3><span class="chip pchip"></span><div id="pGidade"></div></div></div>
+    <div class="gr g2"><div class="p"><h3><span class="dot" style="background:var(--meta);color:var(--meta)"></span>Gênero · Meta</h3><span class="chip pchip"></span><div id="pMgenero"></div></div>
+      <div class="p"><h3><span class="dot" style="background:var(--google);color:var(--google)"></span>Gênero · Google</h3><span class="chip pchip"></span><div id="pGgenero"></div></div></div>
+    <div class="gr g2"><div class="p"><h3><span class="dot" style="background:var(--meta);color:var(--meta)"></span>Estados · Meta</h3><span class="chip pchip"></span><div class="rol" id="pMestado"></div></div>
+      <div class="p"><h3><span class="dot" style="background:var(--google);color:var(--google)"></span>Estados · Google</h3><span class="chip pchip"></span><div class="rol" id="pGestado"></div></div></div>
+    <div class="gr g3">
+      <div class="p"><h3><span class="dot" style="background:var(--meta);color:var(--meta)"></span>Posicionamento</h3><span class="chip pchip"></span><div class="rol" id="pMposicionamento"></div></div>
+      <div class="p"><h3><span class="dot" style="background:var(--google);color:var(--google)"></span>Dispositivo</h3><span class="chip pchip"></span><div id="pGdispositivo"></div></div>
+      <div class="p"><h3><span class="dot" style="background:var(--site);color:var(--site)"></span>Dispositivo no site</h3><span class="chip pchip"></span><div id="pSdisp"></div></div>
+    </div>
+    <div class="gr g2">
+      <div class="p"><h3><span class="dot" style="background:var(--meta);color:var(--meta)"></span>Criativos</h3><span class="chip pchip"></span><div class="rol"><table id="tAnun"></table></div></div>
+      <div class="p"><h3><span class="dot" style="background:var(--google);color:var(--google)"></span>Termos pesquisados</h3><span class="chip pchip"></span><div class="rol"><table id="tTermos"></table></div></div>
+    </div>
+  </section>
+
+  <!-- VENDAS -->
+  <section class="sec" id="s-vendas">
+    <div class="gr g4" id="kVendas"></div>
+    <div class="gr g3">
+      <div class="p"><h3>Por origem</h3><span class="chip pchip"></span><div id="vOrigem"></div></div>
+      <div class="p"><h3>Por público</h3><span class="chip pchip"></span><div id="vPublico"></div></div>
+      <div class="p"><h3>Por criativo</h3><span class="chip pchip"></span><div class="rol" id="vConteudo"></div></div>
+    </div>
+  </section>
+
+  <!-- DADOS -->
+  <section class="sec" id="s-dados">
+    <div class="p"><h3>Fontes</h3><table id="tFontes"></table>
+      <div style="margin-top:18px"><button class="btn" id="bSync">Atualizar Meta agora</button></div></div>
+  </section>
+</main>
+</div>
+<div id="carga"><div style="text-align:center"><div class="selo"><div class="anel"><svg width="30" height="30" viewBox="0 0 40 40"><g transform="translate(9 28) rotate(-38)" fill="none" stroke="#ff9a3c" stroke-width="2.6" stroke-linecap="round"><circle r="6.5"/><circle r="2"/><path d="M6.5 0H25M20 0V4.5M23.5 0V5.5"/></g></svg></div></div><div class="runas"></div></div></div>
+<div id="porta"><form id="fPorta"><div class="selo"><div class="anel"><svg width="30" height="30" viewBox="0 0 40 40"><g transform="translate(9 28) rotate(-38)" fill="none" stroke="#ff9a3c" stroke-width="2.6" stroke-linecap="round"><circle r="6.5"/><circle r="2"/><path d="M6.5 0H25M20 0V4.5M23.5 0V5.5"/></g></svg></div></div><div class="elfico">Pedo mellon a minno</div><input id="iChave" type="password" autocomplete="current-password" autofocus></form></div>
+
+<script>
+var API = "https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec";
+var CHAVE = (function(){var q=new URLSearchParams(location.search).get('k');try{if(q){localStorage.setItem('mc_k',q);history.replaceState(null,'',location.pathname)}return q||localStorage.getItem('mc_k')||''}catch(e){return q||''}})();
+var D = null, DIAS = 14, MEM = {};
+function guarda(d,v){MEM[d]=v;try{localStorage.setItem('mc_d'+d,JSON.stringify(v))}catch(e){}}
+function lembra(d){if(MEM[d])return MEM[d];try{var v=localStorage.getItem('mc_d'+d);return v?JSON.parse(v):null}catch(e){return null}}
+function porta(){$('carga').style.display='none';$('porta').style.display='grid';$('iChave').focus()}
+function buscar(d){return fetch(API+'?api=dados&dias='+d+'&k='+encodeURIComponent(CHAVE)).then(function(r){return r.json()})}
+var FRASE={geral:'Mae govannen',funil:'Ai na vedui',publico:'Lasto beth lammen',vendas:'Ai na vedui',dados:'Namárië'};
+var TIT = {geral:'VISÃO GERAL',funil:'FUNIL',publico:'PÚBLICO',vendas:'VENDAS',dados:'DADOS'};
+var COR = {meta:'#5aa9ff',google:'#f7d154',google_ads:'#f7d154',site:'#3ef0d8',brasa:'#ff9a3c',viol:'#b48cff',direto:'#5d6b7a'};
+var CORIG = {'Meta Ads':'#5aa9ff','Google Ads':'#f7d154','Instagram':'#ff6fb5','Facebook':'#7f8cff','Google (busca)':'#c9e86b','IAs':'#b48cff','Direto':'#5d6b7a','Outras buscas':'#8fd3c0'};
+function corO(o){return CORIG[o]||'#8aa0b3'}
+
+function $(id){return document.getElementById(id)}
+function brl(v){return 'R$ '+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function int(v){return Math.round(v||0).toLocaleString('pt-BR')}
+function pct(v){return isFinite(v)?(v*100).toLocaleString('pt-BR',{maximumFractionDigits:1})+'%':'—'}
+function div(a,b){return b?a/b:NaN}
+function g(o,p,m){return ((o||{})[p]||{})[m]||0}
+function soma(o,m){return g(o,'google_ads',m)+g(o,'meta',m)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function glow(v,c){return '<span style="color:'+c+';text-shadow:0 0 14px '+c+'66">'+v+'</span>'}
+
+function delta(a,b,inverso,neutro){
+  if(!b) return '<span class="d">primeiro período</span>';
+  if(!isFinite(a)||!isFinite(b)) return '<span class="d">—</span>';
+  var r=(a-b)/b, bom=inverso?r<0:r>0;
+  return '<span class="d '+(neutro||Math.abs(r)<0.005?'':bom?'up':'dn')+'">'+(r>0?'▲ +':'▼ ')+(r*100).toLocaleString('pt-BR',{maximumFractionDigits:0})+'% vs. anterior</span>';
+}
+function kpi(t,v,dl,cor){return '<div class="p k"><div class="t">'+t+'</div><div class="v">'+glow(v,cor||'#e9edf2')+'</div>'+(dl||'')+'<div class="barra" style="background:'+(cor||'#3ef0d8')+';box-shadow:0 0 12px '+(cor||'#3ef0d8')+'"></div></div>'}
+
+function carregar(){
+  if(!CHAVE){porta();return}
+  var c=lembra(DIAS);
+  if(c)pintar(c);else $('carga').style.display='grid';
+  buscar(DIAS).then(function(d){
+    if(d.erro==='acesso'){try{localStorage.removeItem('mc_k')}catch(e){}CHAVE='';porta();return}
+    if(d.erro)throw new Error(d.erro);
+    guarda(DIAS,d);pintar(d);
+    [7,14,30,90].forEach(function(x){if(x!==DIAS&&!MEM[x])buscar(x).then(function(v){if(!v.erro)guarda(x,v)})});
+  }).catch(function(e){if(!c){$('carga').innerHTML='<div class="elfico">'+esc(e.message)+'</div>'}});
+}
+
+function pintar(d){
+  D=d; $('carga').style.display='none';
+  document.querySelectorAll('.pchip').forEach(function(c){c.textContent=DIAS+' dias'});
+  $('sub').textContent='ÚLTIMOS '+DIAS+' DIAS';
+  $('gerado').textContent=d.gerado?'atualizado '+d.gerado:'';
+  var A=d.totais.atual,B=d.totais.ant,V=d.vendas,AC=d.acessos||{atual:{},ant:{}};
+  var inv=soma(A,'investimento'),invB=soma(B,'investimento');
+  var cpa=div(inv,V.atual.n),cpaB=div(invB,V.ant.n),roas=div(V.atual.valor,inv),roasB=div(V.ant.valor,invB);
+
+  // ── VISÃO GERAL
+  $('kGeral').innerHTML=
+    kpi('Investimento',brl(inv),delta(inv,invB,0,1),'#3ef0d8')+
+    kpi('Acessos ao site',int(AC.atual.visitas),delta(AC.atual.visitas,AC.ant.visitas),'#3ef0d8')+
+    kpi('Vendas',int(V.atual.n),delta(V.atual.n,V.ant.n),'#ff9a3c')+
+    kpi('Custo por venda',isFinite(cpa)?brl(cpa):'—',isFinite(cpa)&&isFinite(cpaB)?delta(cpa,cpaB,true):'<span class="d">sem venda no período</span>','#ff9a3c')+
+    kpi('Retorno',isFinite(roas)?roas.toLocaleString('pt-BR',{maximumFractionDigits:2})+'x':'—',isFinite(roas)&&isFinite(roasB)?delta(roas,roasB):'<span class="d">'+brl(V.atual.valor)+' faturados</span>','#ff9a3c');
+  var vo=V.atual.porOrigem||{};
+  plat('pGoogle','Google','google_ads','google',COR.google,A,B,vo.google,d.serie);
+  plat('pMeta','Meta','meta','meta',COR.meta,A,B,vo.meta,d.serie);
+  acessosDia(AC.dia||[]);
+  barrasO('bOrigem',AC.porOrigem||[]);
+  var pg=AC.porPagina||[];
+  $('tPag').innerHTML=pg.length?'<tr><th>Página</th><th>Acessos</th><th>Cliques em comprar</th><th>Taxa</th></tr>'+pg.map(function(x){return '<tr><td>'+esc(x.item)+'</td><td>'+int(x.visitas)+'</td><td>'+int(x.comprar)+'</td><td>'+glow(pct(div(x.comprar,x.visitas)),'#3ef0d8')+'</td></tr>'}).join(''):'<tr><td class="vazio">sem acessos no período</td></tr>';
+  serie(d.serie);
+
+  // ── FUNIL (desde o início)
+  var F=d.funil||{plat:{}},P=F.plat||{};
+  var fi=g(P,'google_ads','investimento')+g(P,'meta','investimento'),fimp=g(P,'google_ads','impressoes')+g(P,'meta','impressoes'),fcl=g(P,'google_ads','cliques')+g(P,'meta','cliques');
+  var lucro=(F.liquido||F.faturamento||0)-fi;
+  $('kFunil').innerHTML=kpi('Investido',brl(fi),'<span class="d">em '+(F.dias||0)+' dias</span>','#3ef0d8')+kpi('Faturamento',brl(F.faturamento),'<span class="d">'+int(F.vendas)+' vendas · '+int(F.reembolsos)+' reembolsos</span>','#ff9a3c')+
+    kpi('Resultado',brl(lucro),'<span class="d">líquido − investido</span>',lucro>=0?'#7cf0b0':'#ff6b6b')+kpi('Custo por venda',F.vendas?brl(fi/F.vendas):'—','<span class="d">média do período</span>','#ff9a3c')+
+    kpi('Retorno',fi&&F.faturamento?(F.faturamento/fi).toLocaleString('pt-BR',{maximumFractionDigits:2})+'x':'—','<span class="d">faturamento ÷ investido</span>','#ff9a3c');
+  $('desde').textContent='desde '+(F.desde||'').split('-').reverse().join('/');
+  var et=[['Impressões',fimp,'Custo por mil',fimp?brl(fi/fimp*1000):'—'],['Cliques',fcl,'Custo por clique',fcl?brl(fi/fcl):'—'],['Acessos ao site',F.visitas,'Custo por acesso',F.visitas?brl(fi/F.visitas):'—'],
+    ['Cliques em comprar',F.comprar,'Custo por clique',F.comprar?brl(fi/F.comprar):'—'],['Checkouts',g(P,'meta','checkouts'),'',g(P,'meta','checkouts')?brl(fi/g(P,'meta','checkouts')):'—'],['Vendas',F.vendas,'Custo por venda',F.vendas?brl(fi/F.vendas):'—']];
+  var mx=Math.max.apply(null,et.map(function(e){return e[1]}))||1;
+  fluxo(et);
+  function dest(t,x,cor){return '<div class="p"><h3>'+t+'</h3>'+(x?'<div class="k"><div class="v" style="font-size:20px">'+glow(esc(x.item),cor)+'</div><span class="d">'+int(x.conversoes)+' resultados · '+brl(x.investimento)+' · '+int(x.cliques)+' cliques</span></div>':'<div class="vazio">aguardando dados</div>')+'</div>'}
+  $('destaques').innerHTML=dest('Criativo que mais converte',F.melhorCriativo,'#5aa9ff')+dest('Faixa de idade',F.melhorIdade,'#b48cff')+dest('Estado',F.melhorEstado,'#7cf0b0');
+
+  // ── PÚBLICO
+  [['M','meta'],['G','google_ads']].forEach(function(p){['idade','genero','estado','posicionamento','dispositivo'].forEach(function(dm){var el=$('p'+p[0]+dm);if(el)barras(el,d.publico[p[1]+'|'+dm],COR[p[1]],dm==='idade')})});
+  var sd=(AC.porDisp||[]).map(function(x){return {item:x.item,investimento:x.visitas,cliques:x.comprar}});
+  barras('pSdisp',sd,COR.site,false,true);
+  var an=d.publico['meta|anuncio']||[];
+  $('tAnun').innerHTML=an.length?'<tr><th>Criativo</th><th>Investido</th><th>CTR</th><th>CPC</th><th>Result.</th></tr>'+an.map(function(a){return '<tr><td>'+esc(a.item)+'</td><td>'+brl(a.investimento)+'</td><td>'+pct(div(a.cliques,a.impressoes))+'</td><td>'+(a.cliques?brl(a.investimento/a.cliques):'—')+'</td><td>'+int(a.conversoes)+'</td></tr>'}).join(''):'<tr><td class="vazio">sem veiculação no período</td></tr>';
+  $('tTermos').innerHTML=d.termos.length?'<tr><th>Termo</th><th>Impr.</th><th>Cliques</th><th>Investido</th><th>Conv.</th></tr>'+d.termos.map(function(t){return '<tr><td>'+esc(t.termo)+'</td><td>'+int(t.impressoes)+'</td><td>'+int(t.cliques)+'</td><td>'+brl(t.investimento)+'</td><td>'+int(t.conversoes)+'</td></tr>'}).join(''):'<tr><td class="vazio">sem termos no período</td></tr>';
+
+  // ── VENDAS
+  var tm=div(V.atual.valor,V.atual.n);
+  $('kVendas').innerHTML=kpi('Vendas aprovadas',int(V.atual.n),delta(V.atual.n,V.ant.n),'#ff9a3c')+kpi('Faturamento',brl(V.atual.valor),delta(V.atual.valor,V.ant.valor),'#ff9a3c')+
+    kpi('Ticket médio',isFinite(tm)?brl(tm):'—','<span class="d">por venda</span>','#ff9a3c')+kpi('Reembolsos',int(V.atual.reembolsos||0),'<span class="d">no período</span>','#ff6b6b');
+  barrasV('vOrigem',V.atual.porOrigem,true);barrasV('vPublico',V.atual.porPublico);barrasV('vConteudo',V.atual.porConteudo);
+
+  // ── DADOS
+  var f=d.fontes||{}, ultAc=(AC.dia||[]).length?AC.dia[AC.dia.length-1].d.split('-').reverse().slice(0,2).join('/'):'';
+  f.site=f.site||(ultAc?{quando:ultAc,status:'OK',msg:int(AC.atual.visitas)+' acessos no período'}:null);
+  $('tFontes').innerHTML='<tr><th>Fonte</th><th>Última</th><th>Status</th><th style="text-align:left;padding-left:20px">Registro</th></tr>'+[['google_ads','Google Ads'],['meta','Meta'],['cakto','Cakto'],['site','Site']].map(function(k){var x=f[k[0]];
+    return '<tr><td>'+k[1]+'</td><td>'+(x?x.quando:'—')+'</td><td><span class="st '+(x?x.status:'PENDENTE')+'">'+(x?x.status:'sem registro')+'</span></td><td style="text-align:left;padding-left:20px;white-space:normal;color:var(--tx2)">'+(x?esc(x.msg):'')+'</td></tr>'}).join('');
+  siglas();
+}
+
+function fluxo(et){
+  var W=1200,H=260,n=et.length,cw=W/n,mid=H/2,mx=Math.max.apply(null,et.map(function(e){return e[1]}))||1;
+  var h=et.map(function(e){return e[1]?Math.max(14,Math.pow(e[1]/mx,.3)*(H-30)):8});
+  var xs=et.map(function(e,i){return cw*(i+.5)});
+  function borda(sinal){var d='M0 '+(mid+sinal*h[0]/2)+' L'+xs[0]+' '+(mid+sinal*h[0]/2);
+    for(var i=1;i<n;i++){var a=xs[i-1],b=xs[i],c=(a+b)/2;d+=' C'+c+' '+(mid+sinal*h[i-1]/2)+' '+c+' '+(mid+sinal*h[i]/2)+' '+b+' '+(mid+sinal*h[i]/2)}
+    return d+' L'+W+' '+(mid+sinal*h[n-1]/2)}
+  var topo=borda(-1),base=borda(1);
+  var baseRev=base.replace(/^M/,'').split(/ (?=[LC])/);
+  // caminho fechado: topo → desce → base invertida
+  var pts=[];for(var i=n-1;i>=0;i--)pts.push(i);
+  var dB='L'+W+' '+(mid+h[n-1]/2);
+  for(var k=n-1;k>0;k--){var a=xs[k-1],b=xs[k],c=(a+b)/2;dB+=' L'+b+' '+(mid+h[k]/2)+' C'+c+' '+(mid+h[k]/2)+' '+c+' '+(mid+h[k-1]/2)+' '+a+' '+(mid+h[k-1]/2)}
+  dB+=' L0 '+(mid+h[0]/2)+'Z';
+  var corpo=topo+' '+dB;
+  var linhas='';for(var f=1;f<=5;f++){var t=f/6;var dd='M0 '+(mid+(t-.5)*h[0]);for(var i2=1;i2<n;i2++){var a2=xs[i2-1],b2=xs[i2],c2=(a2+b2)/2;dd+=(i2===1?' L'+a2+' '+(mid+(t-.5)*h[0]):'')+' C'+c2+' '+(mid+(t-.5)*h[i2-1])+' '+c2+' '+(mid+(t-.5)*h[i2])+' '+b2+' '+(mid+(t-.5)*h[i2])}dd+=' L'+W+' '+(mid+(t-.5)*h[n-1]);
+    linhas+='<path d="'+dd+'" class="fio" style="animation-delay:-'+(f*1.3)+'s;stroke-opacity:'+(.25+.1*(f%3))+'"/>'}
+  var sep='';xs.forEach(function(x,i){if(i)sep+='<line x1="'+(cw*i)+'" x2="'+(cw*i)+'" y1="6" y2="'+(H-6)+'" stroke="rgba(232,194,122,.14)" stroke-dasharray="2 5"/>'});
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" preserveAspectRatio="none" style="display:block;height:'+H+'px"><defs>'+
+    '<linearGradient id="fx" x1="0" x2="1"><stop offset="0" stop-color="#3ef0d8" stop-opacity=".55"/><stop offset=".6" stop-color="#7cf0b0" stop-opacity=".45"/><stop offset="1" stop-color="#ff9a3c" stop-opacity=".85"/></linearGradient>'+
+    '<linearGradient id="fl" x1="0" x2="1"><stop offset="0" stop-color="#3ef0d8"/><stop offset="1" stop-color="#ff9a3c"/></linearGradient>'+
+    '<filter id="br"><feGaussianBlur stdDeviation="10"/></filter></defs>'+sep+
+    '<path d="'+corpo+'" fill="url(#fx)" filter="url(#br)" opacity=".55"/><path d="'+corpo+'" fill="url(#fx)" opacity=".35"/>'+
+    '<g fill="none" stroke="url(#fl)" stroke-width="1.2">'+linhas+'</g>'+
+    '<path d="'+topo+'" fill="none" stroke="url(#fl)" stroke-width="1.6"/><path d="'+base+'" fill="none" stroke="url(#fl)" stroke-width="1.6"/></svg>';
+  var col=function(fn){return '<div class="fxg">'+et.map(fn).join('')+'</div>'};
+  $('fnTotal').innerHTML=col(function(e){return '<div class="fxl">'+e[0]+'</div>'})+svg+
+    col(function(e,i){return '<div class="fxv"><b>'+int(e[1])+'</b><span class="c">'+(i?pct(div(e[1],et[i-1][1])):'')+'</span><span>'+(e[3]||'—')+'</span></div>'});
+}
+
+var DICA={'ctr':'CTR · taxa de cliques: cliques ÷ impressões','cpc':'CPC · custo por clique: investimento ÷ cliques',
+ 'custo por mil':'CPM · custo por mil impressões','custo por venda':'CPA · custo por aquisição: investimento ÷ vendas',
+ 'retorno':'ROAS · retorno sobre o investimento: faturamento ÷ investimento','impressões':'Vezes em que o anúncio apareceu na tela',
+ 'impr.':'Impressões · vezes em que o anúncio apareceu na tela','conversões':'Ações registradas como resultado (compra no site)',
+ 'conv.':'Conversões · ações registradas como resultado','result.':'Resultados · ação otimizada da campanha (compra ou visita ao perfil)',
+ 'visitas à página':'Carregamentos da página após o clique no anúncio','checkouts':'Chegadas à tela de pagamento da Cakto',
+ 'passagem':'Parte da etapa anterior que avançou para esta','taxa':'Cliques em comprar ÷ acessos','ticket médio':'Faturamento ÷ número de vendas',
+ 'resultado':'Faturamento líquido − investimento','custo':'Investimento ÷ total da etapa','cliques em comprar':'Cliques no botão de compra da página'};
+function siglas(){document.querySelectorAll('.k .t,.mg span,th,.fxl,.fxg + svg ~ .fxg span').forEach(function(el){
+  var t=el.textContent.trim().toLowerCase();if(DICA[t])el.setAttribute('data-dica',DICA[t])});
+  document.querySelectorAll('.fxl').forEach(function(el){var t=el.textContent.trim().toLowerCase();if(DICA[t])el.setAttribute('data-dica',DICA[t])})}
+
+function plat(id,nome,p,src,cor,A,B,vendas,s){
+  var i=g(A,p,'investimento'),im=g(A,p,'impressoes'),c=g(A,p,'cliques'),vv=(vendas||{}).n||0,fat=(vendas||{}).valor||0;
+  var conv=p==='meta'?g(A,p,'visitas_pagina'):g(A,p,'compras');
+  var cel=[['Impressões',int(im)],['Cliques',int(c)],['CTR',pct(div(c,im))],['CPC',c?brl(i/c):'—'],
+    [p==='meta'?'Visitas à página':'Conversões',int(conv)],['Vendas',int(vv)],['Custo por venda',vv?brl(i/vv):'—'],['Retorno',i&&fat?(fat/i).toLocaleString('pt-BR',{maximumFractionDigits:2})+'x':'—']];
+  var pts=s.map(function(x){return x.v[p+'.investimento']||0});
+  $(id).innerHTML='<div class="cab"><div class="nm" style="color:'+cor+';text-shadow:0 0 16px '+cor+'55"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:'+cor+';box-shadow:0 0 12px '+cor+'"></span>'+nome.toUpperCase()+'</div>'+
+    '<div class="inv"><b>'+glow(brl(i),cor)+'</b><span>investido · '+delta(i,g(B,p,'investimento'),0,1).replace('class="d','class="d" style="font-size:10px').replace('vs. anterior','')+'</span></div></div>'+
+    '<div class="mg">'+cel.map(function(x){return '<div><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('')+'</div>'+spark(pts,cor);
+}
+
+function spark(v,cor){
+  if(!v.length)return '';
+  var W=560,H=46,mx=Math.max.apply(null,v)||1,st=W/Math.max(1,v.length-1);
+  var pts=v.map(function(x,i){return (i*st).toFixed(1)+','+(H-4-(H-8)*x/mx).toFixed(1)}).join(' ');
+  var id='gr'+cor.replace('#','');
+  return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" width="100%"><defs><linearGradient id="'+id+'" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+cor+'" stop-opacity=".35"/><stop offset="1" stop-color="'+cor+'" stop-opacity="0"/></linearGradient></defs>'+
+    '<polygon points="0,'+H+' '+pts+' '+W+','+H+'" fill="url(#'+id+')"/><polyline points="'+pts+'" fill="none" stroke="'+cor+'" stroke-width="1.6" style="filter:drop-shadow(0 0 4px '+cor+')"/></svg>';
+}
+
+function acessosDia(dia){
+  var el=$('gAcessos');
+  if(!dia.length){el.innerHTML='<div class="vazio">sem acessos no período</div>';$('legAc').innerHTML='';return}
+  var orig={};dia.forEach(function(x){Object.keys(x.v).forEach(function(k){orig[k]=(orig[k]||0)+x.v[k]})});
+  var ord=Object.keys(orig).sort(function(a,b){return orig[b]-orig[a]});
+  var W=760,H=220,P=30,mx=Math.max.apply(null,dia.map(function(x){return ord.reduce(function(s,k){return s+(x.v[k]||0)},0)}))||1,bw=(W-P*2)/dia.length,out='';
+  for(var k=0;k<=3;k++){var y=H-P-(H-P*2)*k/3;out+='<line x1="'+P+'" x2="'+(W-P)+'" y1="'+y+'" y2="'+y+'" stroke="rgba(140,220,205,.08)"/><text x="0" y="'+(y+3)+'">'+Math.round(mx*k/3)+'</text>'}
+  dia.forEach(function(x,i){var y=H-P,x0=P+i*bw+bw*.2,w=bw*.6;ord.forEach(function(o){var h=(H-P*2)*(x.v[o]||0)/mx;if(h>0){y-=h;out+='<rect x="'+x0+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+corO(o)+'" opacity=".85"/>'}});
+    if(i%Math.ceil(dia.length/8)===0)out+='<text x="'+(P+i*bw+bw/2)+'" y="'+(H-8)+'" text-anchor="middle">'+x.d.slice(8)+'/'+x.d.slice(5,7)+'</text>'});
+  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%">'+out+'</svg>';
+  $('legAc').innerHTML=ord.map(function(o){return '<span><i style="background:'+corO(o)+';box-shadow:0 0 6px '+corO(o)+'"></i>'+esc(o)+'</span>'}).join('');
+}
+
+function barrasO(id,arr){
+  if(!arr.length){$(id).innerHTML='<div class="vazio">sem acessos no período</div>';return}
+  var tot=arr.reduce(function(s,x){return s+x.visitas},0)||1,mx=arr[0].visitas||1;
+  $(id).innerHTML=arr.map(function(x){var c=corO(x.item);return '<div class="bar"><span class="n">'+esc(x.item)+'</span><span class="tr"><i style="width:'+(x.visitas/mx*100)+'%;background:'+c+';box-shadow:0 0 8px '+c+'"></i></span><span class="x">'+int(x.visitas)+'<small>'+pct(x.visitas/tot)+'</small></span></div>'}).join('');
+}
+
+var ORDEM_IDADE=['18–24','18-24','25–34','25-34','35–44','35-44','45–54','45-54','55–64','55-64','65+','Indefinida'];
+function barras(el,arr,cor,ordemIdade,site){
+  if(typeof el==='string')el=$(el);
+  arr=(arr||[]).slice();
+  if(!arr.length){el.innerHTML='<div class="vazio">sem dados no período</div>';return}
+  if(ordemIdade)arr.sort(function(a,b){return ORDEM_IDADE.indexOf(a.item)-ORDEM_IDADE.indexOf(b.item)});
+  var tot=arr.reduce(function(s,x){return s+x.investimento},0)||1,mx=Math.max.apply(null,arr.map(function(x){return x.investimento}))||1;
+  el.innerHTML=arr.map(function(x){return '<div class="bar"><span class="n" title="'+esc(x.item)+'">'+esc(x.item)+'</span><span class="tr"><i style="width:'+(x.investimento/mx*100)+'%;background:'+cor+';box-shadow:0 0 8px '+cor+'"></i></span><span class="x">'+pct(x.investimento/tot)+'<small>'+int(x.cliques)+(site?' compr.':' cl.')+'</small></span></div>'}).join('');
+}
+
+function barrasV(id,obj,porOrigem){
+  var arr=Object.keys(obj||{}).map(function(k){return {k:k,n:obj[k].n,v:obj[k].valor}}).sort(function(a,b){return b.n-a.n});
+  if(!arr.length){$(id).innerHTML='<div class="vazio">sem venda no período</div>';return}
+  var mx=arr[0].n||1,ROT={meta:'Meta',google:'Google',direto:'Direto',pais:'Casa dos pais',aluguel:'Aluguel',instagram:'Instagram'};
+  $(id).innerHTML=arr.map(function(x){var c=porOrigem?(COR[x.k]||COR.direto):COR.brasa;
+    return '<div class="bar"><span class="n">'+esc(ROT[x.k]||x.k)+'</span><span class="tr"><i style="width:'+(x.n/mx*100)+'%;background:'+c+';box-shadow:0 0 8px '+c+'"></i></span><span class="x">'+int(x.n)+'<small>'+brl(x.v)+'</small></span></div>'}).join('');
+}
+
+function serie(s){
+  var W=640,H=220,P=30;
+  if(!s.length){$('gSerie').innerHTML='<div class="vazio">sem dados no período</div>';return}
+  var inv=s.map(function(x){return [(x.v['google_ads.investimento']||0),(x.v['meta.investimento']||0),(x.v['vendas']||0)]});
+  var maxI=Math.max.apply(null,inv.map(function(x){return x[0]+x[1]}))||1, maxV=Math.max.apply(null,inv.map(function(x){return x[2]}))||1;
+  var bw=(W-P*2)/s.length, out='';
+  for(var k=0;k<=3;k++){var y=H-P-(H-P*2)*k/3;out+='<line x1="'+P+'" x2="'+(W-P)+'" y1="'+y+'" y2="'+y+'" stroke="rgba(140,220,205,.08)"/><text x="0" y="'+(y+3)+'">'+Math.round(maxI*k/3)+'</text>'}
+  var pts=[];
+  s.forEach(function(x,i){var x0=P+i*bw+bw*.22,w=bw*.56,hG=(H-P*2)*inv[i][0]/maxI,hM=(H-P*2)*inv[i][1]/maxI;
+    out+='<rect x="'+x0+'" y="'+(H-P-hG)+'" width="'+w+'" height="'+hG+'" fill="#f7d154" opacity=".75"/><rect x="'+x0+'" y="'+(H-P-hG-hM)+'" width="'+w+'" height="'+hM+'" fill="#5aa9ff" opacity=".75"/>';
+    pts.push((P+i*bw+bw/2)+','+(H-P-(H-P*2)*inv[i][2]/maxV));
+    if(i%Math.ceil(s.length/7)===0)out+='<text x="'+(P+i*bw+bw/2)+'" y="'+(H-8)+'" text-anchor="middle">'+x.d.slice(8)+'/'+x.d.slice(5,7)+'</text>'});
+  out+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="#ff9a3c" stroke-width="2" style="filter:drop-shadow(0 0 5px #ff9a3c)"/>';
+  pts.forEach(function(p){var c=p.split(',');out+='<circle cx="'+c[0]+'" cy="'+c[1]+'" r="2.6" fill="#05070c" stroke="#ff9a3c" stroke-width="1.5"/>'});
+  $('gSerie').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%">'+out+'</svg>';
+}
+
+document.querySelectorAll('nav a').forEach(function(a){a.onclick=function(){
+  document.querySelectorAll('nav a').forEach(function(x){x.classList.remove('on')});a.classList.add('on');
+  document.querySelectorAll('.sec').forEach(function(x){x.classList.remove('on')});$('s-'+a.dataset.s).classList.add('on');$('tit').textContent=TIT[a.dataset.s];$('frase').textContent=FRASE[a.dataset.s];
+  $('sub').textContent=a.dataset.s==='funil'?'DESDE O LANÇAMENTO':'ÚLTIMOS '+DIAS+' DIAS';
+  document.querySelector('.per').style.visibility=a.dataset.s==='funil'||a.dataset.s==='dados'?'hidden':'visible'}});
+document.querySelectorAll('.per button').forEach(function(b){b.onclick=function(){
+  document.querySelectorAll('.per button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');DIAS=+b.dataset.d;carregar()}});
+$('bSync').onclick=function(){var b=this;b.textContent='Atualizando…';
+  fetch(API+'?api=sync&k='+encodeURIComponent(CHAVE)).then(function(r){return r.json()}).then(function(){MEM={};b.textContent='Atualizar Meta agora';carregar()})};
+$('fPorta').onsubmit=function(ev){ev.preventDefault();CHAVE=$('iChave').value.trim();try{localStorage.setItem('mc_k',CHAVE)}catch(e){}$('porta').style.display='none';carregar()};
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
+carregar();
+</script>
+</body>
+</html>
