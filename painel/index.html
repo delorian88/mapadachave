@@ -138,8 +138,9 @@ svg text{font-family:'Chakra Petch',sans-serif;font-size:10px;fill:var(--tx3)}
 .p:not(.plat):not(.orn)::before,.p:not(.plat):not(.orn)::after{display:none}
 .runas{animation:runa 14s linear infinite}
 @keyframes runa{to{background-position-x:264px}}
-.elfico{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:var(--ouro);opacity:.85;letter-spacing:.06em;text-transform:none}
-#frase{font-size:16px;margin-top:6px;text-shadow:0 0 12px rgba(232,194,122,.35)}
+.elfico{cursor:default;transition:color .3s,text-shadow .3s;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:var(--ouro);opacity:.85;letter-spacing:.06em;text-transform:none}
+[data-elf]:hover{color:#ffe2a8;text-shadow:0 0 14px rgba(232,194,122,.55)}
+#frase{display:inline-block;min-height:22px;font-size:16px;margin-top:6px;text-shadow:0 0 12px rgba(232,194,122,.35)}
 .rod .elfico{display:block;font-size:13px;margin-bottom:10px;opacity:.6}
 [data-dica]{position:relative;cursor:help;border-bottom:1px dotted rgba(232,194,122,.45)}
 [data-dica]:hover::after{content:attr(data-dica);position:absolute;left:0;top:calc(100% + 8px);z-index:20;width:max-content;max-width:240px;white-space:normal;
@@ -181,10 +182,10 @@ nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:
   <a data-s="vendas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9z"/><path d="M12 11l8-4.5M12 11L4 6.5M12 11v9"/></svg>Vendas</a>
   <div class="fil"></div>
   <a data-s="dados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>Dados</a>
-  <div class="rod"><span class="elfico">Elen síla lúmenn' omentielvo</span><span id="gerado"></span></div>
+  <div class="rod"><span class="elfico" data-elf="Elen síla lúmenn' omentielvo">Elen síla lúmenn' omentielvo</span><span id="gerado"></span></div>
 </nav>
 <main>
-  <div class="topo"><div><h1 id="tit">VISÃO GERAL</h1><small id="sub">ÚLTIMOS 14 DIAS</small><div class="elfico" id="frase">Mae govannen</div><div class="runas" style="width:260px"></div></div>
+  <div class="topo"><div><h1 id="tit">VISÃO GERAL</h1><div class="elfico" id="frase" data-elf="Mae govannen">Mae govannen</div></div>
     <div class="per"><button data-d="7">7D</button><button data-d="14" class="on">14D</button><button data-d="30">30D</button><button data-d="90">90D</button></div></div>
 
   <!-- VISÃO GERAL -->
@@ -246,7 +247,7 @@ nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:
 </main>
 </div>
 <div id="carga"><div style="text-align:center"><div class="selo"><div class="anel"><svg width="30" height="30" viewBox="0 0 40 40"><g transform="translate(9 28) rotate(-38)" fill="none" stroke="#ff9a3c" stroke-width="2.6" stroke-linecap="round"><circle r="6.5"/><circle r="2"/><path d="M6.5 0H25M20 0V4.5M23.5 0V5.5"/></g></svg></div></div><div class="runas"></div></div></div>
-<div id="porta"><form id="fPorta"><div class="selo"><div class="anel"><svg width="30" height="30" viewBox="0 0 40 40"><g transform="translate(9 28) rotate(-38)" fill="none" stroke="#ff9a3c" stroke-width="2.6" stroke-linecap="round"><circle r="6.5"/><circle r="2"/><path d="M6.5 0H25M20 0V4.5M23.5 0V5.5"/></g></svg></div></div><div class="elfico">Pedo mellon a minno</div><input id="iChave" type="password" autocomplete="current-password" autofocus></form></div>
+<div id="porta"><form id="fPorta"><div class="selo"><div class="anel"><svg width="30" height="30" viewBox="0 0 40 40"><g transform="translate(9 28) rotate(-38)" fill="none" stroke="#ff9a3c" stroke-width="2.6" stroke-linecap="round"><circle r="6.5"/><circle r="2"/><path d="M6.5 0H25M20 0V4.5M23.5 0V5.5"/></g></svg></div></div><div class="elfico" data-elf="Pedo mellon a minno">Pedo mellon a minno</div><input id="iChave" type="password" autocomplete="current-password" autofocus></form></div>
 
 <script>
 var API = "https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec";
@@ -256,7 +257,18 @@ function guarda(d,v){MEM[d]=v;try{localStorage.setItem('mc_d'+d,JSON.stringify(v
 function lembra(d){if(MEM[d])return MEM[d];try{var v=localStorage.getItem('mc_d'+d);return v?JSON.parse(v):null}catch(e){return null}}
 function porta(){$('carga').style.display='none';$('porta').style.display='grid';$('iChave').focus()}
 function buscar(d){return fetch(API+'?api=dados&dias='+d+'&k='+encodeURIComponent(CHAVE)).then(function(r){return r.json()})}
-var FRASE={geral:'Mae govannen',funil:'Ai na vedui',publico:'Lasto beth lammen',vendas:'Ai na vedui',dados:'Namárië'};
+var FRASE={geral:'Mae govannen',funil:'Ai na vedui',publico:'Lasto beth lammen',vendas:'Elen síla lúmenn\' omentielvo',dados:'Le suilon'};
+var TRAD={'Mae govannen':'Bem-vindo, viajante','Ai na vedui':'Enfim, chegamos','Lasto beth lammen':'Ouça as palavras da minha língua',
+ 'Elen síla lúmenn\' omentielvo':'Uma estrela brilha na hora do nosso encontro','Le suilon':'Eu te saúdo','Pedo mellon a minno':'Diga amigo e entre'};
+var RUN='ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ';
+function decifra(el,alvo){
+  clearInterval(el._t);var de=el.textContent,n=Math.max(de.length,alvo.length),q=0,passos=18;
+  el._t=setInterval(function(){q++;var out='';
+    for(var i=0;i<n;i++){var lim=Math.floor(q/passos*n*1.25)-((i*7)%5);
+      if(i<alvo.length&&lim>i)out+=alvo[i];else if(i<n&&(alvo[i]||de[i])&&(alvo[i]||de[i])!==' ')out+=RUN[(Math.random()*RUN.length)|0];else out+=' ';}
+    el.textContent=q>=passos?alvo:out.replace(/\s+$/,'');if(q>=passos)clearInterval(el._t)},34)}
+document.addEventListener('mouseover',function(e){var el=e.target.closest&&e.target.closest('[data-elf]');if(!el||el._on)return;el._on=1;decifra(el,TRAD[el.dataset.elf]||el.dataset.elf)});
+document.addEventListener('mouseout',function(e){var el=e.target.closest&&e.target.closest('[data-elf]');if(!el||el.contains(e.relatedTarget))return;el._on=0;decifra(el,el.dataset.elf)});
 var TIT = {geral:'VISÃO GERAL',funil:'FUNIL',publico:'PÚBLICO',vendas:'VENDAS',dados:'DADOS'};
 var COR = {meta:'#5aa9ff',google:'#f7d154',google_ads:'#f7d154',site:'#3ef0d8',brasa:'#ff9a3c',viol:'#b48cff',direto:'#5d6b7a'};
 var CORIG = {'Meta Ads':'#5aa9ff','Google Ads':'#f7d154','Instagram':'#ff6fb5','Facebook':'#7f8cff','Google (busca)':'#c9e86b','IAs':'#b48cff','Direto':'#5d6b7a','Outras buscas':'#8fd3c0'};
@@ -295,7 +307,6 @@ function carregar(){
 function pintar(d){
   D=d; $('carga').style.display='none';
   document.querySelectorAll('.pchip').forEach(function(c){c.textContent=DIAS+' dias'});
-  $('sub').textContent='ÚLTIMOS '+DIAS+' DIAS';
   $('gerado').textContent=d.gerado?'atualizado '+d.gerado:'';
   var A=d.totais.atual,B=d.totais.ant,V=d.vendas,AC=d.acessos||{atual:{},ant:{}};
   var inv=soma(A,'investimento'),invB=soma(B,'investimento');
@@ -472,8 +483,7 @@ function serie(s){
 
 document.querySelectorAll('nav a').forEach(function(a){a.onclick=function(){
   document.querySelectorAll('nav a').forEach(function(x){x.classList.remove('on')});a.classList.add('on');
-  document.querySelectorAll('.sec').forEach(function(x){x.classList.remove('on')});$('s-'+a.dataset.s).classList.add('on');$('tit').textContent=TIT[a.dataset.s];$('frase').textContent=FRASE[a.dataset.s];
-  $('sub').textContent=a.dataset.s==='funil'?'DESDE O LANÇAMENTO':'ÚLTIMOS '+DIAS+' DIAS';
+  document.querySelectorAll('.sec').forEach(function(x){x.classList.remove('on')});$('s-'+a.dataset.s).classList.add('on');$('tit').textContent=TIT[a.dataset.s];$('frase').dataset.elf=FRASE[a.dataset.s];$('frase').textContent=FRASE[a.dataset.s];
   document.querySelector('.per').style.visibility=a.dataset.s==='funil'||a.dataset.s==='dados'?'hidden':'visible'}});
 document.querySelectorAll('.per button').forEach(function(b){b.onclick=function(){
   document.querySelectorAll('.per button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');DIAS=+b.dataset.d;carregar()}});
