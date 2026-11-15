@@ -16,4 +16,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://delorian88.github.io/mapadachave/sitemap.xml
+Sitemap: https://mapadachave.com.br/sitemap.xml
