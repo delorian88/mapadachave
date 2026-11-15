@@ -105,7 +105,7 @@ th:last-child,td:last-child{padding-right:0}
 td:first-child{white-space:normal;color:var(--tx)}
 .rol{max-height:300px;overflow-y:auto}
 .rol::-webkit-scrollbar{width:4px}.rol::-webkit-scrollbar-thumb{background:var(--ln)}
-.vazio{color:var(--tx3);text-align:center;padding:26px 0;letter-spacing:.12em;font-size:11px;text-transform:uppercase}
+.vazio,td.vazio{color:var(--tx3)!important;text-align:center!important;text-align:center;padding:26px 0;letter-spacing:.12em;font-size:11px;text-transform:uppercase}
 
 /* funil */
 .fn{display:flex;flex-direction:column;gap:10px}
@@ -314,7 +314,7 @@ function pintar(d){
   acessosDia(AC.dia||[]);
   barrasO('bOrigem',AC.porOrigem||[]);
   var pg=AC.porPagina||[];
-  $('tPag').innerHTML=pg.length?'<tr><th>Página</th><th>Acessos</th><th>Cliques em comprar</th><th>Taxa</th></tr>'+pg.map(function(x){return '<tr><td>'+esc(x.item)+'</td><td>'+int(x.visitas)+'</td><td>'+int(x.comprar)+'</td><td>'+glow(pct(div(x.comprar,x.visitas)),'#3ef0d8')+'</td></tr>'}).join(''):'<tr><td class="vazio">sem acessos no período</td></tr>';
+  $('tPag').innerHTML=pg.length?'<tr><th>Página</th><th>Acessos</th><th>Cliques em comprar</th><th>Taxa</th></tr>'+pg.map(function(x){return '<tr><td>'+esc(x.item)+'</td><td>'+int(x.visitas)+'</td><td>'+int(x.comprar)+'</td><td>'+glow(pct(div(x.comprar,x.visitas)),'#3ef0d8')+'</td></tr>'}).join(''):'<tr><td class="vazio" colspan="5">sem acessos no período</td></tr>';
   serie(d.serie);
 
   // ── FUNIL (desde o início)
@@ -337,8 +337,8 @@ function pintar(d){
   var sd=(AC.porDisp||[]).map(function(x){return {item:x.item,investimento:x.visitas,cliques:x.comprar}});
   barras('pSdisp',sd,COR.site,false,true);
   var an=d.publico['meta|anuncio']||[];
-  $('tAnun').innerHTML=an.length?'<tr><th>Criativo</th><th>Investido</th><th>CTR</th><th>CPC</th><th>Result.</th></tr>'+an.map(function(a){return '<tr><td>'+esc(a.item)+'</td><td>'+brl(a.investimento)+'</td><td>'+pct(div(a.cliques,a.impressoes))+'</td><td>'+(a.cliques?brl(a.investimento/a.cliques):'—')+'</td><td>'+int(a.conversoes)+'</td></tr>'}).join(''):'<tr><td class="vazio">sem veiculação no período</td></tr>';
-  $('tTermos').innerHTML=d.termos.length?'<tr><th>Termo</th><th>Impr.</th><th>Cliques</th><th>Investido</th><th>Conv.</th></tr>'+d.termos.map(function(t){return '<tr><td>'+esc(t.termo)+'</td><td>'+int(t.impressoes)+'</td><td>'+int(t.cliques)+'</td><td>'+brl(t.investimento)+'</td><td>'+int(t.conversoes)+'</td></tr>'}).join(''):'<tr><td class="vazio">sem termos no período</td></tr>';
+  $('tAnun').innerHTML=an.length?'<tr><th>Criativo</th><th>Investido</th><th>CTR</th><th>CPC</th><th>Result.</th></tr>'+an.map(function(a){return '<tr><td>'+esc(a.item)+'</td><td>'+brl(a.investimento)+'</td><td>'+pct(div(a.cliques,a.impressoes))+'</td><td>'+(a.cliques?brl(a.investimento/a.cliques):'—')+'</td><td>'+int(a.conversoes)+'</td></tr>'}).join(''):'<tr><td class="vazio" colspan="5">sem veiculação no período</td></tr>';
+  $('tTermos').innerHTML=d.termos.length?'<tr><th>Termo</th><th>Impr.</th><th>Cliques</th><th>Investido</th><th>Conv.</th></tr>'+d.termos.map(function(t){return '<tr><td>'+esc(t.termo)+'</td><td>'+int(t.impressoes)+'</td><td>'+int(t.cliques)+'</td><td>'+brl(t.investimento)+'</td><td>'+int(t.conversoes)+'</td></tr>'}).join(''):'<tr><td class="vazio" colspan="5">sem termos no período</td></tr>';
 
   // ── VENDAS
   var tm=div(V.atual.valor,V.atual.n);
