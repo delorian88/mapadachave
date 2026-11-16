@@ -137,6 +137,7 @@ svg text{font-family:'Chakra Petch',sans-serif;font-size:10px;fill:var(--tx3)}
 .fio{stroke-dasharray:3 14;animation:corre 6s linear infinite}@keyframes corre{to{stroke-dashoffset:-170}}
 .p:not(.plat):not(.orn)::before,.p:not(.plat):not(.orn)::after{display:none}
 #pGoogle::after,#pMeta::before{display:none}
+.sub{font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin:4px 0 8px}#pGdispositivo{margin-bottom:14px}
 .runas{animation:runa 14s linear infinite}
 @keyframes runa{to{background-position-x:264px}}
 .elfico{cursor:default;transition:color .3s,text-shadow .3s;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:var(--ouro);opacity:.85;letter-spacing:.06em;text-transform:none}
@@ -234,8 +235,8 @@ nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:
       <div class="p"><h3><span class="dot" style="background:var(--google);color:var(--google)"></span>Estados · Google</h3><span class="chip pchip"></span><div class="rol" id="pGestado"></div></div></div>
     <div class="gr g3">
       <div class="p"><h3><span class="dot" style="background:var(--meta);color:var(--meta)"></span>Posicionamento</h3><span class="chip pchip"></span><div class="rol" id="pMposicionamento"></div></div>
-      <div class="p"><h3><span class="dot" style="background:var(--google);color:var(--google)"></span>Dispositivo</h3><span class="chip pchip"></span><div id="pGdispositivo"></div></div>
-      <div class="p"><h3><span class="dot" style="background:var(--site);color:var(--site)"></span>Dispositivo no site</h3><span class="chip pchip"></span><div id="pSdisp"></div></div>
+      <div class="p"><h3><span class="dot" style="background:var(--google);color:var(--google)"></span>Dispositivo</h3><span class="chip pchip"></span><div class="sub" style="color:var(--google)">Anúncio</div><div id="pGdispositivo"></div><div class="sub" style="color:var(--site)">Site</div><div id="pSdisp"></div></div>
+      <div class="p"><h3><span class="dot" style="background:var(--site);color:var(--site)"></span>Horário de pico</h3><span class="chip pchip"></span><div id="pHora"></div></div>
     </div>
     <div class="gr g2">
       <div class="p"><h3><span class="dot" style="background:var(--meta);color:var(--meta)"></span>Criativos</h3><span class="chip pchip"></span><div class="rol"><table id="tAnun"></table></div></div>
@@ -363,6 +364,7 @@ function pintar(d){
   [['M','meta'],['G','google_ads']].forEach(function(p){['idade','genero','estado','posicionamento','dispositivo'].forEach(function(dm){var el=$('p'+p[0]+dm);if(el)barras(el,d.publico[p[1]+'|'+dm],COR[p[1]],dm==='idade')})});
   var sd=(AC.porDisp||[]).map(function(x){return {item:x.item,investimento:x.visitas,cliques:x.comprar}});
   barras('pSdisp',sd,COR.site,false,true);
+  horas(AC.porHora||[]);
   var an=d.publico['meta|anuncio']||[];
   $('tAnun').innerHTML=an.length?'<tr><th>Criativo</th><th>Investido</th><th>CTR</th><th>CPC</th><th>Result.</th></tr>'+an.map(function(a){return '<tr><td>'+esc(a.item)+'</td><td>'+brl(a.investimento)+'</td><td>'+pct(div(a.cliques,a.impressoes))+'</td><td>'+(a.cliques?brl(a.investimento/a.cliques):'—')+'</td><td>'+int(a.conversoes)+'</td></tr>'}).join(''):'<tr><td class="vazio" colspan="5">sem veiculação no período</td></tr>';
   $('tTermos').innerHTML=d.termos.length?'<tr><th>Termo</th><th>Impr.</th><th>Cliques</th><th>Investido</th><th>Conv.</th></tr>'+d.termos.map(function(t){return '<tr><td>'+esc(t.termo)+'</td><td>'+int(t.impressoes)+'</td><td>'+int(t.cliques)+'</td><td>'+brl(t.investimento)+'</td><td>'+int(t.conversoes)+'</td></tr>'}).join(''):'<tr><td class="vazio" colspan="5">sem termos no período</td></tr>';
@@ -481,6 +483,15 @@ function barrasO(id,arr){
 }
 
 var ORDEM_IDADE=['18–24','18-24','25–34','25-34','35–44','35-44','45–54','45-54','55–64','55-64','65+','Indefinida'];
+function horas(h){
+  var tot=h.reduce(function(s,x){return s+x},0);
+  if(!tot){$('pHora').innerHTML='<div class="vazio">sem acessos no período</div>';return}
+  var mx=Math.max.apply(null,h)||1,pk=h.indexOf(mx),W=300,H=120,bw=W/24,out='';
+  h.forEach(function(v,i){var bh=v/mx*(H-30),on=i===pk,c=on?'#3ef0d8':'rgba(62,240,216,.35)';
+    out+='<rect x="'+(i*bw+1.5)+'" y="'+(H-18-bh)+'" width="'+(bw-3)+'" height="'+Math.max(bh,1)+'" rx="1.5" fill="'+c+'"'+(on?' style="filter:drop-shadow(0 0 5px #3ef0d8)"':'')+'><title>'+i+'h · '+v+'</title></rect>';
+    if(i%6===0)out+='<text x="'+(i*bw+bw/2)+'" y="'+(H-4)+'" text-anchor="middle">'+i+'h</text>'});
+  $('pHora').innerHTML='<div class="k" style="min-height:0;margin-bottom:10px"><div class="v" style="font-size:22px">'+glow(pk+'h',"#3ef0d8")+'</div></div><svg viewBox="0 0 '+W+' '+H+'" width="100%">'+out+'</svg>';
+}
 function barras(el,arr,cor,ordemIdade,site){
   if(typeof el==='string')el=$(el);
   arr=(arr||[]).slice();
