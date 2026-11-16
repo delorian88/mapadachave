@@ -582,7 +582,7 @@ function serie(s){
   $('gSerie').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%">'+out+'</svg>';
 }
 
-var APPD=null,NFERR={teto:'Quanto posso comprar',meta:'Meta da entrada',sozinho:'Morar sozinho',golpe:'Antes do Pix',custo:'Custo da compra',aluguel:'Aluguel × compra',bancos:'Comparar bancos',documentos:'Documentos',custos:'Gastos da compra',enxoval:'Enxoval',planta:'Na planta',dois:'Comprar a dois',pais:'Conversa com os pais',glossario:'Glossário',etapas:'Etapas',etapa:'Etapa aberta',imoveis:'Imóveis',imovel:'Ficha do imóvel',ferramentas:'Ferramentas',dados:'Cópia de segurança'};
+var APPD=null,NFERR={teto:'Até que valor posso comprar',meta:'Meta da entrada',sozinho:'Morar sozinho',golpe:'Antes do Pix',custo:'Custo da compra',aluguel:'Aluguel × compra',bancos:'Comparar bancos',documentos:'Documentos',custos:'Gastos da compra',enxoval:'Enxoval',planta:'Na planta',dois:'Comprar a dois',pais:'Conversa com os pais',glossario:'Glossário',etapas:'Etapas',etapa:'Etapa aberta',imoveis:'Imóveis',imovel:'Ficha do imóvel',ferramentas:'Ferramentas',dados:'Cópia de segurança'};
 function carregaApp(){if(APPD)pintaApp(APPD);else{try{var c=JSON.parse(localStorage.getItem('mc_app')||'null');if(c)pintaApp(c)}catch(e){}}
   fetch(API+'?api=app&k='+encodeURIComponent(CHAVE)).then(function(r){return r.json()}).then(function(d){if(d&&d.kpi){APPD=d;try{localStorage.setItem('mc_app',JSON.stringify(d))}catch(e){}pintaApp(d)}else if(!APPD)$('kApp').innerHTML='<div class="p vazio" style="grid-column:1/-1">aguardando dados do app</div>'}).catch(function(){})}
 function dmy(d){return d?d.slice(8,10)+'/'+d.slice(5,7):''}
