@@ -549,7 +549,7 @@ var RX={
  'Renda bruta mínima':'Renda que o banco costuma pedir para aprovar a 1ª parcela: parcela ÷ 30%.',
  'Sobra no mês':'Salário líquido menos todos os gastos. Ideal: sobrar pelo menos 10% para imprevistos e reserva.',
  'Gastos':'Soma de todos os gastos do mês.',
- 'Casa sobre o salário':'Moradia + condomínio + IPTU sobre o salário líquido. Até 35% é confortável; acima de 40% aperta.',
+ 'Moradia no salário':'Quanto do salário líquido vai para parcela ou aluguel + condomínio + IPTU. Até 35% é confortável; acima de 40% aperta.','Gastos previstos':'Soma do que vai gastar por mês morando sozinho, preenchido abaixo.',
  'Patrimônio comprando':'Valor do imóvel no fim − saldo devedor + o que sobrou aplicado.',
  'Patrimônio alugando':'O que ficou aplicado: a entrada que não foi gasta + a diferença de cada mês.',
  'Total pago de aluguel':'Soma de todos os aluguéis do período, com reajuste.',
@@ -790,7 +790,7 @@ TELAS.sozinho={html:function(){return topo('Dá pra morar sozinho?','ferramentas
   var txt={ok:'Dá, com folga',warn:'Dá, no limite',bad:'Ainda não fecha'}[s.st];
   res.innerHTML='<div class="card esc"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><div class="rot">'+ri('Sobra no mês')+'</div><div class="big" style="color:'+(s.sob<0?'#FF8A72':'var(--amber)')+'">'+brl(s.sob)+'</div></div>'+selo(s.st,txt)+'</div>'+
   '<div class="pilha" style="margin-top:14px">'+s.it.filter(function(x){return x[1]>0}).map(function(x){return '<i style="width:'+(x[1]/TT*100)+'%;background:'+x[2]+'" data-t="'+esc(x[0])+' · <b>'+brl(x[1])+'</b>"></i>'}).join('')+(s.sob>0?'<i style="width:'+(s.sob/TT*100)+'%;background:rgba(255,255,255,.16)" data-t="Sobra · <b>'+brl(s.sob)+'</b>"></i>':'')+'</div>'+
-  '<div class="lin"><span>Gastos</span><b>'+brl(s.tot)+'</b></div><div class="lin"><span>Casa sobre o salário</span><b>'+pct(s.mp)+'</b></div></div>'+
+  '<div class="lin"><span>'+ri('Gastos previstos')+'</span><b>'+brl(s.tot)+'</b></div><div class="lin"><span>'+ri('Moradia no salário')+'</span><b>'+pct(s.mp)+'</b></div></div>'+
   '<div class="card"><div class="leg">'+s.it.filter(function(x){return x[1]>0}).sort(function(a,b){return b[1]-a[1]}).map(function(x){return '<i style="background:'+x[2]+'"></i><span>'+x[0]+'</span><b>'+brl(x[1])+'</b><small>'+pct(x[1]/T,0)+'</small>'}).join('')+'</div></div>'};
   liga(r,f);f()}};
 
@@ -901,7 +901,7 @@ TELAS.dois={html:function(){return topo('Comprar a dois','ferramentas')+'<div cl
 
 /* Conversa com os pais */
 function textoPais(){var m=cMeta(),s=cSoz(),t=cTeto();
- return 'Fiz as contas da minha saída de casa:\n\n• Valor máximo do imóvel hoje: '+brl(t.teto)+'\n• Entrada + custos: '+brl(m.meta)+'\n• Já tenho guardado: '+brl(m.disp)+'\n• Guardo por mês: '+brl(m.mens)+'\n• Entrada pronta em: '+(m.meses===0?'agora':isFinite(m.meses)?m.meses+' meses ('+mesAno(addMes(m.meses))+')':'—')+'\n\nMorando sozinho:\n• Gastos do mês: '+brl(s.tot)+'\n• Sobra no mês: '+brl(s.sob)+'\n• Casa sobre o salário: '+pct(s.mp)+'\n\nReserva de emergência separada e fora da entrada. Antes de qualquer pagamento, matrícula conferida e dinheiro só na conta do proprietário.'}
+ return 'Fiz as contas da minha saída de casa:\n\n• Valor máximo do imóvel hoje: '+brl(t.teto)+'\n• Entrada + custos: '+brl(m.meta)+'\n• Já tenho guardado: '+brl(m.disp)+'\n• Guardo por mês: '+brl(m.mens)+'\n• Entrada pronta em: '+(m.meses===0?'agora':isFinite(m.meses)?m.meses+' meses ('+mesAno(addMes(m.meses))+')':'—')+'\n\nMorando sozinho:\n• Gastos do mês: '+brl(s.tot)+'\n• Sobra no mês: '+brl(s.sob)+'\n• Moradia no salário: '+pct(s.mp)+'\n\nReserva de emergência separada e fora da entrada. Antes de qualquer pagamento, matrícula conferida e dinheiro só na conta do proprietário.'}
 TELAS.pais={html:function(){var m=cMeta(),s=cSoz();return topo('Conversa com os pais','ferramentas')+
  '<div class="grid2" style="margin-bottom:12px"><div class="card" style="margin:0"><div class="rot">Entrada pronta</div><div class="mid">'+(m.meses===0?'Agora':isFinite(m.meses)?mesAno(addMes(m.meses)):'—')+'</div></div><div class="card" style="margin:0"><div class="rot">'+ri('Sobra no mês')+'</div><div class="mid" style="color:'+(s.sob<0?'var(--bad)':'var(--ink)')+'">'+brl(s.sob)+'</div></div></div>'+
  '<div class="txt" id="tp">'+esc(textoPais())+'</div><div class="lado" style="margin-bottom:12px"><button class="bt cl" data-copia="tp">'+ic('copia')+'Copiar</button><button class="bt" data-share="tp">'+ic('envia')+'Enviar</button></div>'+
@@ -993,7 +993,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.13',S=null,fbOk=false;
+var VER='1.14',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
