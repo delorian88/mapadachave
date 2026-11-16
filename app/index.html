@@ -245,7 +245,7 @@ var PADRAO={
   preco:200000,precoAval:0,custos:4.5,prazoDesejado:24,primeira:1,
   aluguel:1400,reaj:5,valoriz:5,horiz:10,
   moradia:1600,cond:350,iptu:80,luz:160,agua:80,gas:45,net:130,mercado:850,transp:320,saude:0,lazer:300,dividas:0,outros:150,
-  incSaldo:180000,incc:6,incMeses:30,
+  incSaldo:180000,incc:6.5,incMeses:30,
   aRenda:3500,bRenda:3000,aEnt:20000,bEnt:15000
 };
 var D;
@@ -445,7 +445,7 @@ var ENXOVAL=[
  ['Área de serviço',[['Máquina de lavar',2200,0],['Varal',150,1],['Vassoura, rodo e balde',120,1],['Produtos de limpeza',150,1]]],
  ['Instalação',[['Chuveiro elétrico',180,1],['Lâmpadas',120,1],['Furadeira e caixa de ferramentas',350,0],['Internet (instalação)',100,1]]]
 ];
-var GLOS=[['Alienação fiduciária','Garantia do financiamento. O imóvel fica em nome do banco até a quitação.'],['Amortizar','Pagar parte da dívida antes, para reduzir o prazo ou a parcela.'],['Avaliação','Valor que o engenheiro do banco dá ao imóvel. O banco financia sobre o menor valor entre avaliação e preço.'],['CET','Custo efetivo total: juros + seguros + tarifas. Número usado para comparar bancos.'],['Cota de financiamento','Parte do valor do imóvel que o banco empresta. O resto é a entrada.'],['DECORE','Declaração de rendimentos assinada por contador. Usada por autônomos para comprovar renda.'],['Distrato','Desistência da compra na planta. A Lei 13.786/2018 define multa e devolução.'],['Entrada','Parte do preço que sai do seu bolso ou do FGTS.'],['Escritura','Documento do tabelionato que formaliza a compra à vista. Precisa ser registrada.'],['FGTS','Dinheiro depositado pela empresa todo mês para quem trabalha com carteira. Pode virar entrada.'],['Habite-se','Documento da prefeitura que libera o imóvel para moradia.'],['INCC','Índice que corrige as parcelas do imóvel na planta até as chaves.'],['Interveniente quitante','Banco que quita o financiamento do vendedor para o imóvel ser vendido livre.'],['ITBI','Imposto da prefeitura sobre a compra. Pago pelo comprador, sobre o valor da compra.'],['Juros de obra','Valor pago ao banco durante a construção, sem reduzir a dívida.'],['Matrícula','Registro do imóvel no cartório. Mostra dono, área, histórico e o que pesa sobre ele.'],['MCMV','Minha Casa Minha Vida. Juros menores e subsídio conforme a faixa de renda.'],['MIP e DFI','Seguros obrigatórios do financiamento: morte ou invalidez e danos ao imóvel.'],['Ônus reais','Penhora, hipoteca, usufruto, alienação: restrições anotadas na matrícula.'],['Patrimônio de afetação','Separa o dinheiro de uma obra do caixa da construtora.'],['Price','Parcela fixa. Paga mais juros no total.'],['Registro','Anotação da compra na matrícula. A partir dele o imóvel é do comprador.'],['Registrato','Sistema do Banco Central que mostra todas as dívidas no seu CPF.'],['SAC','Parcela começa maior e cai todo mês. Paga menos juros no total.'],['SBPE','Dinheiro da poupança usado pelos bancos para financiar imóveis.'],['SFH','Sistema Financeiro da Habitação. Permite FGTS. Teto de R$ 2,25 milhões.'],['Sinal','Valor pago na assinatura do contrato de compra e venda, de 5% a 10%.'],['TR','Taxa Referencial que corrige o saldo devedor junto com os juros.']];
+var GLOS=[['Alienação fiduciária','Garantia do financiamento. O imóvel fica em nome do banco até a quitação.'],['Amortizar','Pagar parte da dívida antes, para reduzir o prazo ou a parcela.'],['Avaliação','Valor que o engenheiro do banco dá ao imóvel. O banco financia sobre o menor valor entre avaliação e preço.'],['CET','Custo efetivo total: juros + seguros + tarifas. Número usado para comparar bancos.'],['Cota de financiamento','Parte do valor do imóvel que o banco empresta. O resto é a entrada.'],['DECORE','Declaração de rendimentos assinada por contador. Usada por autônomos para comprovar renda.'],['Distrato','Desistência da compra na planta. A Lei 13.786/2018 define multa e devolução.'],['Entrada','Parte do preço que sai do seu bolso ou do FGTS.'],['Escritura','Documento do tabelionato que formaliza a compra à vista. Precisa ser registrada.'],['FGTS','Dinheiro depositado pela empresa todo mês para quem trabalha com carteira. Pode virar entrada.'],['Habite-se','Documento da prefeitura que libera o imóvel para moradia.'],['INCC','Índice que corrige as parcelas do imóvel na planta até as chaves.'],['Interveniente quitante','Banco que quita o financiamento do vendedor para o imóvel ser vendido livre.'],['ITBI','Imposto da prefeitura sobre a compra. Pago pelo comprador, sobre o valor da compra.'],['Juros de obra','Valor pago ao banco durante a construção, sem reduzir a dívida.'],['Matrícula','Registro do imóvel no cartório. Mostra dono, área, histórico e o que pesa sobre ele.'],['MCMV','Minha Casa Minha Vida. Juros menores e subsídio conforme a faixa de renda.'],['MIP e DFI','Seguros obrigatórios do financiamento: morte ou invalidez e danos ao imóvel.'],['Ônus reais','Penhora, hipoteca, usufruto, alienação: restrições anotadas na matrícula.'],['Patrimônio de afetação','Separa o dinheiro de uma obra do caixa da construtora.'],['Price','Parcela fixa. Paga mais juros no total.'],['Registro','Anotação da compra na matrícula. A partir dele o imóvel é do comprador.'],['Registrato','Sistema do Banco Central que mostra todas as dívidas no seu CPF.'],['SAC','Parcela começa maior e cai todo mês. Paga menos juros no total.'],['SBPE','Dinheiro da poupança usado pelos bancos para financiar imóveis.'],['SFH','Sistema Financeiro da Habitação. Permite FGTS. Teto de R$ 2,25 milhões.'],['Sinal','Valor pago na assinatura do contrato de compra e venda, de 5% a 10%.'],['TR','Taxa Referencial que corrige o saldo devedor junto com os juros.'],['CBS e IBS','Impostos da reforma tributária. Em 2027 a CBS substitui PIS e Cofins na venda de imóvel por empresa, como construtora e incorporadora. Quem compra para morar e vende de forma eventual segue sem eles.']];
 
 /* ---------- explicações dos campos ---------- */
 var AJ={
@@ -453,7 +453,7 @@ var AJ={
  guardado:['Dinheiro já separado para a entrada. A reserva de emergência fica de fora.',''],
  fgts:['Saldo do FGTS que pode virar entrada. Precisa somar 3 anos de carteira assinada e não ter imóvel na cidade onde mora ou trabalha.','App FGTS, em Meu FGTS. Some o saldo de todas as contas.'],
  condiptu:['Condomínio + IPTU de um mês, no tipo de imóvel que você procura. O banco não conta, mas sai do seu bolso todo mês.','No anúncio do imóvel. IPTU costuma vir por ano: divida por 12.'],
- juros:['Juros ao ano do financiamento. Referência de nov/2026: Caixa cerca de 11% + TR; bancos privados a partir de 11,6%; MCMV faixa 4 cerca de 10%.','Na simulação do banco ou com o correspondente bancário.','Muda com o banco, a faixa de renda e o relacionamento com o banco.'],
+ juros:['Juros ao ano do financiamento. Referência de nov/2026: Caixa cerca de 11% + TR; bancos privados a partir de 11,6%; MCMV faixa 4 cerca de 10%.','Na simulação do banco ou com o correspondente bancário.','Muda com o banco, a faixa de renda e o relacionamento com o banco. Também acompanha a Selic: o mercado espera 12,5% no fim de 2027 (Focus de 09/11/2026).'],
  prazo:['Tempo para pagar. Máximo de 420 meses (35 anos). Prazo maior deixa a parcela menor e aumenta os juros no total.',''],
  cota:['Parte do valor do imóvel que o banco empresta. O resto é a entrada.','Caixa: até 80% no SAC e até 70% na Price. Bancos privados e MCMV têm regras próprias.'],
  comp:['Quanto da renda bruta pode ir para a parcela.','Bancos e Minha Casa Minha Vida aprovam até 30%.'],
@@ -467,7 +467,7 @@ var AJ={
  guardo:['Quanto dá para separar todo mês para a entrada.','Guarde no dia em que o salário cai.'],
  rend:['Rendimento ao ano, já sem imposto, de onde a entrada fica guardada: Tesouro Selic ou CDB de liquidez diária.','Referência de nov/2026: cerca de 10% ao ano.'],
  prazoDesejado:['Em quantos meses você quer a entrada pronta. O resultado mostra quanto guardar por mês para chegar lá.',''],
- liquida:['Salário que cai na conta, já sem INSS e IR.',''],
+ liquida:['Salário que cai na conta, já sem INSS e IR.','No holerite, na linha de líquido.','Desde janeiro de 2026, quem ganha até R$ 5 mil não tem IR retido, e há desconto até R$ 7.350.'],
  moradia:['Parcela do financiamento ou aluguel.','Use a 1ª parcela da ferramenta Custo da compra.'],
  cond:['Condomínio do prédio.','No anúncio ou com a administradora.'],
  iptu:['IPTU do ano dividido por 12.','No carnê do IPTU ou no anúncio.'],
@@ -482,7 +482,7 @@ var AJ={
  valoriz:['Quanto o imóvel sobe de preço por ano.','Média de longo prazo do FipeZAP, perto da inflação.'],
  horiz:['Quantos anos comparar.',''],
  incSaldo:['Quanto falta pagar direto à construtora até as chaves, sem o financiamento.','Na tabela de pagamento do contrato.'],
- incc:['Índice que corrige as parcelas da planta até as chaves.','Acumulado de 12 meses publicado pela FGV.'],
+ incc:['Índice que corrige o que falta pagar à construtora até as chaves.','Acumulado de 12 meses publicado pela FGV. Referência: 6,75% até outubro de 2026 (INCC-M).'],
  incMeses:['Meses até a entrega das chaves.','Data de entrega do contrato, somando a tolerância de 180 dias.'],
  aRenda:['Renda bruta de uma das pessoas que vai assinar.','Holerite ou declaração de IR.'],
  bRenda:['Renda bruta da outra pessoa.','Holerite ou declaração de IR.'],
@@ -924,7 +924,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.5',S=null,fbOk=false;
+var VER='1.6',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
