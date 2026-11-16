@@ -270,6 +270,7 @@ var D = null, DIAS = 14, MEM = {};
 function guarda(d,v){MEM[d]=v;try{localStorage.setItem('mc_d'+d,JSON.stringify(v))}catch(e){}}
 function lembra(d){if(MEM[d])return MEM[d];try{var v=localStorage.getItem('mc_d'+d);return v?JSON.parse(v):null}catch(e){return null}}
 function porta(){$('carga').style.display='none';$('porta').style.display='grid';$('iChave').focus()}
+function nomePag(p){var q=String(p||'/').split('?'),c=q[0]||'/',n=(c==='/'||c==='/index.html')?'Página de vendas':c.replace(/^\/|\/$/g,'').replace(/[-_]/g,' ');n=n.charAt(0).toUpperCase()+n.slice(1);var m=/(?:^|&)publico=([^&#]+)/.exec(q[1]||'');if(m){var P={aluguel:'Aluguel',pais:'Pais'},v=decodeURIComponent(m[1]);n+=' · '+(P[v]||v.charAt(0).toUpperCase()+v.slice(1))}return n}
 function buscar(d){return fetch(API+'?api=dados&dias='+d+'&k='+encodeURIComponent(CHAVE)).then(function(r){return r.json()})}
 var FRASE={geral:'Mae govannen',funil:'Noro lim',publico:'Elen síla lúmenn\' omentielvo',vendas:'Hannon le',dados:'Lasto beth lammen'};
 var TRAD={'Mae govannen':'Bem-vindo, viajante','Noro lim':'Corra, corra depressa','Elen síla lúmenn\' omentielvo':'Uma estrela brilha na hora do nosso encontro',
@@ -340,7 +341,7 @@ function pintar(d){
   acessosDia(AC.dia||[]);
   barrasO('bOrigem',AC.porOrigem||[]);
   var pg=AC.porPagina||[];
-  $('tPag').innerHTML=pg.length?'<tr><th>Página</th><th>Acessos</th><th>Cliques em comprar</th><th>Taxa</th></tr>'+pg.map(function(x){return '<tr><td>'+esc(x.item)+'</td><td>'+int(x.visitas)+'</td><td>'+int(x.comprar)+'</td><td>'+glow(pct(div(x.comprar,x.visitas)),'#3ef0d8')+'</td></tr>'}).join(''):'<tr><td class="vazio" colspan="5">sem acessos no período</td></tr>';
+  $('tPag').innerHTML=pg.length?'<tr><th>Página</th><th>Acessos</th><th>Cliques em comprar</th><th>Taxa</th></tr>'+pg.map(function(x){return '<tr><td title="'+esc(x.item)+'">'+esc(nomePag(x.item))+'</td><td>'+int(x.visitas)+'</td><td>'+int(x.comprar)+'</td><td>'+glow(pct(div(x.comprar,x.visitas)),'#3ef0d8')+'</td></tr>'}).join(''):'<tr><td class="vazio" colspan="5">sem acessos no período</td></tr>';
   serie(d.serie);
 
   // ── FUNIL (desde o início)
