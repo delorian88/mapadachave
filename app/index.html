@@ -407,17 +407,17 @@ var ETAPAS=[
   n:['cz','Amortizar','Reduzir prazo economiza mais juros. Reduzir parcela alivia o mês. FGTS amortiza a cada 2 anos.']}
 ];
 var GOLPE=[
- ['Conta de destino no nome do proprietário da matrícula',''],
- ['Valor confirmado por ligação, não só por mensagem','WhatsApp clonado de corretor ou vendedor é o golpe mais comum.'],
- ['Boleto de ITBI emitido por você no site da prefeitura',''],
- ['Corretor ativo no CRECI do estado',''],
- ['Preço dentro da média dos imóveis iguais da região',''],
- ['Nenhum valor pedido para “reservar” antes da visita',''],
- ['Sem pressa imposta pelo vendedor','“Tenho outro interessado hoje” é sinal de golpe.'],
- ['Procuração confirmada no cartório que a lavrou','Se a venda for por procuração.'],
- ['Leilão conferido no site oficial do leiloeiro','Se for imóvel de leilão.'],
- ['E-mail do banco ou da construtora no domínio oficial',''],
- ['PDFs conferidos na fonte, por QR code ou site do cartório','']
+ ['A conta de destino está no nome do dono que aparece na matrícula?',''],
+ ['O valor foi confirmado por ligação, e não só por mensagem?','WhatsApp clonado de corretor ou vendedor é o golpe mais comum.'],
+ ['O boleto do ITBI foi emitido por você, no site da prefeitura?',''],
+ ['O corretor está ativo no CRECI do estado?',''],
+ ['O preço está na média dos imóveis iguais da região?',''],
+ ['A visita aconteceu antes de qualquer pedido de dinheiro?','Pedido de valor para “reservar” antes da visita é sinal de golpe.'],
+ ['O vendedor dá tempo para você decidir?','“Tenho outro interessado hoje” é sinal de golpe.'],
+ ['A procuração foi confirmada no cartório que a fez?','Se a venda for por procuração.'],
+ ['O leilão foi conferido no site oficial do leiloeiro?','Se for imóvel de leilão.'],
+ ['Os e-mails do banco ou da construtora vêm do endereço oficial?',''],
+ ['Os PDFs foram conferidos na fonte, por QR code ou site do cartório?','']
 ];
 var SINAIS=['Preço bem abaixo do bairro','Pressa para fechar','Sinal pedido antes da visita ou da matrícula','Conta em nome de outra pessoa','Vendedor que nunca aparece pessoalmente','Corretor só por WhatsApp, sem CRECI','Boleto ou chave Pix enviados por mensagem','Documento só em foto ou print'];
 var DOCS={
@@ -993,7 +993,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.15',S=null,fbOk=false;
+var VER='1.16',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
