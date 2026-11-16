@@ -208,6 +208,8 @@ a{color:inherit;text-decoration:none}
 .nv .pt{width:10px;height:10px;border-radius:50%;background:var(--ink3);flex:none}.nv.on .pt{background:#2E9E5B;box-shadow:0 0 0 4px rgba(46,158,91,.15)}
 .nv b{display:block;font-size:15px}.nv small{font-size:12.5px;color:var(--ink3)}
 .av-nv{font-size:14px;line-height:1.5;color:var(--ink2)}.av-nv p{margin:0 0 10px}.av-nv ul{margin:0 0 14px;padding-left:18px}.av-nv li{margin-bottom:6px}
+.ei{gap:8px}.exc{width:26px;height:26px;border-radius:50%;flex:none;color:var(--ink3);font-size:17px;line-height:1;display:grid;place-items:center;background:transparent}.exc:hover{background:var(--sand);color:var(--bad)}
+.add{display:block;width:100%;text-align:left;padding:14px 16px;border-top:1px solid var(--line);font-weight:600;font-size:14px;color:var(--amber-d,#BA7517);background:transparent}
 .lic{font-size:11.5px;color:var(--ink3);text-align:center;margin:26px 0 4px;font-variant-numeric:tabular-nums}
 .erro{color:var(--bad);font-size:13.5px;font-weight:600;min-height:20px;margin-top:8px}
 .fade{animation:fd .28s ease}
@@ -583,7 +585,7 @@ var TOOLS=[
  {id:'bancos',ic:'banco',t:'Comparar bancos'},
  {id:'documentos',ic:'pasta',t:'Documentos'},
  {id:'custos',ic:'recibo',t:'Gastos da compra'},
- {id:'enxoval',ic:'caixa',t:'Enxoval da casa'},
+ {id:'enxoval',ic:'caixa',t:'Itens da casa nova'},
  {id:'planta',ic:'guindaste',t:'Imóvel na planta'},
  {id:'dois',ic:'dois',t:'Comprar a dois'},
  {id:'pais',ic:'conversa',t:'Conversa com os pais'},
@@ -691,7 +693,7 @@ function nav(){var a=[['inicio','casa','Início'],['ferramentas','grade','Ferram
  var grupo={teto:'ferramentas',meta:'ferramentas',sozinho:'ferramentas',golpe:'ferramentas',custo:'ferramentas',aluguel:'ferramentas',bancos:'ferramentas',documentos:'ferramentas',custos:'ferramentas',enxoval:'ferramentas',planta:'ferramentas',dois:'ferramentas',pais:'ferramentas',glossario:'ferramentas',dados:'ferramentas',etapa:'etapas',imovel:'imoveis'}[r]||r;
  return '<nav class="nav"><div>'+a.map(function(x){return '<a href="#'+x[0]+'" class="'+(grupo===x[0]?'on':'')+'">'+ic(x[1])+x[2]+'</a>'}).join('')+'</div></nav>'}
 var TELAS={};
-function render(){fecha();var h=(location.hash||'#inicio').slice(1)||'inicio';R.rota=h;var p=h.split('/'),f=TELAS[p[0]]||TELAS.inicio;
+function render(){fecha();var h=(location.hash||'#inicio').slice(1)||'inicio';R.rota=h;var p=h.split('/'),f=TELAS[p[0]]||TELAS.inicio;if(toolT(p[0]).t){D.ui.ult=D.ui.ult||{};D.ui.ult[p[0]]=Date.now();try{localStorage.setItem('mc_app',JSON.stringify(D))}catch(e){}}
  var app=$('#app');app.innerHTML='<div class="wrap fade">'+f.html(p[1])+'</div>'+nav();if(f.liga)f.liga(app,p[1]);window.scrollTo(0,0)}
 window.addEventListener('hashchange',render);
 
@@ -706,11 +708,10 @@ TELAS.inicio={html:function(){
  '<a class="card esc" href="#etapas" style="display:block"><div class="anel">'+anel(ok/tot,Math.round(ok/tot*100)+'%')+'<div style="flex:1;min-width:0"><div class="rot">'+feitasE+' de 10 etapas</div><div class="mid" style="color:#fff">'+(prox<0?'Chave na mão':'Etapa '+(prox+1)+' · '+esc(ETAPAS[prox].t))+'</div>'+(prox>=0?'<div class="rot" style="margin-top:4px">'+feitos('e'+prox,ETAPAS[prox].i.length)+' de '+ETAPAS[prox].i.length+' itens</div>':'')+'</div></div></a>'+
  '<a class="card" href="#meta" style="display:block"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="rot">Entrada + custos</div><div class="rot">'+dataM+'</div></div><div class="big">'+brl(m.disp)+' <span style="font-size:15px;color:var(--ink3);font-weight:600">de '+brl(m.meta)+'</span></div><div class="barra" style="margin-top:12px"><i style="width:'+(fm*100)+'%"></i></div><div style="display:flex;justify-content:space-between;margin-top:8px" class="rot"><span>'+pct(fm,0)+'</span><span>Falta '+brl(m.falta)+'</span></div></a>'+
  '<div class="grid2"><a class="card" href="#teto" style="margin:0"><div class="rot">'+ri('Teto de preço')+'</div><div class="mid">'+brlk(t.teto)+'</div><div class="rot" style="margin-top:2px">Limite: '+t.lim.toLowerCase()+'</div></a><a class="card" href="#sozinho" style="margin:0"><div class="rot">'+ri('Sobra no mês')+'</div><div class="mid" style="color:'+(cSoz().sob<0?'var(--bad)':'var(--ink)')+'">'+brl(cSoz().sob)+'</div><div class="rot" style="margin-top:2px">Morando sozinho</div></a></div>'+
- '<div class="h2">Ferramentas</div><div class="tools">'+
- '<a class="tool dest" href="#golpe"><span class="ic">'+ic('escudo')+'</span><span><b>Antes do Pix</b><small>'+golpeResumo()+'</small></span></a>'+
- ['teto','meta','sozinho','custo'].map(cartaoTool).join('')+'<a class="tool" href="#ferramentas" style="grid-column:1/-1;flex-direction:row;align-items:center;min-height:0;justify-content:space-between"><b>Todas as ferramentas</b>'+ic('chev','chev')+'</a></div>'}};
+ '<div class="h2">Seus objetivos</div><div class="tools">'+ordemTools().map(cartaoTool).join('')+'</div>'}};
+function ordemTools(){var u=D.ui.ult||{},ids=TOOLS.map(function(t){return t.id}),us=ids.filter(function(i){return u[i]}).sort(function(a,b){return u[b]-u[a]});return us.concat(ids.filter(function(i){return !u[i]}))}
 function lic(){return S?'<div class="lic">Licença de '+esc(S.n||S.e)+(S.n?' · '+esc(S.e):'')+'</div>':''}
-function cartaoTool(id){var t=toolT(id),sub=subTool(id);return '<a class="tool" href="#'+id+'"><span class="ic">'+ic(t.ic)+'</span><span><b>'+t.t+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</span></a>'}
+function cartaoTool(id){var t=toolT(id),sub=subTool(id);return '<a class="tool'+(id==='golpe'&&/Pare/.test(sub)?' dest':'')+'" href="#'+id+'"><span class="ic">'+ic(t.ic)+'</span><span><b>'+t.t+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</span></a>'}
 function subTool(id){switch(id){
  case 'teto':return brlk(cTeto().teto);
  case 'meta':var m=cMeta();return m.meses===0?'Pronta':isFinite(m.meses)?m.meses+' meses':'';
@@ -725,6 +726,7 @@ function subTool(id){switch(id){
  case 'dois':return feitos('dois',DOIS.length)+' de '+DOIS.length;
  case 'imoveis':return D.imv.length+' imóveis';
  case 'glossario':return GLOS.length+' termos';
+ case 'pais':return 'Texto pronto';
  case 'golpe':return golpeResumo();
  default:return ''}}
 TELAS.ferramentas={html:function(){
@@ -834,18 +836,32 @@ TELAS.custos={html:function(){return topo('Gastos da compra','ferramentas')+'<di
   $$('#cl input').forEach(function(i){i.addEventListener('focus',function(){selTudo(i)});i.addEventListener('blur',function(){var v=parse(i.value);i.value=i.value===''?'':num(v)})});f()}};
 
 /* Enxoval */
-function totEnx(){var m1=0,dp=0,ok=0,tot=0;ENXOVAL.forEach(function(c,ci){c[1].forEach(function(x,i){var k=ci+'.'+i,o=D.enx[k]||{},v=o.v!=null?o.v:x[1],m=o.m!=null?o.m:x[2];tot+=v;if(m)m1+=v;else dp+=v;if(o.ok)ok+=v})});return {m1:m1,dp:dp,ok:ok,tot:tot}}
-TELAS.enxoval={html:function(){var aba=D.ui.enxA||'m1';return topo('Enxoval da casa','ferramentas')+'<div id="res"></div><div class="seg" id="ea" style="margin-bottom:12px"><button data-a="m1" class="'+(aba==='m1'?'on':'')+'">Mês 1</button><button data-a="dp" class="'+(aba==='dp'?'on':'')+'">Pode esperar</button><button data-a="tudo" class="'+(aba==='tudo'?'on':'')+'">Tudo</button></div><div id="el"></div>'},
+function listaEnx(){var L=[];D.enxX=D.enxX||[];
+ ENXOVAL.forEach(function(c,ci){c[1].forEach(function(x,i){var k=ci+'.'+i,o=D.enx[k]||{};if(o.del)return;L.push({k:k,c:ci,n:x[0],v:o.v!=null?o.v:x[1],m:o.m!=null?o.m:x[2],ok:!!o.ok})})});
+ D.enxX.forEach(function(x){L.push({k:'x'+x.id,c:x.c,n:x.n,v:+x.v||0,m:x.m?1:0,ok:!!x.ok,x:x})});return L}
+function totEnx(){var m1=0,dp=0,ok=0,tot=0;listaEnx().forEach(function(x){tot+=x.v;if(x.m)m1+=x.v;else dp+=x.v;if(x.ok)ok+=x.v});return {m1:m1,dp:dp,ok:ok,tot:tot}}
+function catsEnx(){return ENXOVAL.map(function(c){return c[0]}).concat(['Outros'])}
+TELAS.enxoval={html:function(){var aba=D.ui.enxA||'m1';return topo('Itens da casa nova','ferramentas')+'<div id="res"></div><div class="seg" id="ea" style="margin-bottom:12px"><button data-a="m1" class="'+(aba==='m1'?'on':'')+'">Mês 1</button><button data-a="dp" class="'+(aba==='dp'?'on':'')+'">Pode esperar</button><button data-a="tudo" class="'+(aba==='tudo'?'on':'')+'">Tudo</button></div><div id="el"></div>'},
  liga:function(r){var f=function(){var t=totEnx(),fr=t.tot?t.ok/t.tot:0;$('#res').innerHTML='<div class="card esc"><div class="grid2"><div><div class="rot">Mês 1</div><div class="mid amb">'+brl(t.m1)+'</div></div><div><div class="rot">Pode esperar</div><div class="mid" style="color:#fff">'+brl(t.dp)+'</div></div></div><div class="barra" style="margin-top:14px"><i style="width:'+(fr*100)+'%"></i></div><div class="rot" style="margin-top:8px">Já tenho '+brl(t.ok)+' de '+brl(t.tot)+'</div></div>'};
-  var p=function(){var aba=D.ui.enxA||'m1';$('#el').innerHTML=ENXOVAL.map(function(c,ci){var it=c[1].map(function(x,i){var k=ci+'.'+i,o=D.enx[k]||{},v=o.v!=null?o.v:x[1],m=o.m!=null?o.m:x[2];if(aba==='m1'&&!m||aba==='dp'&&m)return '';
-     return '<div class="cp" data-e="'+k+'"><button class="ck'+(o.ok?' on':'')+'" data-eok="1" style="padding:0;border:0;width:auto;flex:1;align-items:center"><span class="bx">'+ic('ok')+'</span><span><b>'+esc(x[0])+'</b></span></button><button data-em="1" class="selo '+(m?'warn':'ok')+'" style="padding:5px 9px;font-size:11.5px">'+(m?'Mês 1':'Depois')+'</button><div class="in" style="min-width:104px;max-width:104px;padding:0 10px"><span>R$</span><input data-ev="1" inputmode="decimal" value="'+num(v)+'"></div></div>'}).join('');
-    return it?'<div class="h2">'+c[0]+'</div><div class="campos">'+it+'</div>':''}).join('');
-   $$('[data-ev]',$('#el')).forEach(function(i){i.addEventListener('focus',function(){selTudo(i)});i.addEventListener('blur',function(){i.value=num(parse(i.value))})})};
+  var p=function(){var aba=D.ui.enxA||'m1',L=listaEnx(),nd=Object.keys(D.enx).filter(function(k){return D.enx[k].del}).length;
+   $('#el').innerHTML=catsEnx().map(function(cn,ci){var it=L.filter(function(x){return x.c===ci&&!(aba==='m1'&&!x.m||aba==='dp'&&x.m)}).map(function(x){
+     return '<div class="cp ei" data-e="'+x.k+'"><button class="ck'+(x.ok?' on':'')+'" data-eok="1" style="padding:0;border:0;width:auto;flex:1;align-items:center"><span class="bx">'+ic('ok')+'</span><span><b>'+esc(x.n)+'</b></span></button><button data-em="1" class="selo '+(x.m?'warn':'ok')+'" style="padding:5px 9px;font-size:11.5px">'+(x.m?'Mês 1':'Depois')+'</button><div class="in" style="min-width:96px;max-width:96px;padding:0 10px"><span>R$</span><input data-ev="1" inputmode="decimal" value="'+num(x.v)+'"></div><button class="exc" data-edel="1" aria-label="Remover">×</button></div>'}).join('');
+    return '<div class="h2">'+esc(cn)+'</div><div class="campos">'+it+'<button class="add" data-eadd="'+ci+'">+ Adicionar item</button></div>'}).join('')+
+    (nd?'<button class="bt cl" id="erest" style="margin-top:6px">Trazer de volta os '+nd+' itens removidos</button>':'');
+   $$('[data-ev]',$('#el')).forEach(function(i){i.addEventListener('focus',function(){selTudo(i)});i.addEventListener('blur',function(){i.value=num(parse(i.value))})});
+   var rb=$('#erest');if(rb)rb.addEventListener('click',function(){Object.keys(D.enx).forEach(function(k){delete D.enx[k].del});salva();f();p();toast('Itens de volta')})};
+  var obj=function(k){if(k.charAt(0)==='x'){var id=k.slice(1);for(var i=0;i<D.enxX.length;i++)if(String(D.enxX[i].id)===id)return D.enxX[i];return {}}return D.enx[k]=D.enx[k]||{}};
+  var novo=function(ci){var cs=catsEnx();folha('Novo item','<div class="campos" style="margin-bottom:14px"><div class="cp"><label for="en_n"><span>Item</span></label><div class="in" style="max-width:62%"><input id="en_n" class="tx" type="text" autocomplete="off" placeholder="Ex.: Air fryer"></div></div><div class="cp"><label for="en_v"><span>Valor</span></label><div class="in"><span>R$</span><input id="en_v" inputmode="decimal" value="0"></div></div><div class="cp"><label><span>Quando</span></label><div class="seg" id="en_m" style="margin:0;max-width:62%"><button data-m="1" class="on">Mês 1</button><button data-m="0">Depois</button></div></div><div class="cp"><label for="en_c"><span>Cômodo</span></label><div class="in" style="max-width:62%"><select id="en_c" style="border:0;background:transparent;width:100%;font:inherit;font-weight:600">'+cs.map(function(c,i){return '<option value="'+i+'"'+(i===ci?' selected':'')+'>'+esc(c)+'</option>'}).join('')+'</select></div></div></div><button class="bt" id="en_ok">Adicionar</button>',function(fc){
+    var m=1;$('#en_m',fc).addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;m=+b.dataset.m;$$('#en_m button',fc).forEach(function(x){x.classList.toggle('on',x===b)})});
+    setTimeout(function(){$('#en_n',fc).focus()},250);
+    $('#en_ok',fc).addEventListener('click',function(){var n=($('#en_n',fc).value||'').trim();if(!n){$('#en_n',fc).focus();return}D.enxX=D.enxX||[];D.enxX.push({id:Date.now(),n:n,v:parse($('#en_v',fc).value),m:m,c:+$('#en_c',fc).value,ok:false});salva();fecha();f();p();toast('Item adicionado')})})};
   $('#ea').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;D.ui.enxA=b.dataset.a;salva();$$('#ea button').forEach(function(x){x.classList.toggle('on',x===b)});p()});
-  $('#el').addEventListener('click',function(e){var row=e.target.closest('[data-e]');if(!row)return;var k=row.dataset.e,o=D.enx[k]=D.enx[k]||{};
-   if(e.target.closest('[data-eok]')){o.ok=!o.ok;row.querySelector('.ck').classList.toggle('on',o.ok);salva();f()}
-   else if(e.target.closest('[data-em]')){var ci=+k.split('.')[0],ii=+k.split('.')[1],base=ENXOVAL[ci][1][ii][2],m=o.m!=null?o.m:base;o.m=m?0:1;salva();f();p()}});
-  $('#el').addEventListener('input',function(e){if(!e.target.dataset.ev)return;var k=e.target.closest('[data-e]').dataset.e,o=D.enx[k]=D.enx[k]||{};o.v=parse(e.target.value);salva();f()});
+  $('#el').addEventListener('click',function(e){var ad=e.target.closest('[data-eadd]');if(ad){novo(+ad.dataset.eadd);return}
+   var row=e.target.closest('[data-e]');if(!row)return;var k=row.dataset.e,o=obj(k),cust=k.charAt(0)==='x';
+   if(e.target.closest('[data-edel]')){if(cust)D.enxX=D.enxX.filter(function(x){return x!==o});else o.del=1;salva();f();p();toast('Item removido')}
+   else if(e.target.closest('[data-eok]')){o.ok=!o.ok;row.querySelector('.ck').classList.toggle('on',o.ok);salva();f()}
+   else if(e.target.closest('[data-em]')){var cur=cust?(o.m?1:0):(o.m!=null?o.m:ENXOVAL[+k.split('.')[0]][1][+k.split('.')[1]][2]);o.m=cur?0:1;salva();f();p()}});
+  $('#el').addEventListener('input',function(e){if(!e.target.dataset.ev)return;var o=obj(e.target.closest('[data-e]').dataset.e);o.v=parse(e.target.value);salva();f()});
   f();p()}};
 
 /* Na planta */
@@ -924,7 +940,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.6',S=null,fbOk=false;
+var VER='1.7',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
