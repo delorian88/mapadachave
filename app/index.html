@@ -541,7 +541,7 @@ var RX={
  'Total pago de aluguel':'Soma de todos os aluguéis do período, com reajuste.',
  'Total pago de parcelas':'Soma das parcelas do financiamento no período.',
  'Total pago estimado':'Valor financiado + juros pelo CET em todo o prazo.',
- 'Saldo corrigido nas chaves':'Quanto o saldo da construtora vira até as chaves, corrigido pelo INCC.',
+ 'Valor a pagar na entrega':'O que falta pagar à construtora já com a correção do INCC, que incide todo mês até a entrega das chaves.',
  'Preço por m²':'Preço ÷ área. Compare com imóveis iguais do mesmo bairro.',
  'Fixo por mês':'Condomínio + IPTU do mês, que se somam à parcela.',
  'Dentro do teto':'Compara o preço com o teto de Até que valor posso comprar.',
@@ -849,8 +849,8 @@ TELAS.enxoval={html:function(){var aba=D.ui.enxA||'m1';return topo('Enxoval da c
   f();p()}};
 
 /* Na planta */
-TELAS.planta={html:function(){return topo('Imóvel na planta','ferramentas')+'<div class="h2" style="margin-top:6px">Correção até as chaves</div>'+campos([['incSaldo','Saldo a pagar até as chaves','r'],['incc','INCC ao ano','p'],['incMeses','Meses até as chaves','m']])+'<div id="res"></div><div class="h2">Antes de assinar</div><div id="cl"></div>'},
- liga:function(r){var f=function(){var s=V('incSaldo'),fi=s*Math.pow(1+V('incc')/100,V('incMeses')/12),ac=fi-s;$('#res').innerHTML='<div class="card esc"><div class="rot">'+ri('Saldo corrigido nas chaves')+'</div><div class="big amb">'+brl(fi)+'</div><div class="rot" style="margin-top:6px">+ '+brl(ac)+' de correção ('+pct(s?ac/s:0)+')</div></div>'};
+TELAS.planta={html:function(){return topo('Imóvel na planta','ferramentas')+'<div class="h2" style="margin-top:6px">Correção da obra (INCC)</div>'+campos([['incSaldo','Falta pagar à construtora','r'],['incc','INCC ao ano','p'],['incMeses','Meses até as chaves','m']])+'<div id="res"></div><div class="h2">Antes de assinar</div><div id="cl"></div>'},
+ liga:function(r){var f=function(){var s=V('incSaldo'),fi=s*Math.pow(1+V('incc')/100,V('incMeses')/12),ac=fi-s;$('#res').innerHTML='<div class="card esc"><div class="rot">'+ri('Valor a pagar na entrega')+'</div><div class="big amb">'+brl(fi)+'</div><div class="rot" style="margin-top:6px">+ '+brl(ac)+' de correção pelo INCC ('+pct(s?ac/s:0)+')</div></div>'};
   var c=function(){$('#cl').innerHTML='<div class="card" style="display:flex;justify-content:space-between;align-items:center"><div class="mid">'+feitos('pl',PLANTA.length)+' de '+PLANTA.length+'</div>'+(feitos('pl',PLANTA.length)===PLANTA.length?selo('ok','Conferido'):selo('warn','Em conferência'))+'</div>'+ckLista('pl',PLANTA);ligaCk($('#cl'),c)};
   liga(r,f);f();c()}};
 
@@ -924,7 +924,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.4',S=null,fbOk=false;
+var VER='1.5',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
