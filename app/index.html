@@ -221,7 +221,7 @@ a{color:inherit;text-decoration:none}
 .ei{gap:8px}.exc{width:26px;height:26px;border-radius:50%;flex:none;color:var(--ink3);font-size:17px;line-height:1;display:grid;place-items:center;background:transparent}.exc:hover{background:var(--sand);color:var(--bad)}
 .add{display:block;width:100%;text-align:left;padding:14px 16px;border-top:1px solid var(--line);font-weight:600;font-size:14px;color:var(--amber-d,#BA7517);background:transparent}
 .op{display:flex;flex-wrap:wrap;gap:8px}.op button{padding:9px 13px;border-radius:999px;border:1px solid var(--line2);background:#fff;font-size:13.5px;font-weight:600;color:var(--ink)}.op button.on{background:var(--ink);border-color:var(--ink);color:#fff}.pq:first-child{border-top:0!important}
-.cvw{display:flex;gap:10px;align-items:flex-end}.cv{display:flex;flex-direction:column;align-items:center;gap:6px;flex:none}.cv small{font-size:10px;color:var(--ink3);font-weight:600}.cvb{width:34px;display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:var(--sand)}.cvb i{display:block;flex:none}.cvs{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;gap:7px}.cvl{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:13px;white-space:nowrap}.cvl span{display:flex;align-items:center;gap:6px;color:var(--ink2);min-width:0}.cvl span i{width:9px;height:9px;border-radius:3px;flex:none}.cvl b{font-variant-numeric:tabular-nums;white-space:nowrap}.cvt{border-top:1px solid var(--line);padding-top:8px;margin-top:2px;display:flex;flex-direction:column;gap:7px}.cvt .cvl b{font-size:14px}
+.cxw{display:flex;flex-direction:column}.cx{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:13.5px}.cx i{width:4px;align-self:stretch;border-radius:2px;flex:none}.cx span{flex:1;color:var(--ink2)}.cx b{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}.cx.tt{border-top:1px solid var(--line);margin-top:4px;padding-top:10px}.cx.tt span{color:var(--ink);font-weight:600}.cx.tt b{font-size:15px;font-weight:700}.cx:first-child{border-top:0;margin-top:0;padding-top:7px}.cx.fb b,.cx.fb span{color:var(--bad)}.cx.fo b,.cx.fo span{color:var(--ok)}
 .lic{font-size:11.5px;color:var(--ink3);text-align:center;margin:26px 0 4px;font-variant-numeric:tabular-nums}
 .erro{color:var(--bad);font-size:13.5px;font-weight:600;min-height:20px;margin-top:8px}
 .fade{animation:fd .28s ease}
@@ -321,7 +321,7 @@ var ETAPAS=[
   ['Entrada disponível somada','Dinheiro guardado + FGTS.'],
   ['Reserva para custos de compra: 4% a 6% do preço',''],
   ['Reserva de emergência intacta: 3 a 6 meses de gastos','Fora da entrada.'],
-  ['Teto de preço anotado','']],
+  ['Valor máximo anotado','']],
   n:['am','Imóvel de R$ 300 mil, Caixa SAC','Entrada R$ 60 mil · ITBI, cartório e avaliação ≈ R$ 13,5 mil · 1ª parcela ≈ R$ 2.670 · renda bruta mínima ≈ R$ 8.900.'],f:'teto'},
  {t:'Crédito, FGTS e MCMV',o:'Crédito aprovado ou pré-aprovado em mãos.',i:[
   ['Nome sem restrição no Serasa, SPC e Registrato',''],
@@ -334,8 +334,8 @@ var ETAPAS=[
   ['Documentos entregues ao banco ou correspondente',''],
   ['Carta de crédito guardada, com validade anotada','']],
   f:'bancos'},
- {t:'Busca e visitas',o:'Buscar só dentro do teto e do perfil.',i:[
-  ['Busca nos portais com filtro de preço no teto',''],
+ {t:'Busca e visitas',o:'Buscar só até o valor máximo e dentro do perfil.',i:[
+  ['Busca nos portais com filtro até o valor máximo',''],
   ['Lista curta com no máximo 8 imóveis',''],
   ['Disponibilidade e preço confirmados antes de agendar',''],
   ['Corretor conferido no site do CRECI do estado',''],
@@ -524,13 +524,13 @@ var SL={
  prazoDesejado:[3,120,1,null,'']
 };
 var RX={
- 'Teto de preço':'O maior preço de imóvel que cabe hoje. É o menor entre dois limites: o que a renda paga de parcela e o que o seu dinheiro cobre de entrada e custos.',
+ 'Valor máximo':'O maior preço de imóvel que cabe hoje. É o menor entre dois limites: o que a renda paga de parcela e o que o seu dinheiro cobre de entrada e custos.',
  'Pela renda':'Preço máximo que a parcela permite, com o percentual da renda e a parte financiada escolhidos.',
  'Pela entrada':'Preço máximo que o seu dinheiro cobre: entrada + ITBI + cartório + avaliação.',
  'Parcela máxima':'Percentual da renda bruta escolhido. Bancos aprovam até 30%.',
  'Banco empresta até':'Valor máximo financiado para essa parcela, no SAC, com os juros e o prazo informados.',
  'Dinheiro disponível':'Dinheiro guardado + FGTS. A reserva de emergência fica fora.',
- 'Gasto mensal no teto':'1ª parcela + condomínio + IPTU de um imóvel no teto de preço.',
+ 'Gasto mensal no valor máximo':'1ª parcela + condomínio + IPTU de um imóvel no valor máximo.',
  'Gasto sobre a renda':'Quanto do salário bruto vai para a casa todo mês. Até 35% é confortável. Acima de 40% o orçamento aperta, mesmo com o banco aprovando.',
  'Entrada pronta em':'Mês em que guardado + FGTS + depósitos mensais, com rendimento, chegam à meta.',
  'Entrada':'Parte do preço que o banco não financia. Sai do seu bolso ou do FGTS.',
@@ -555,12 +555,12 @@ var RX={
  'Total pago de aluguel':'Soma de todos os aluguéis do período, com reajuste.',
  'Total pago de parcelas':'Soma das parcelas do financiamento no período.',
  'Total pago estimado':'Valor financiado + juros pelo CET em todo o prazo.',
- 'Compra no teto':'Como fica a compra de um imóvel no valor do teto: quanto o banco financia, a entrada, os impostos e taxas (ITBI, cartório e avaliação) que não entram no financiamento, e quanto falta ou sobra do seu dinheiro.',
- 'Parcelas no teto':'Primeira e última parcela no SAC e parcela fixa na Price, sem seguros. Na Caixa, a Price financia até 70%.',
+ 'Compra no valor máximo':'Como fica a compra de um imóvel no valor máximo: quanto o banco financia, a entrada, os impostos e taxas (ITBI, cartório e avaliação) que não entram no financiamento, e quanto falta ou sobra do seu dinheiro.',
+ 'Parcelas no valor máximo':'Primeira e última parcela no SAC e parcela fixa na Price, sem seguros. Na Caixa, a Price financia até 70%.',
  'Valor a pagar na entrega':'O que falta pagar à construtora já com a correção do INCC, que incide todo mês até a entrega das chaves.',
  'Preço por m²':'Preço ÷ área. Compare com imóveis iguais do mesmo bairro.',
  'Fixo por mês':'Condomínio + IPTU do mês, que se somam à parcela.',
- 'Dentro do teto':'Compara o preço com o teto de Até que valor posso comprar.',
+ 'Dentro do valor máximo':'Compara o preço com o valor máximo de Até que valor posso comprar.',
  'Juros ao ano':'Taxa que o banco informou na simulação. Referência de nov/2026: Caixa cerca de 11% + TR.',
  'CET ao ano':'Custo efetivo total: juros + seguros + tarifas. É o número que compara bancos de forma justa. Está na simulação por escrito.',
  'Sistema':'SAC começa com parcela maior e cai todo mês. Price tem parcela fixa e paga mais juros no total.',
@@ -721,7 +721,7 @@ TELAS.inicio={html:function(){
  return '<div class="top"><div class="marca"><i>'+'<svg viewBox="0 0 40 40" width="22" height="22"><g transform="translate(10 27) rotate(-38)" fill="none" stroke="#EF9F27" stroke-width="3.6" stroke-linecap="round"><circle r="6"/><path d="M6 0H22M17 0V4M20.5 0V5"/></g></svg>'+'</i><div><b>Mapa da Chave</b><small>'+(primeiroNome()?esc(primeiroNome()):'Seu primeiro imóvel')+'</small></div></div></div>'+
  '<a class="card esc" href="#etapas" style="display:block"><div class="anel">'+anel(ok/tot,Math.round(ok/tot*100)+'%')+'<div style="flex:1;min-width:0"><div class="rot">'+feitasE+' de 10 etapas</div><div class="mid" style="color:#fff">'+(prox<0?'Chave na mão':'Etapa '+(prox+1)+' · '+esc(ETAPAS[prox].t))+'</div>'+(prox>=0?'<div class="rot" style="margin-top:4px">'+feitos('e'+prox,ETAPAS[prox].i.length)+' de '+ETAPAS[prox].i.length+' itens</div>':'')+'</div></div></a>'+
  '<a class="card" href="#meta" style="display:block"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="rot">Entrada + custos</div><div class="rot">'+dataM+'</div></div><div class="big">'+brl(m.disp)+' <span style="font-size:15px;color:var(--ink3);font-weight:600">de '+brl(m.meta)+'</span></div><div class="barra" style="margin-top:12px"><i style="width:'+(fm*100)+'%"></i></div><div style="display:flex;justify-content:space-between;margin-top:8px" class="rot"><span>'+pct(fm,0)+'</span><span>Falta '+brl(m.falta)+'</span></div></a>'+
- '<div class="grid2"><a class="card" href="#teto" style="margin:0"><div class="rot">'+ri('Teto de preço')+'</div><div class="mid">'+brlk(t.teto)+'</div><div class="rot" style="margin-top:2px">Limite: '+t.lim.toLowerCase()+'</div></a><a class="card" href="#sozinho" style="margin:0"><div class="rot">'+ri('Sobra no mês')+'</div><div class="mid" style="color:'+(cSoz().sob<0?'var(--bad)':'var(--ink)')+'">'+brl(cSoz().sob)+'</div><div class="rot" style="margin-top:2px">Morando sozinho</div></a></div>'+
+ '<div class="grid2"><a class="card" href="#teto" style="margin:0"><div class="rot">'+ri('Valor máximo')+'</div><div class="mid">'+brlk(t.teto)+'</div><div class="rot" style="margin-top:2px">Limite: '+t.lim.toLowerCase()+'</div></a><a class="card" href="#sozinho" style="margin:0"><div class="rot">'+ri('Sobra no mês')+'</div><div class="mid" style="color:'+(cSoz().sob<0?'var(--bad)':'var(--ink)')+'">'+brl(cSoz().sob)+'</div><div class="rot" style="margin-top:2px">Morando sozinho</div></a></div>'+
  '<div class="h2">Seus objetivos</div><div class="tools">'+ordemTools().map(cartaoTool).join('')+'</div>'}};
 function ordemTools(){var u=D.ui.ult||{},ids=TOOLS.map(function(t){return t.id}),us=ids.filter(function(i){return u[i]}).sort(function(a,b){return u[b]-u[a]});return us.concat(ids.filter(function(i){return !u[i]}))}
 function lic(){return S?'<div class="lic">Licença de '+esc(S.n||S.e)+(S.n?' · '+esc(S.e):'')+'</div>':''}
@@ -753,22 +753,18 @@ TELAS.teto={html:function(){return topo('Até que valor posso comprar','ferramen
  campos([['renda','Renda bruta','r'],['guardado','Dinheiro guardado','r'],['fgts','FGTS disponível','r'],['condiptu','Condomínio + IPTU','r']],
   [['juros','Juros ao ano','p'],['prazo','Prazo','m'],['cota','Parte financiada','p'],['comp','Parcela máx. da renda','p'],['itbi','ITBI','p'],['cart','Escritura + registro','p'],['aval','Avaliação do banco','r']])+'<div id="res" class="res"></div>'},
  liga:function(r){var f=function(){var t=cTeto(),st=t.gp>0.4?'bad':t.gp>0.35?'warn':'ok';
-  $('#res').innerHTML='<div class="card esc"><div class="rot">'+ri('Teto de preço')+'</div><div class="big amb">'+brl(t.teto)+'</div><div style="margin-top:10px">'+selo(t.lim==='Renda'?'warn':'ok','Limite: '+t.lim.toLowerCase())+'</div></div>'+
+  $('#res').innerHTML='<div class="card esc"><div class="rot">'+ri('Valor máximo')+'</div><div class="big amb">'+brl(t.teto)+'</div><div style="margin-top:10px">'+selo(t.lim==='Renda'?'warn':'ok','Limite: '+t.lim.toLowerCase())+'</div></div>'+
   compraTeto(t)+'<div class="card"><div class="rot" style="margin-bottom:10px">Os dois limites</div>'+duasBarras([['Pela renda',t.pR],['Pela entrada',t.pD]])+'</div>'+
-  '<div class="card">'+lin('Parcela máxima',brl(t.parc))+lin('Banco empresta até',brl(t.fin))+lin('Dinheiro disponível',brl(t.din))+lin('Gasto mensal no teto',brl(t.gasto))+lin('Gasto sobre a renda',selo(st,pct(t.gp)),'')+'</div>'};
+  '<div class="card">'+lin('Parcela máxima',brl(t.parc))+lin('Banco empresta até',brl(t.fin))+lin('Dinheiro disponível',brl(t.din))+lin('Gasto mensal no valor máximo',brl(t.gasto))+lin('Gasto sobre a renda',selo(st,pct(t.gp)),'')+'</div>'};
   liga(r,f);f()}};
 function compraTeto(t){var T=t.teto,cota=V('cota')/100,n=V('prazo')||420,im=imes(V('juros'));if(!(T>0))return '';
  var fin=T*cota,ent=T-fin,cus=T*(V('itbi')+V('cart'))/100+V('aval'),bolso=ent+cus,din=t.din,saldo=din-bolso;
  var sac1=fin/n+fin*im,sacN=fin/n*(1+im),pri=im?fin*im/(1-Math.pow(1+im,-n)):fin/n;
- var tot=T+cus,h=230,px=function(v){return Math.max(0,v/tot*h)};
- var dinH=Math.min(px(din),h),faltaH=saldo<0?px(-saldo):0;
- var col1='<div class="cv"><div class="cvb" style="height:'+h+'px"><i style="height:'+px(cus)+'px;background:#C4422B" data-t="Custos"></i><i style="height:'+px(ent)+'px;background:var(--amber)"></i><i style="height:'+px(fin)+'px;background:var(--line2)"></i></div><small>Compra</small></div>';
- var col2='<div class="cv"><div class="cvb" style="height:'+h+'px;justify-content:flex-end;background:transparent">'+(faltaH?'<i style="height:'+faltaH+'px;background:repeating-linear-gradient(45deg,#C4422B33 0 6px,transparent 6px 12px);border:1.5px dashed #C4422B"></i>':'')+'<i style="height:'+dinH+'px;background:#2E8B57"></i></div><small>Você</small></div>';
- var li=function(c,a,b,f){return '<div class="cvl"><span><i style="background:'+c+'"></i>'+a+'</span><b'+(f?' style="color:'+f+'"':'')+'>'+b+'</b></div>'};
- return '<div class="card"><div class="rot" style="margin-bottom:12px">'+ri('Compra no teto')+'</div><div class="cvw">'+col1+col2+'<div class="cvs">'+
-  li('var(--line2)','Banco ('+pct(cota,0)+')',brl(fin))+li('var(--amber)','Entrada',brl(ent))+li('#C4422B','Impostos e taxas',brl(cus))+
-  '<div class="cvt">'+li('transparent','Do seu bolso',brl(bolso))+li('#2E8B57','Você já tem',brl(din))+li('transparent',saldo<0?'Falta':'Sobra',brl(Math.abs(saldo)),saldo<0?'var(--bad)':'var(--ok)')+'</div></div></div>'+
-  '<div class="rot" style="margin:16px 0 8px">'+ri('Parcelas no teto')+'</div>'+lin('SAC · 1ª parcela',brl(sac1))+lin('SAC · última parcela',brl(sacN))+lin('Price · parcela fixa',brl(pri))+'</div>'}
+ var li=function(c,a,b,k){return '<div class="cx'+(k?' '+k:'')+'"><i style="background:'+c+'"></i><span>'+a+'</span><b>'+b+'</b></div>'};
+ return '<div class="card"><div class="rot" style="margin-bottom:10px">'+ri('Compra no valor máximo')+'</div><div class="cxw">'+
+  li('var(--ink)','Valor do imóvel',brl(T),'tt')+li('var(--line2)','Banco financia ('+pct(cota,0)+')','− '+brl(fin))+li('var(--amber)','Entrada',brl(ent))+li('#C4422B','Impostos e taxas','+ '+brl(cus))+
+  li('var(--ink)','Do seu bolso',brl(bolso),'tt')+li('#2E8B57','Você já tem','− '+brl(din))+li(saldo<0?'var(--bad)':'var(--ok)',saldo<0?'Falta':'Sobra',brl(Math.abs(saldo)),'tt '+(saldo<0?'fb':'fo'))+'</div>'+
+  '<div class="rot" style="margin:16px 0 8px">'+ri('Parcelas no valor máximo')+'</div>'+lin('SAC · 1ª parcela',brl(sac1))+lin('SAC · última parcela',brl(sacN))+lin('Price · parcela fixa',brl(pri))+'</div>'}
 function duasBarras(a){var mx=Math.max(a[0][1],a[1][1])||1,mn=Math.min(a[0][1],a[1][1]);return a.map(function(x){var low=x[1]===mn;return '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px"><span style="color:var(--ink2)">'+x[0]+'</span><b style="font-variant-numeric:tabular-nums">'+brl(x[1])+'</b></div><div class="barra" style="height:12px"><i style="width:'+(x[1]/mx*100)+'%;background:'+(low?'var(--amber)':'var(--line2)')+'"></i></div></div>'}).join('')}
 
 /* Meta da entrada */
@@ -905,7 +901,7 @@ TELAS.dois={html:function(){return topo('Comprar a dois','ferramentas')+'<div cl
 
 /* Conversa com os pais */
 function textoPais(){var m=cMeta(),s=cSoz(),t=cTeto();
- return 'Fiz as contas da minha saída de casa:\n\n• Teto de preço hoje: '+brl(t.teto)+'\n• Entrada + custos: '+brl(m.meta)+'\n• Já tenho guardado: '+brl(m.disp)+'\n• Guardo por mês: '+brl(m.mens)+'\n• Entrada pronta em: '+(m.meses===0?'agora':isFinite(m.meses)?m.meses+' meses ('+mesAno(addMes(m.meses))+')':'—')+'\n\nMorando sozinho:\n• Gastos do mês: '+brl(s.tot)+'\n• Sobra no mês: '+brl(s.sob)+'\n• Casa sobre o salário: '+pct(s.mp)+'\n\nReserva de emergência separada e fora da entrada. Antes de qualquer pagamento, matrícula conferida e dinheiro só na conta do proprietário.'}
+ return 'Fiz as contas da minha saída de casa:\n\n• Valor máximo do imóvel hoje: '+brl(t.teto)+'\n• Entrada + custos: '+brl(m.meta)+'\n• Já tenho guardado: '+brl(m.disp)+'\n• Guardo por mês: '+brl(m.mens)+'\n• Entrada pronta em: '+(m.meses===0?'agora':isFinite(m.meses)?m.meses+' meses ('+mesAno(addMes(m.meses))+')':'—')+'\n\nMorando sozinho:\n• Gastos do mês: '+brl(s.tot)+'\n• Sobra no mês: '+brl(s.sob)+'\n• Casa sobre o salário: '+pct(s.mp)+'\n\nReserva de emergência separada e fora da entrada. Antes de qualquer pagamento, matrícula conferida e dinheiro só na conta do proprietário.'}
 TELAS.pais={html:function(){var m=cMeta(),s=cSoz();return topo('Conversa com os pais','ferramentas')+
  '<div class="grid2" style="margin-bottom:12px"><div class="card" style="margin:0"><div class="rot">Entrada pronta</div><div class="mid">'+(m.meses===0?'Agora':isFinite(m.meses)?mesAno(addMes(m.meses)):'—')+'</div></div><div class="card" style="margin:0"><div class="rot">'+ri('Sobra no mês')+'</div><div class="mid" style="color:'+(s.sob<0?'var(--bad)':'var(--ink)')+'">'+brl(s.sob)+'</div></div></div>'+
  '<div class="txt" id="tp">'+esc(textoPais())+'</div><div class="lado" style="margin-bottom:12px"><button class="bt cl" data-copia="tp">'+ic('copia')+'Copiar</button><button class="bt" data-share="tp">'+ic('envia')+'Enviar</button></div>'+
@@ -969,7 +965,7 @@ TELAS.imovel={html:function(id){var x=D.imv.filter(function(y){return y.id===id}
  '<div class="h2">Anotações</div><textarea id="obs" rows="4" style="width:100%;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;font-size:15px;background:#fff;outline:0;resize:vertical;margin-bottom:12px">'+esc(x.obs||'')+'</textarea>'+
  '<button class="bt cl" id="apaga" style="color:var(--bad)">'+ic('lixo')+'Apagar imóvel</button>'},
  liga:function(r,id){var x=D.imv.filter(function(y){return y.id===id})[0];if(!x)return;
-  var f=function(){var c=imvCalc(x);$('#res').innerHTML=(x.preco?'<div class="card esc"><div class="grid2"><div><div class="rot">'+ri('Preço por m²')+'</div><div class="mid amb">'+(c.m2?brl(c.m2):'—')+'</div></div><div><div class="rot">'+ri('Fixo por mês')+'</div><div class="mid" style="color:#fff">'+brl(c.fixo)+'</div></div></div>'+(cTeto().teto?'<div class="lin" style="margin-top:8px"><span>Dentro do teto</span><b>'+(x.preco<=cTeto().teto?selo('ok','Sim'):selo('bad','Acima '+brlk(x.preco-cTeto().teto)))+'</b></div>':'')+'</div>':'')};
+  var f=function(){var c=imvCalc(x);$('#res').innerHTML=(x.preco?'<div class="card esc"><div class="grid2"><div><div class="rot">'+ri('Preço por m²')+'</div><div class="mid amb">'+(c.m2?brl(c.m2):'—')+'</div></div><div><div class="rot">'+ri('Fixo por mês')+'</div><div class="mid" style="color:#fff">'+brl(c.fixo)+'</div></div></div>'+(cTeto().teto?'<div class="lin" style="margin-top:8px"><span>Dentro do valor máximo</span><b>'+(x.preco<=cTeto().teto?selo('ok','Sim'):selo('bad','Acima '+brlk(x.preco-cTeto().teto)))+'</b></div>':'')+'</div>':'')};
   $$('[data-i]',r).forEach(function(i){var k=i.dataset.i,tx=i.classList.contains('tx');i.addEventListener('input',function(){x[k]=tx?i.value:(i.value===''?(k==='nota'?'':0):parse(i.value));if(k==='nota'&&x.nota!=='')x.nota=Math.max(0,Math.min(10,x.nota));salva();f();if(k==='nome')$('.top h1').textContent=i.value||'Novo imóvel'});if(!tx)i.addEventListener('focus',function(){selTudo(i)})});
   $('#mt').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;x.mat=+b.dataset.v;salva();$$('#mt button').forEach(function(y){y.classList.toggle('on',y===b)})});
   $('#obs').addEventListener('input',function(e){x.obs=e.target.value;salva()});
@@ -997,7 +993,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.10',S=null,fbOk=false;
+var VER='1.11',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
