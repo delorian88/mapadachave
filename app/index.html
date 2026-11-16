@@ -524,9 +524,9 @@ var SL={
  prazoDesejado:[3,120,1,null,'']
 };
 var RX={
- 'Valor máximo':'O maior preço de imóvel que cabe hoje. É o menor entre dois limites: o que a renda paga de parcela e o que o seu dinheiro cobre de entrada e custos.',
- 'Pela renda':'Preço máximo que a parcela permite, com o percentual da renda e a parte financiada escolhidos.',
- 'Pela entrada':'Preço máximo que o seu dinheiro cobre: entrada + ITBI + cartório + avaliação.',
+ 'Valor máximo':'O maior preço de imóvel que cabe hoje: o que o banco empresta somado ao seu dinheiro, menos impostos e taxas. Fica no menor entre dois limites: a parcela que a renda paga e a parte máxima que o banco financia.',
+ 'Pela renda':'Empréstimo máximo para a parcela que cabe na renda + o seu dinheiro, menos ITBI, cartório e avaliação.',
+ 'Pela entrada':'Com o banco financiando a parte máxima, o preço que o seu dinheiro cobre: entrada + ITBI + cartório + avaliação.',
  'Parcela máxima':'Percentual da renda bruta escolhido. Bancos aprovam até 30%.',
  'Banco empresta até':'Valor máximo financiado para essa parcela, no SAC, com os juros e o prazo informados.',
  'Dinheiro disponível':'Dinheiro guardado + FGTS. A reserva de emergência fica fora.',
@@ -611,9 +611,9 @@ function toolT(id){for(var i=0;i<TOOLS.length;i++)if(TOOLS[i].id===id)return TOO
 function imes(a){return Math.pow(1+a/100,1/12)-1}
 function cTeto(){var im=imes(V('juros')),n=V('prazo')||420,cota=V('cota')/100;
  var parc=V('renda')*V('comp')/100,fin=parc/(1/n+im),pR=cota?fin/cota:0,din=V('guardado')+V('fgts');
- var pD=Math.max(0,(din-V('aval'))/((1-cota)+V('itbi')/100+V('cart')/100)),teto=Math.min(pR,pD);
- var gasto=teto*cota*(1/n+im)+V('condiptu');
- return {parc:parc,fin:fin,pR:pR,din:din,pD:pD,teto:teto,lim:pR<=pD?'Renda':'Entrada',gasto:gasto,gp:V('renda')?gasto/V('renda'):0}}
+ var tx=V('itbi')/100+V('cart')/100,pD=Math.max(0,(din-V('aval'))/((1-cota)+tx)),pJ=Math.max(0,(din-V('aval')+fin)/(1+tx)),teto=Math.min(pJ,pD);
+ var finT=Math.min(fin,teto*cota),gasto=finT*(1/n+im)+V('condiptu');
+ return {parc:parc,fin:fin,finT:finT,pR:pJ,din:din,pD:pD,teto:teto,lim:pJ<pD?'Renda':'Entrada',gasto:gasto,gp:V('renda')?gasto/V('renda'):0}}
 function cMeta(){var p=V('preco'),cota=V('cota')/100,meta=p*(1-cota)+p*V('custos')/100,disp=V('guardado')+V('fgts'),falta=Math.max(0,meta-disp);
  var im=imes(V('rend')),fg=V('salario')*0.08,mens=V('guardo')+fg,meses;
  if(falta<=0)meses=0;else if(mens<=0&&im<=0)meses=Infinity;else{var a=(meta*im+mens),b=(disp*im+mens);meses=im>0?(b>0&&a/b>0?Math.ceil(Math.log(a/b)/Math.log(1+im)):Infinity):Math.ceil(falta/mens)}
@@ -754,15 +754,15 @@ TELAS.teto={html:function(){return topo('Até que valor posso comprar','ferramen
   [['juros','Juros ao ano','p'],['prazo','Prazo','m'],['cota','Parte financiada','p'],['comp','Parcela máx. da renda','p'],['itbi','ITBI','p'],['cart','Escritura + registro','p'],['aval','Avaliação do banco','r']])+'<div id="res" class="res"></div>'},
  liga:function(r){var f=function(){var t=cTeto(),st=t.gp>0.4?'bad':t.gp>0.35?'warn':'ok';
   $('#res').innerHTML='<div class="card esc"><div class="rot">'+ri('Valor máximo')+'</div><div class="big amb">'+brl(t.teto)+'</div><div style="margin-top:10px">'+selo(t.lim==='Renda'?'warn':'ok','Limite: '+t.lim.toLowerCase())+'</div></div>'+
-  compraTeto(t)+'<div class="card"><div class="rot" style="margin-bottom:10px">Os dois limites</div>'+duasBarras([['Pela renda',t.pR,'O imóvel mais caro cuja parcela cabe no seu salário.'],['Pela entrada',t.pD,'O imóvel mais caro que o seu dinheiro (guardado + FGTS) paga de entrada e custos (ITBI, cartório e avaliação).']])+'</div>'+
+  compraTeto(t)+'<div class="card"><div class="rot" style="margin-bottom:10px">Os dois limites</div>'+duasBarras([['Pela renda',t.pR,'O banco empresta o que a parcela permite e o seu dinheiro paga o resto, com impostos e taxas.'],['Pela entrada',t.pD,'O banco financia até '+pct(V('cota')/100,0)+'. O seu dinheiro (guardado + FGTS) paga o restante, com impostos e taxas.']])+'</div>'+
   '<div class="card">'+lin('Parcela máxima',brl(t.parc))+lin('Banco empresta até',brl(t.fin))+lin('Dinheiro disponível',brl(t.din))+lin('Gasto mensal no valor máximo',brl(t.gasto))+lin('Gasto sobre a renda',selo(st,pct(t.gp)),'')+'</div>'};
   liga(r,f);f()}};
 function compraTeto(t){var T=t.teto,cota=V('cota')/100,n=V('prazo')||420,im=imes(V('juros'));if(!(T>0))return '';
- var fin=T*cota,ent=T-fin,cus=T*(V('itbi')+V('cart'))/100+V('aval'),bolso=ent+cus,din=t.din,saldo=din-bolso;
+ var fin=t.finT,ent=T-fin,cus=T*(V('itbi')+V('cart'))/100+V('aval'),bolso=ent+cus,din=t.din,saldo=din-bolso;
  var sac1=fin/n+fin*im,sacN=fin/n*(1+im),pri=im?fin*im/(1-Math.pow(1+im,-n)):fin/n;
  var li=function(c,a,b,k){return '<div class="cx'+(k?' '+k:'')+'"><i style="background:'+c+'"></i><span>'+a+'</span><b>'+b+'</b></div>'};
  return '<div class="card"><div class="rot" style="margin-bottom:10px">'+ri('Compra no valor máximo')+'</div><div class="cxw">'+
-  li('var(--ink)','Valor do imóvel',brl(T),'tt')+li('var(--line2)','Banco financia ('+pct(cota,0)+')','− '+brl(fin))+li('var(--amber)','Entrada',brl(ent))+li('#C4422B','Impostos e taxas','+ '+brl(cus))+
+  li('var(--ink)','Valor do imóvel',brl(T),'tt')+li('var(--line2)','Banco financia ('+pct(fin/T,0)+')','− '+brl(fin))+li('var(--amber)','Entrada',brl(ent))+li('#C4422B','Impostos e taxas','+ '+brl(cus))+
   li('var(--ink)','Do seu bolso',brl(bolso),'tt')+li('#2E8B57','Você já tem','− '+brl(din))+li(saldo<0?'var(--bad)':'var(--ok)',saldo<0?'Falta':'Sobra',brl(Math.abs(saldo)),'tt '+(saldo<0?'fb':'fo'))+'</div>'+
   '<div class="rot" style="margin:16px 0 8px">'+ri('Parcelas no valor máximo')+'</div>'+lin('SAC · 1ª parcela',brl(sac1))+lin('SAC · última parcela',brl(sacN))+lin('Price · parcela fixa',brl(pri))+'</div>'}
 function duasBarras(a){var mx=Math.max(a[0][1],a[1][1])||1,mn=Math.min(a[0][1],a[1][1]);return a.map(function(x){var low=x[1]===mn;return '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px"><span style="color:var(--ink2)">'+x[0]+'</span><b style="font-variant-numeric:tabular-nums">'+brl(x[1])+'</b></div><div class="barra" style="height:12px"><i style="width:'+(x[1]/mx*100)+'%;background:'+(low?'var(--amber)':'var(--line2)')+'"></i></div>'+(x[2]?'<div style="font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.35">'+x[2]+'</div>':'')+'</div>'}).join('')}
@@ -993,7 +993,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.12',S=null,fbOk=false;
+var VER='1.13',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
