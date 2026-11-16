@@ -156,6 +156,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .barra{display:flex}
   header .btn{display:none}
 }
+#calc{padding-top:40px}.qcalc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}.cin{display:flex;flex-direction:column;gap:14px}.cin label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}.cin label span{display:flex;align-items:center;gap:8px;border:1.5px solid var(--ink);border-radius:10px;padding:0 14px;background:#fff}.cin i{font-style:normal;color:var(--ink2);font-weight:600}.cin input{border:0;outline:0;font:inherit;font-size:20px;font-weight:700;padding:14px 0;width:100%;background:transparent;color:var(--ink)}.cout{background:var(--ink);color:#fff;border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}.cl small{display:block;font-size:13px;color:#C9C7BE}.cl b{font-size:34px;color:var(--amber);letter-spacing:-1px}.cg{display:flex;justify-content:space-between;gap:10px;font-size:14.5px;border-top:1px solid #4a4a47;padding-top:9px}.cg span{color:#C9C7BE}.cnota{font-size:12.5px;color:var(--ink2);margin-top:12px;max-width:720px}@media(max-width:760px){.qcalc{grid-template-columns:1fr}}
 </style>
 <!-- Meta Pixel -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1373264678051720');fbq('track','PageView');fbq('track','ViewContent',{content_name:'Mapa da Chave 2027',value:47,currency:'BRL'});</script>
@@ -173,8 +174,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <section class="hero" style="padding-top:56px"><div class="wrap">
   <div>
     <div class="tag">Edição 2027 · celular e computador</div>
-    <h1 id="h1">Do aluguel ou da casa dos pais para o seu <em>primeiro imóvel</em>.</h1>
-    <p class="lead" id="lead">Com organização e sem susto. Tudo o que a compra pede está num lugar só, na ordem certa: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão.</p>
+    <h1 id="h1">Da casa dos pais à chave do seu <em>primeiro imóvel</em>.</h1>
+    <p class="lead" id="lead">Para quem nunca comprou e não tem quem explique em casa. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão.</p>
     <div class="preco-linha">
       <a class="btn comprar" href="#oferta">Quero o Mapa da Chave <span class="seta">→</span></a>
       <div class="preco">Acesso imediato<b>R$ 47</b></div>
@@ -185,6 +186,25 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <div class="cel c1"><img src="a/app/inicio.webp" alt="" width="585" height="1266"></div>
     <div class="cel c2"><img src="a/app/teto.webp" alt="" width="585" height="1266"></div>
   </div>
+</div></section>
+
+<section id="calc"><div class="wrap">
+  <h2>Até que valor você pode comprar?</h2>
+  <div class="qcalc">
+    <div class="cin">
+      <label>Renda bruta da família por mês<span><i>R$</i><input id="cr" inputmode="numeric" placeholder="5.000"></span></label>
+      <label>Dinheiro guardado + FGTS<span><i>R$</i><input id="cd" inputmode="numeric" placeholder="30.000"></span></label>
+    </div>
+    <div class="cout" id="co">
+      <div class="cl"><small>Valor máximo do imóvel</small><b id="cv">—</b></div>
+      <div class="cg"><span>Banco financia</span><b id="cf">—</b></div>
+      <div class="cg"><span>Entrada + impostos e taxas</span><b id="ce">—</b></div>
+      <div class="cg"><span>1ª parcela (SAC)</span><b id="cp">—</b></div>
+      <div class="cg"><span>Limite</span><b id="cm">—</b></div>
+    </div>
+  </div>
+  <p class="cnota">Estimativa · juros de 11% ao ano · 35 anos · parcela até 30% da renda · banco até 80% · impostos e taxas ≈ 3,5% + R$ 3 mil.</p>
+  <a class="btn comprar" href="#oferta" style="margin-top:18px">Montar o plano completo <span class="seta">→</span></a>
 </div></section>
 
 <section class="sand"><div class="wrap">
@@ -233,8 +253,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 <section><div class="wrap dois">
   <div class="lista sim"><h3>Para quem é</h3><ul>
-    <li>Mora de aluguel e quer parar de pagar para morar</li>
     <li>Mora com os pais e quer o próprio espaço</li>
+    <li>Nunca comprou imóvel e não tem quem oriente em casa</li>
+    <li>Mora de aluguel e quer parar de pagar para morar</li>
     <li>Quer saber quanto pode gastar antes de procurar</li>
     <li>Ainda está juntando a entrada e quer um prazo real</li>
     <li>Vai financiar, usar FGTS ou entrar no Minha Casa Minha Vida</li>
@@ -245,6 +266,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <li>Quem procura análise jurídica de um caso específico</li>
     <li>Quem já comprou imóvel e conhece o processo</li>
   </ul></div>
+</div></section>
+
+<section class="sand"><div class="wrap">
+  <h2>Antes de comprar</h2>
+  <div class="dores">
+    <div class="dor"><b>"Tem tudo isso de graça na internet."</b><p>Tem a regra geral. Aqui a conta sai com a sua renda, o seu dinheiro e o imóvel que você está olhando.</p></div>
+    <div class="dor"><b>"Ninguém em casa já comprou imóvel."</b><p>As 10 etapas vêm em ordem, com o que conferir em cada uma, do primeiro real guardado até a matrícula no seu nome.</p></div>
+    <div class="dor"><b>"Ainda falta muito para eu comprar."</b><p>Com a meta da entrada definida, cada mês guardado tem valor e prazo. Quem começa sem meta junta para o imóvel errado.</p></div>
+    <div class="dor"><b>"Nunca comprei nada assim pela internet."</b><p>Pagamento pela Cakto, no Pix ou no cartão. Acesso no e-mail logo após o pagamento e 7 dias para pedir o dinheiro de volta.</p></div>
+  </div>
 </div></section>
 
 <section class="sand" id="oferta"><div class="wrap">
@@ -291,7 +322,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <script>
 const V = {
   aluguel: ["Do aluguel à chave do seu <em>primeiro imóvel</em>.", "Quanto o aluguel já levou e quanto daria de entrada. As 10 etapas da compra e 14 ferramentas no celular e no computador, com aluguel × compra, meta da entrada e o que conferir antes do Pix."],
-  pais: ["Da casa dos pais à chave do seu <em>primeiro imóvel</em>.", "Quanto juntar, em quantos meses e o que fazer em cada etapa. Meta da entrada com FGTS, quanto sobra morando sozinho e as 10 etapas da compra no celular e no computador."]
+  pais: ["Da casa dos pais à chave do seu <em>primeiro imóvel</em>.", "Para quem nunca comprou e não tem quem explique em casa. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão."]
 };
 const p = new URLSearchParams(location.search).get("publico");
 if (V[p]) { document.getElementById("h1").innerHTML = V[p][0]; document.getElementById("lead").textContent = V[p][1]; }
@@ -314,6 +345,16 @@ function bater(ev) {
   } catch (e) {}
 }
 bater("visita");
+
+(function(){var r=document.getElementById("cr"),d=document.getElementById("cd");if(!r)return;
+ var n=420,im=Math.pow(1.11,1/12)-1,cota=.8,tx=.035,av=3000,f=function(v){return "R$ "+Math.round(v).toLocaleString("pt-BR")};
+ var num=function(e){return +(e.value.replace(/\D/g,""))||0};
+ var calc=function(e){if(e){var v=num(e.target);e.target.value=v?v.toLocaleString("pt-BR"):""}
+  var R=num(r),D=num(d);if(!R){["cv","cf","ce","cp","cm"].forEach(function(k){document.getElementById(k).textContent="—"});return}
+  var fin=R*.3/(1/n+im),pD=Math.max(0,(D-av)/((1-cota)+tx)),pJ=Math.max(0,(D-av+fin)/(1+tx)),T=Math.min(pJ,pD),fT=Math.min(fin,T*cota);
+  document.getElementById("cv").textContent=f(T);document.getElementById("cf").textContent=f(fT);document.getElementById("ce").textContent=f(T-fT+T*tx+av);
+  document.getElementById("cp").textContent=f(fT*(1/n+im));document.getElementById("cm").textContent=pJ<pD?"a renda":"o dinheiro guardado";};
+ r.addEventListener("input",calc);d.addEventListener("input",calc)})();
 </script>
 </body>
 </html>
