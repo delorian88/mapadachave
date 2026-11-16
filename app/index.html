@@ -550,8 +550,8 @@ var RX={
  'Sobra no mês':'Salário líquido menos todos os gastos. Ideal: sobrar pelo menos 10% para imprevistos e reserva.',
  'Gastos':'Soma de todos os gastos do mês.',
  'Moradia no salário':'Quanto do salário líquido vai para parcela ou aluguel + condomínio + IPTU. Até 35% é confortável; acima de 40% aperta.','Gastos previstos':'Soma do que vai gastar por mês morando sozinho, preenchido abaixo.',
- 'Comprando':'Valor do imóvel no fim − saldo devedor + o que sobrou aplicado.',
- 'Alugando e investindo':'A entrada aplicada desde o início e, todo mês, a diferença entre a parcela e o aluguel investida, sem falhar.','Alugando e gastando':'O mais comum: o que sobra no mês é gasto e a entrada não fica aplicada. O aluguel não deixa patrimônio.','Para alugar e investir, guardar':'O que precisaria ser aplicado para o cenário Alugar e investir acontecer: a entrada e a diferença entre parcela e aluguel. A diferença muda todo mês com o reajuste do aluguel e a queda da parcela no SAC.',
+ 'Comprando':'Valor do imóvel no fim − saldo devedor + o que sobrou aplicado. O imóvel é patrimônio mesmo sem disciplina de poupar: a parcela obriga.',
+ 'Patrimônio estimado':'Patrimônio é o que é seu. Comprando: o imóvel menos o que ainda deve ao banco, e cada parcela paga aumenta esse valor. Alugando: só o dinheiro poupado e aplicado; o aluguel pago não volta.','Alugando e poupando':'Só vale se a entrada ficar aplicada desde o início e, todo mês, a diferença entre a parcela e o aluguel for poupada e aplicada, sem falhar. Gastando essa diferença, o aluguel não deixa patrimônio.','Para alugar e poupar, guardar':'O que precisaria ser poupado e aplicado para o cenário Alugar e poupar acontecer: a entrada e a diferença entre parcela e aluguel. A diferença muda todo mês com o reajuste do aluguel e a queda da parcela no SAC.',
  'Total pago de aluguel':'Soma de todos os aluguéis do período, com reajuste.',
  'Total pago de parcelas':'Soma das parcelas do financiamento no período.',
  'Total pago estimado':'Valor financiado + juros pelo CET em todo o prazo.',
@@ -827,10 +827,10 @@ TELAS.aluguel={html:function(){return topo('Aluguel × compra','ferramentas')+
  campos([['aluguel','Aluguel por mês','r'],['preco','Preço do imóvel','r'],['horiz','Comparar em','a']],[['reaj','Reajuste do aluguel','p'],['cota','Parte financiada','p'],['custos','Custos de compra','p'],['juros','Juros ao ano','p'],['prazo','Prazo','m'],['valoriz','Valorização ao ano','p'],['rend','Rendimento ao ano','p']])+'<div id="res" class="res"></div>'},
  liga:function(r){var f=function(){var a=cAluguel(),dif=a.fc-a.fa,win=dif>=0,n=a.c.length,xs=a.c.map(function(_,i){return i===0||i===n-1||(n>4&&i===Math.round((n-1)/2))?'ano '+(i+1):null});
   var A=num(V('horiz'));
-  $('#res').innerHTML='<div class="card esc"><div class="rot">Estimativa · em '+A+' anos, forma mais patrimônio</div><div class="big amb">'+(win?'Comprar':'Alugar e investir')+'</div><div class="rot" style="margin-top:6px">Diferença de '+brl(Math.abs(dif))+'</div></div>'+
-  (a.apA>0?'<div class="card"><div class="rot" style="margin-bottom:4px">'+ri('Para alugar e investir, guardar')+'</div>'+lin('Entrada aplicada no início',brl(a.ent))+lin('No 1º mês',brl(Math.max(0,a.d1)))+lin('Média por mês',brl(a.apA/a.H))+'</div>':'')+
-  (n>1?'<div class="card"><div class="rot" style="margin-bottom:6px">Patrimônio ano a ano</div>'+gLinhas([{v:a.c,c:'#EF9F27',n:'Comprar'},{v:a.a,c:'#5E8BA8',n:'Alugar e investir'},{v:a.z,c:'#C4422B',n:'Alugar e gastar'}],{x:xs,lab:function(i){return 'Ano '+(i+1)}})+'</div>':'')+
-  '<div class="card"><div class="rot" style="margin-bottom:4px">Patrimônio estimado em '+A+' anos</div>'+lin('Comprando',brl(a.fc))+lin('Alugando e investindo',brl(a.fa))+lin('Alugando e gastando',brl(0))+'</div><div class="card">'+lin('Total pago de aluguel',brl(a.ta))+lin('Total pago de parcelas',brl(a.tp))+'</div>'};
+  $('#res').innerHTML='<div class="card esc"><div class="rot">Estimativa · em '+A+' anos, forma mais patrimônio</div><div class="big amb">'+(win?'Comprar':'Alugar e poupar')+'</div><div class="rot" style="margin-top:6px">Diferença de '+brl(Math.abs(dif))+'</div></div>'+
+  (a.apA>0?'<div class="card"><div class="rot" style="margin-bottom:4px">'+ri('Para alugar e poupar, guardar')+'</div>'+lin('Entrada aplicada no início',brl(a.ent))+lin('No 1º mês',brl(Math.max(0,a.d1)))+lin('Média por mês',brl(a.apA/a.H))+'</div>':'')+
+  (n>1?'<div class="card"><div class="rot" style="margin-bottom:6px">Patrimônio ano a ano</div>'+gLinhas([{v:a.c,c:'#EF9F27',n:'Comprar'},{v:a.a,c:'#5E8BA8',n:'Alugar e poupar'}],{x:xs,lab:function(i){return 'Ano '+(i+1)}})+'</div>':'')+
+  '<div class="card"><div class="rot" style="margin-bottom:4px">'+ri('Patrimônio estimado')+' em '+A+' anos</div>'+lin('Comprando',brl(a.fc))+lin('Alugando e poupando',brl(a.fa))+'</div><div class="card">'+lin('Total pago de aluguel',brl(a.ta))+lin('Total pago de parcelas',brl(a.tp))+'</div>'};
   liga(r,f);f()}};
 
 /* Comparar bancos */
@@ -995,7 +995,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.18',S=null,fbOk=false;
+var VER='1.19',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
