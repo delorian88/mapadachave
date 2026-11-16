@@ -136,6 +136,7 @@ svg text{font-family:'Chakra Petch',sans-serif;font-size:10px;fill:var(--tx3)}
 .fxv span{font-size:12px;color:var(--tx2);min-height:15px}.fxv span.c{color:var(--site);font-weight:600}
 .fio{stroke-dasharray:3 14;animation:corre 6s linear infinite}@keyframes corre{to{stroke-dashoffset:-170}}
 .p:not(.plat):not(.orn)::before,.p:not(.plat):not(.orn)::after{display:none}
+#pGoogle::after,#pMeta::before{display:none}
 .runas{animation:runa 14s linear infinite}
 @keyframes runa{to{background-position-x:264px}}
 .elfico{cursor:default;transition:color .3s,text-shadow .3s;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:var(--ouro);opacity:.85;letter-spacing:.06em;text-transform:none}
@@ -255,7 +256,7 @@ nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:
   <!-- DADOS -->
   <section class="sec" id="s-dados">
     <div class="p"><h3>Fontes</h3><table id="tFontes"></table>
-      <div style="margin-top:18px"><button class="btn" id="bSync">Atualizar Meta agora</button></div></div>
+      <div style="margin-top:18px"><button class="btn" id="bSync">Atualizar dados</button></div></div>
   </section>
 </main>
 </div>
@@ -520,7 +521,7 @@ document.querySelectorAll('nav a').forEach(function(a){a.onclick=function(){
 document.querySelectorAll('.per button').forEach(function(b){b.onclick=function(){
   document.querySelectorAll('.per button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');DIAS=+b.dataset.d;carregar()}});
 $('bSync').onclick=function(){var b=this;b.textContent='Atualizando…';
-  fetch(API+'?api=sync&k='+encodeURIComponent(CHAVE)).then(function(r){return r.json()}).then(function(){MEM={};b.textContent='Atualizar Meta agora';carregar()})};
+  fetch(API+'?api=sync&k='+encodeURIComponent(CHAVE)).then(function(r){return r.json()}).then(function(){MEM={};b.textContent='Atualizar dados';carregar()})};
 $('fPorta').onsubmit=function(ev){ev.preventDefault();CHAVE=$('iChave').value.trim();try{localStorage.setItem('mc_k',CHAVE)}catch(e){}$('porta').style.display='none';carregar()};
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
 carregar();
