@@ -210,6 +210,7 @@ a{color:inherit;text-decoration:none}
 .av-nv{font-size:14px;line-height:1.5;color:var(--ink2)}.av-nv p{margin:0 0 10px}.av-nv ul{margin:0 0 14px;padding-left:18px}.av-nv li{margin-bottom:6px}
 .ei{gap:8px}.exc{width:26px;height:26px;border-radius:50%;flex:none;color:var(--ink3);font-size:17px;line-height:1;display:grid;place-items:center;background:transparent}.exc:hover{background:var(--sand);color:var(--bad)}
 .add{display:block;width:100%;text-align:left;padding:14px 16px;border-top:1px solid var(--line);font-weight:600;font-size:14px;color:var(--amber-d,#BA7517);background:transparent}
+.op{display:flex;flex-wrap:wrap;gap:8px}.op button{padding:9px 13px;border-radius:999px;border:1px solid var(--line2);background:#fff;font-size:13.5px;font-weight:600;color:var(--ink)}.op button.on{background:var(--ink);border-color:var(--ink);color:#fff}.pq:first-child{border-top:0!important}
 .lic{font-size:11.5px;color:var(--ink3);text-align:center;margin:26px 0 4px;font-variant-numeric:tabular-nums}
 .erro{color:var(--bad);font-size:13.5px;font-weight:600;min-height:20px;margin-top:8px}
 .fade{animation:fd .28s ease}
@@ -893,11 +894,42 @@ TELAS.glossario={html:function(){return topo('Glossário','ferramentas')+'<div c
 TELAS.etapas={html:function(){return topo('As 10 etapas')+ETAPAS.map(function(e,i){var o=feitos('e'+i,e.i.length),ok=o===e.i.length;return '<a class="etp'+(ok?' ok':'')+'" href="#etapa/'+i+'"><span class="nm">'+(ok?ic('ok').replace('<svg','<svg width="20" height="20" style="stroke:#fff"'):i+1)+'</span><span class="tx"><b>'+e.t+'</b><small>'+o+' de '+e.i.length+'</small><div class="mini"><i style="width:'+(o/e.i.length*100)+'%"></i></div></span>'+ic('chev','chev')+'</a>'}).join('')}};
 TELAS.etapa={html:function(a){var i=+a||0,e=ETAPAS[i];if(!e)return '';var o=feitos('e'+i,e.i.length);
  return topo('Etapa '+(i+1),'etapas')+'<div class="titulo">'+e.t+'</div><div class="card esc"><div class="anel">'+anel(o/e.i.length,o+'/'+e.i.length)+'<div class="mid" style="color:#fff;font-size:16px;line-height:1.35">'+e.o+'</div></div></div>'+
- ckLista('e'+i,e.i)+(e.n?'<div class="nota '+e.n[0]+'"><b>'+e.n[1]+'</b>'+e.n[2]+'</div>':'')+
+ ckLista('e'+i,e.i)+(i===0?'<div class="h2">Qual imóvel combina com você</div><div id="pf"></div>':'')+(e.n?'<div class="nota '+e.n[0]+'"><b>'+e.n[1]+'</b>'+e.n[2]+'</div>':'')+
  (e.f?'<a class="tool dest" href="#'+e.f+'" style="margin-bottom:12px"><span class="ic">'+ic(toolT(e.f).ic||'predio')+'</span><span style="flex:1"><b>'+(toolT(e.f).t||'Imóveis')+'</b>'+(subTool(e.f)?'<small>'+subTool(e.f)+'</small>':'')+'</span>'+ic('chev','chev')+'</a>':'')+
  '<div class="lado">'+(i>0?'<a class="bt cl" href="#etapa/'+(i-1)+'">'+ic('volta')+'Etapa '+i+'</a>':'')+(i<9?'<a class="bt" href="#etapa/'+(i+1)+'">Etapa '+(i+2)+ic('chev')+'</a>':'')+'</div>'},
- liga:function(r,a){var i=+a||0,e=ETAPAS[i];ligaCk(r,function(){var o=feitos('e'+i,e.i.length);$('.card.esc .anel svg',r).outerHTML=anel(o/e.i.length,o+'/'+e.i.length);if(o===e.i.length)toast('Etapa '+(i+1)+' concluída')})}};
+ liga:function(r,a){var i=+a||0,e=ETAPAS[i];if(i===0)perfil.liga();ligaCk(r,function(){var o=feitos('e'+i,e.i.length);$('.card.esc .anel svg',r).outerHTML=anel(o/e.i.length,o+'/'+e.i.length);if(o===e.i.length)toast('Etapa '+(i+1)+' concluída')})}};
 
+/* Perfil do imóvel */
+var PERG=[
+ ['mot','Motivo da compra',[['alug','Sair do aluguel'],['pais','Sair da casa dos pais'],['fam','Casar ou ter filhos'],['esp','Mais espaço']]],
+ ['quem','Quem vai morar',[['so','Só eu'],['cas','Casal'],['fil','Com filhos ou planejando'],['pet','Com cachorro']]],
+ ['quando','Quando precisa mudar',[['6m','Em até 6 meses'],['18m','De 6 a 18 meses'],['sp','Sem pressa, 2 anos ou mais']]],
+ ['ent','Dinheiro da entrada',[['tem','Já tenho'],['parte','Tenho uma parte'],['junt','Estou começando a juntar']]],
+ ['prio','O que mais pesa',[['seg','Segurança e portaria'],['esp','Espaço e quintal'],['fixo','Gasto fixo baixo'],['loc','Perto do trabalho']]],
+ ['rot','Rotina',[['fora','Fora o dia todo'],['casa','Trabalho em casa']]],
+ ['ref','Reforma',[['nao','Não quero reformar'],['peq','Topo pequenos reparos'],['sim','Topo reformar para pagar menos']]],
+ ['cond','Condomínio',[['ok','Cabe no orçamento'],['nao','Prefiro sem condomínio']]]
+];
+var perfil=(function(){
+ var TT={apto:'Apartamento',cond:'Casa em condomínio',rua:'Casa de rua'},EE={planta:'Na planta',novo:'Pronto e novo',usado:'Usado'};
+ function calc(r){var t={apto:0,cond:0,rua:0},e={planta:0,novo:0,usado:0},pt={apto:[],cond:[],rua:[]},pe={planta:[],novo:[],usado:[]};
+  function T(k,n,w){t[k]+=n;if(n>0&&w)pt[k].push(w)}function E(k,n,w){e[k]+=n;if(n>0&&w)pe[k].push(w)}
+  switch(r.mot){case 'alug':E('usado',1,'Sai do aluguel mais rápido');E('novo',1,'Sai do aluguel mais rápido');E('planta',-2);break;case 'pais':E('planta',1,'Dá para esperar a obra morando com os pais');break;case 'fam':T('cond',1,'Área comum para crianças');break;case 'esp':T('rua',1,'Mais metro quadrado pelo preço');T('cond',1,'Mais espaço com segurança');break}
+  switch(r.quem){case 'so':T('apto',2,'Menos espaço para cuidar morando só');T('cond',1);break;case 'cas':T('apto',1);T('cond',1);break;case 'fil':T('cond',2,'Lazer e segurança para crianças');T('rua',1,'Mais quartos pelo preço');break;case 'pet':T('rua',2,'Quintal para o cachorro');T('cond',1,'Espaço externo para o cachorro');break}
+  switch(r.quando){case '6m':E('usado',2,'Pronto para morar no prazo');E('novo',2,'Pronto para morar no prazo');E('planta',-4);break;case '18m':E('novo',1);E('usado',1);E('planta',1,'Obras curtas cabem no prazo');break;case 'sp':E('planta',3,'O prazo da obra cabe no seu tempo');break}
+  switch(r.ent){case 'tem':E('usado',2,'Entrada pronta para fechar à vista com o banco');E('novo',1);break;case 'parte':E('novo',1);E('planta',1,'Entrada parcelada durante a obra');break;case 'junt':E('planta',3,'A construtora parcela a entrada durante a obra');break}
+  switch(r.prio){case 'seg':T('apto',2,'Portaria e controle de acesso');T('cond',2,'Portaria e controle de acesso');break;case 'esp':T('rua',2,'Mais espaço pelo mesmo preço');T('cond',1);break;case 'fixo':T('rua',2,'Sem taxa de condomínio');E('usado',1,'Preço de compra menor');break;case 'loc':T('apto',2,'Mais opções perto do centro e do trabalho');E('usado',1,'Mais oferta em bairros prontos');break}
+  switch(r.rot){case 'fora':T('apto',2,'Casa fechada o dia todo com mais segurança');T('cond',1);break;case 'casa':T('rua',1,'Mais espaço para trabalhar em casa');T('cond',1)}
+  switch(r.ref){case 'nao':E('novo',2,'Sem obra para fazer depois da compra');E('planta',2,'Tudo novo, com garantia da construtora');break;case 'peq':E('novo',1);E('usado',1,'Pequenos reparos em troca de preço melhor');break;case 'sim':E('usado',3,'Preço menor em troca de reforma')}
+  if(r.cond==='nao')T('rua',3,'Sem condomínio');
+  var ot=Object.keys(t).sort(function(a,b){return t[b]-t[a]}),oe=Object.keys(e).sort(function(a,b){return e[b]-e[a]});
+  return {t:ot,e:oe,pt:pt,pe:pe}}
+ function pinta(){var el=$('#pf');if(!el)return;var r=D.perfil=D.perfil||{},n=PERG.filter(function(q){return r[q[0]]}).length,res='';
+  if(n>=5){var c=calc(r),t1=c.t[0],e1=c.e[0],por=c.pt[t1].concat(c.pe[e1]).filter(function(x,i,a){return a.indexOf(x)===i}).slice(0,4);
+   res='<div class="card esc"><div class="rot">Indicação para o seu perfil</div><div class="mid amb" style="margin:4px 0 2px">'+TT[t1]+' · '+EE[e1].toLowerCase()+'</div><div class="rot">Também combina: '+TT[c.t[1]].toLowerCase()+' · '+EE[c.e[1]].toLowerCase()+'</div>'+(por.length?'<ul style="margin:12px 0 0;padding-left:18px;color:#fff;font-size:13.5px;line-height:1.5">'+por.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')+'<div class="rot" style="margin-top:10px">É uma indicação, não uma regra.</div></div>'}
+  el.innerHTML=res+'<div class="campos">'+PERG.map(function(q){return '<div style="padding:14px 16px;border-top:1px solid var(--line)" class="pq"><div style="font-weight:600;font-size:14.5px;margin-bottom:10px">'+q[1]+'</div><div class="op" data-q="'+q[0]+'">'+q[2].map(function(o){return '<button type="button" data-v="'+o[0]+'" class="'+(r[q[0]]===o[0]?'on':'')+'">'+o[1]+'</button>'}).join('')+'</div></div>'}).join('')+'</div>'+(n<5?'<div class="rot" style="margin:-4px 4px 14px">Responda pelo menos 5 para ver a indicação.</div>':'')}
+ function liga(){pinta();var el=$('#pf');if(!el)return;el.addEventListener('click',function(ev){var b=ev.target.closest('.op button');if(!b)return;var q=b.parentNode.dataset.q,r=D.perfil=D.perfil||{};r[q]=r[q]===b.dataset.v?'':b.dataset.v;salva();var y=window.scrollY;pinta();window.scrollTo(0,y)})}
+ return {liga:liga,calc:calc}})();
 /* Imóveis */
 function imvCalc(x){return {m2:x.area?x.preco/x.area:0,fixo:(x.cond||0)+(x.iptu||0)}}
 TELAS.imoveis={html:function(){var L=D.imv.slice().sort(function(a,b){return (b.nota||0)-(a.nota||0)});
@@ -940,7 +972,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.7',S=null,fbOk=false;
+var VER='1.8',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
