@@ -550,8 +550,8 @@ var RX={
  'Sobra no mês':'Salário líquido menos todos os gastos. Ideal: sobrar pelo menos 10% para imprevistos e reserva.',
  'Gastos':'Soma de todos os gastos do mês.',
  'Moradia no salário':'Quanto do salário líquido vai para parcela ou aluguel + condomínio + IPTU. Até 35% é confortável; acima de 40% aperta.','Gastos previstos':'Soma do que vai gastar por mês morando sozinho, preenchido abaixo.',
- 'Patrimônio comprando':'Valor do imóvel no fim − saldo devedor + o que sobrou aplicado.',
- 'Patrimônio alugando':'O que ficou aplicado: a entrada que não foi gasta + a diferença de cada mês.',
+ 'Comprando':'Valor do imóvel no fim − saldo devedor + o que sobrou aplicado.',
+ 'Alugando e investindo':'Se, em vez de comprar, a entrada fosse aplicada e todo mês fosse investida a diferença entre a parcela e o aluguel. Gastando essa diferença, o patrimônio de quem aluga fica perto de zero.',
  'Total pago de aluguel':'Soma de todos os aluguéis do período, com reajuste.',
  'Total pago de parcelas':'Soma das parcelas do financiamento no período.',
  'Total pago estimado':'Valor financiado + juros pelo CET em todo o prazo.',
@@ -827,8 +827,8 @@ TELAS.aluguel={html:function(){return topo('Aluguel × compra','ferramentas')+
  campos([['aluguel','Aluguel por mês','r'],['preco','Preço do imóvel','r'],['horiz','Comparar em','a']],[['reaj','Reajuste do aluguel','p'],['cota','Parte financiada','p'],['custos','Custos de compra','p'],['juros','Juros ao ano','p'],['prazo','Prazo','m'],['valoriz','Valorização ao ano','p'],['rend','Rendimento ao ano','p']])+'<div id="res" class="res"></div>'},
  liga:function(r){var f=function(){var a=cAluguel(),dif=a.fc-a.fa,win=dif>=0,n=a.c.length,xs=a.c.map(function(_,i){return i===0||i===n-1||(n>4&&i===Math.round((n-1)/2))?'ano '+(i+1):null});
   $('#res').innerHTML='<div class="card esc"><div class="rot">Em '+num(V('horiz'))+' anos, forma mais patrimônio</div><div class="big amb">'+(win?'Comprar':'Alugar e investir')+'</div><div class="rot" style="margin-top:6px">Diferença de '+brl(Math.abs(dif))+'</div></div>'+
-  (n>1?'<div class="card"><div class="rot" style="margin-bottom:6px">Patrimônio ano a ano</div>'+gLinhas([{v:a.c,c:'#EF9F27',n:'Comprar'},{v:a.a,c:'#5E8BA8',n:'Alugar'}],{x:xs,lab:function(i){return 'Ano '+(i+1)}})+'</div>':'')+
-  '<div class="card">'+lin('Patrimônio comprando',brl(a.fc))+lin('Patrimônio alugando',brl(a.fa))+lin('Total pago de aluguel',brl(a.ta))+lin('Total pago de parcelas',brl(a.tp))+'</div>'};
+  (n>1?'<div class="card"><div class="rot" style="margin-bottom:6px">Patrimônio ano a ano</div>'+gLinhas([{v:a.c,c:'#EF9F27',n:'Comprar'},{v:a.a,c:'#5E8BA8',n:'Alugar e investir'}],{x:xs,lab:function(i){return 'Ano '+(i+1)}})+'</div>':'')+
+  '<div class="card"><div class="rot" style="margin-bottom:4px">Patrimônio em '+num(V('horiz'))+' anos</div>'+lin('Comprando',brl(a.fc))+lin('Alugando e investindo',brl(a.fa))+'</div><div class="card">'+lin('Total pago de aluguel',brl(a.ta))+lin('Total pago de parcelas',brl(a.tp))+'</div>'};
   liga(r,f);f()}};
 
 /* Comparar bancos */
@@ -993,7 +993,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.14',S=null,fbOk=false;
+var VER='1.15',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
