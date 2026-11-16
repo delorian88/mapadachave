@@ -56,6 +56,16 @@ a{color:inherit;text-decoration:none}
 .tool.dest{grid-column:1/-1;flex-direction:row;align-items:center;min-height:0;background:var(--amber-l);border-color:#F2D9AE}
 .tool.dest .ic{background:var(--amber)}
 .tool.dest .ic svg{stroke:#fff}
+.tools{display:flex;flex-direction:column;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tools .tool{border:0;border-radius:0;border-top:1px solid var(--line);min-height:0;flex-direction:row;align-items:center;gap:12px;padding:11px 14px}
+.tools .tool:first-child{border-top:0}
+.tools .tool .ic{width:34px;height:34px;border-radius:10px;flex:none}.tools .tool .ic svg{width:19px;height:19px}
+.tools .tool>span:last-child{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tools .tool b{font-size:14.5px}.tools .tool>b{flex:1}
+.tools .tool small{margin:0;font-size:12.5px;font-weight:600;color:var(--ink2);text-align:right;white-space:nowrap}
+.tools .tool::after{content:'';width:7px;height:7px;border-right:2px solid var(--line2);border-top:2px solid var(--line2);transform:rotate(45deg);flex:none;margin-left:2px}
+.tools .tool.dest{border-radius:0}.tools .tool.dest small{color:var(--amber-d)}
+.tools .tool:active{transform:none;background:var(--sand)}
 /* formulário */
 .campos{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
 .cp{display:flex;align-items:center;gap:12px;padding:0 16px;min-height:56px;border-top:1px solid var(--line)}
@@ -216,7 +226,7 @@ a{color:inherit;text-decoration:none}
 .erro{color:var(--bad);font-size:13.5px;font-weight:600;min-height:20px;margin-top:8px}
 .fade{animation:fd .28s ease}
 @keyframes fd{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@media (min-width:700px){.wrap{padding-top:24px}.tools{grid-template-columns:1fr 1fr 1fr}.tool.dest{grid-column:1/-1}}
+@media (min-width:700px){.wrap{padding-top:24px}}
 @media print{.nav,.top .vt,.bt{display:none!important}body{background:#fff}.card,.campos{break-inside:avoid}}
 </style>
 </head>
@@ -987,7 +997,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.9',S=null,fbOk=false;
+var VER='1.10',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
