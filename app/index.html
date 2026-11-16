@@ -211,6 +211,7 @@ a{color:inherit;text-decoration:none}
 .ei{gap:8px}.exc{width:26px;height:26px;border-radius:50%;flex:none;color:var(--ink3);font-size:17px;line-height:1;display:grid;place-items:center;background:transparent}.exc:hover{background:var(--sand);color:var(--bad)}
 .add{display:block;width:100%;text-align:left;padding:14px 16px;border-top:1px solid var(--line);font-weight:600;font-size:14px;color:var(--amber-d,#BA7517);background:transparent}
 .op{display:flex;flex-wrap:wrap;gap:8px}.op button{padding:9px 13px;border-radius:999px;border:1px solid var(--line2);background:#fff;font-size:13.5px;font-weight:600;color:var(--ink)}.op button.on{background:var(--ink);border-color:var(--ink);color:#fff}.pq:first-child{border-top:0!important}
+.cvw{display:flex;gap:10px;align-items:flex-end}.cv{display:flex;flex-direction:column;align-items:center;gap:6px;flex:none}.cv small{font-size:10px;color:var(--ink3);font-weight:600}.cvb{width:34px;display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:var(--sand)}.cvb i{display:block;flex:none}.cvs{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;gap:7px}.cvl{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:13px;white-space:nowrap}.cvl span{display:flex;align-items:center;gap:6px;color:var(--ink2);min-width:0}.cvl span i{width:9px;height:9px;border-radius:3px;flex:none}.cvl b{font-variant-numeric:tabular-nums;white-space:nowrap}.cvt{border-top:1px solid var(--line);padding-top:8px;margin-top:2px;display:flex;flex-direction:column;gap:7px}.cvt .cvl b{font-size:14px}
 .lic{font-size:11.5px;color:var(--ink3);text-align:center;margin:26px 0 4px;font-variant-numeric:tabular-nums}
 .erro{color:var(--bad);font-size:13.5px;font-weight:600;min-height:20px;margin-top:8px}
 .fade{animation:fd .28s ease}
@@ -544,6 +545,8 @@ var RX={
  'Total pago de aluguel':'Soma de todos os aluguéis do período, com reajuste.',
  'Total pago de parcelas':'Soma das parcelas do financiamento no período.',
  'Total pago estimado':'Valor financiado + juros pelo CET em todo o prazo.',
+ 'Compra no teto':'Como fica a compra de um imóvel no valor do teto: quanto o banco financia, a entrada, os impostos e taxas (ITBI, cartório e avaliação) que não entram no financiamento, e quanto falta ou sobra do seu dinheiro.',
+ 'Parcelas no teto':'Primeira e última parcela no SAC e parcela fixa na Price, sem seguros. Na Caixa, a Price financia até 70%.',
  'Valor a pagar na entrega':'O que falta pagar à construtora já com a correção do INCC, que incide todo mês até a entrega das chaves.',
  'Preço por m²':'Preço ÷ área. Compare com imóveis iguais do mesmo bairro.',
  'Fixo por mês':'Condomínio + IPTU do mês, que se somam à parcela.',
@@ -741,9 +744,21 @@ TELAS.teto={html:function(){return topo('Até que valor posso comprar','ferramen
   [['juros','Juros ao ano','p'],['prazo','Prazo','m'],['cota','Parte financiada','p'],['comp','Parcela máx. da renda','p'],['itbi','ITBI','p'],['cart','Escritura + registro','p'],['aval','Avaliação do banco','r']])+'<div id="res" class="res"></div>'},
  liga:function(r){var f=function(){var t=cTeto(),st=t.gp>0.4?'bad':t.gp>0.35?'warn':'ok';
   $('#res').innerHTML='<div class="card esc"><div class="rot">'+ri('Teto de preço')+'</div><div class="big amb">'+brl(t.teto)+'</div><div style="margin-top:10px">'+selo(t.lim==='Renda'?'warn':'ok','Limite: '+t.lim.toLowerCase())+'</div></div>'+
-  '<div class="card"><div class="rot" style="margin-bottom:10px">Os dois limites</div>'+duasBarras([['Pela renda',t.pR],['Pela entrada',t.pD]])+'</div>'+
+  compraTeto(t)+'<div class="card"><div class="rot" style="margin-bottom:10px">Os dois limites</div>'+duasBarras([['Pela renda',t.pR],['Pela entrada',t.pD]])+'</div>'+
   '<div class="card">'+lin('Parcela máxima',brl(t.parc))+lin('Banco empresta até',brl(t.fin))+lin('Dinheiro disponível',brl(t.din))+lin('Gasto mensal no teto',brl(t.gasto))+lin('Gasto sobre a renda',selo(st,pct(t.gp)),'')+'</div>'};
   liga(r,f);f()}};
+function compraTeto(t){var T=t.teto,cota=V('cota')/100,n=V('prazo')||420,im=imes(V('juros'));if(!(T>0))return '';
+ var fin=T*cota,ent=T-fin,cus=T*(V('itbi')+V('cart'))/100+V('aval'),bolso=ent+cus,din=t.din,saldo=din-bolso;
+ var sac1=fin/n+fin*im,sacN=fin/n*(1+im),pri=im?fin*im/(1-Math.pow(1+im,-n)):fin/n;
+ var tot=T+cus,h=230,px=function(v){return Math.max(0,v/tot*h)};
+ var dinH=Math.min(px(din),h),faltaH=saldo<0?px(-saldo):0;
+ var col1='<div class="cv"><div class="cvb" style="height:'+h+'px"><i style="height:'+px(cus)+'px;background:#C4422B" data-t="Custos"></i><i style="height:'+px(ent)+'px;background:var(--amber)"></i><i style="height:'+px(fin)+'px;background:var(--line2)"></i></div><small>Compra</small></div>';
+ var col2='<div class="cv"><div class="cvb" style="height:'+h+'px;justify-content:flex-end;background:transparent">'+(faltaH?'<i style="height:'+faltaH+'px;background:repeating-linear-gradient(45deg,#C4422B33 0 6px,transparent 6px 12px);border:1.5px dashed #C4422B"></i>':'')+'<i style="height:'+dinH+'px;background:#2E8B57"></i></div><small>Você</small></div>';
+ var li=function(c,a,b,f){return '<div class="cvl"><span><i style="background:'+c+'"></i>'+a+'</span><b'+(f?' style="color:'+f+'"':'')+'>'+b+'</b></div>'};
+ return '<div class="card"><div class="rot" style="margin-bottom:12px">'+ri('Compra no teto')+'</div><div class="cvw">'+col1+col2+'<div class="cvs">'+
+  li('var(--line2)','Banco ('+pct(cota,0)+')',brl(fin))+li('var(--amber)','Entrada',brl(ent))+li('#C4422B','Impostos e taxas',brl(cus))+
+  '<div class="cvt">'+li('transparent','Do seu bolso',brl(bolso))+li('#2E8B57','Você já tem',brl(din))+li('transparent',saldo<0?'Falta':'Sobra',brl(Math.abs(saldo)),saldo<0?'var(--bad)':'var(--ok)')+'</div></div></div>'+
+  '<div class="rot" style="margin:16px 0 8px">'+ri('Parcelas no teto')+'</div>'+lin('SAC · 1ª parcela',brl(sac1))+lin('SAC · última parcela',brl(sacN))+lin('Price · parcela fixa',brl(pri))+'</div>'}
 function duasBarras(a){var mx=Math.max(a[0][1],a[1][1])||1,mn=Math.min(a[0][1],a[1][1]);return a.map(function(x){var low=x[1]===mn;return '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px"><span style="color:var(--ink2)">'+x[0]+'</span><b style="font-variant-numeric:tabular-nums">'+brl(x[1])+'</b></div><div class="barra" style="height:12px"><i style="width:'+(x[1]/mx*100)+'%;background:'+(low?'var(--amber)':'var(--line2)')+'"></i></div></div>'}).join('')}
 
 /* Meta da entrada */
@@ -972,7 +987,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.8',S=null,fbOk=false;
+var VER='1.9',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
