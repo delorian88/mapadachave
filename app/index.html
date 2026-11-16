@@ -540,7 +540,7 @@ var RX={
  'Saldo corrigido nas chaves':'Quanto o saldo da construtora vira até as chaves, corrigido pelo INCC.',
  'Preço por m²':'Preço ÷ área. Compare com imóveis iguais do mesmo bairro.',
  'Fixo por mês':'Condomínio + IPTU do mês, que se somam à parcela.',
- 'Dentro do teto':'Compara o preço com o teto de Quanto posso comprar.',
+ 'Dentro do teto':'Compara o preço com o teto de Até que valor posso comprar.',
  'Juros ao ano':'Taxa que o banco informou na simulação. Referência de nov/2026: Caixa cerca de 11% + TR.',
  'CET ao ano':'Custo efetivo total: juros + seguros + tarifas. É o número que compara bancos de forma justa. Está na simulação por escrito.',
  'Sistema':'SAC começa com parcela maior e cai todo mês. Price tem parcela fixa e paga mais juros no total.',
@@ -570,7 +570,7 @@ function ri(t){return RX[t]?t+'<button type="button" class="ib" data-ex="'+esc(t
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-ex]');if(!b)return;e.preventDefault();e.stopPropagation();var t=b.dataset.ex;folha(esc(t),'<div class="txt" style="background:#fff">'+esc(RX[t]||'')+'</div><button class="bt" onclick="fecha()">Entendi</button>')});
 /* ---------- ferramentas ---------- */
 var TOOLS=[
- {id:'teto',ic:'teto',t:'Quanto posso comprar'},
+ {id:'teto',ic:'teto',t:'Até que valor posso comprar'},
  {id:'meta',ic:'cofre',t:'Meta da entrada'},
  {id:'sozinho',ic:'sozinho',t:'Dá pra morar sozinho?'},
  {id:'golpe',ic:'escudo',t:'Antes do Pix'},
@@ -728,8 +728,8 @@ TELAS.ferramentas={html:function(){
  return topo('Ferramentas')+grupos.map(function(g){return '<div class="h2">'+g[0]+'</div><div class="tools">'+g[1].map(cartaoTool).join('')+'</div>'}).join('')+
  '<div class="h2">Material do kit</div><div class="tools">'+[['https://drive.google.com/file/d/1dXQYCFxtTIMWYecIRsa_UNBg20HYns__/view','livro','Guia em PDF','As 10 etapas'],['https://docs.google.com/spreadsheets/d/1sbkbTUUj6HZLemWYryh_L5Rr3p328cocRq7xtzdPZ08/copy','recibo','Calculadora','Planilha Google']].map(function(k){return '<a class="tool" href="'+k[0]+'" target="_blank" rel="noopener"><span class="ic">'+ic(k[1])+'</span><span><b>'+k[2]+'</b><small>'+k[3]+'</small></span></a>'}).join('')+'</div>'+lic()+'<div class="h2">Seus dados</div><a class="tool dest" href="#dados" style="background:var(--paper);border-color:var(--line)"><span class="ic" style="background:var(--sand)">'+ic('nuvem')+'</span><span><b>Cópia de segurança</b><small>Salvar ou recuperar</small></span></a>'}};
 
-/* Quanto posso comprar */
-TELAS.teto={html:function(){return topo('Quanto posso comprar','ferramentas')+
+/* Até que valor posso comprar */
+TELAS.teto={html:function(){return topo('Até que valor posso comprar','ferramentas')+
  campos([['renda','Renda bruta','r'],['guardado','Dinheiro guardado','r'],['fgts','FGTS disponível','r'],['condiptu','Condomínio + IPTU','r']],
   [['juros','Juros ao ano','p'],['prazo','Prazo','m'],['cota','Parte financiada','p'],['comp','Parcela máx. da renda','p'],['itbi','ITBI','p'],['cart','Escritura + registro','p'],['aval','Avaliação do banco','r']])+'<div id="res" class="res"></div>'},
  liga:function(r){var f=function(){var t=cTeto(),st=t.gp>0.4?'bad':t.gp>0.35?'warn':'ok';
@@ -913,7 +913,7 @@ TELAS.dados={html:function(){return topo('Cópia de segurança','ferramentas')+
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.2',S=null,fbOk=false;
+var VER='1.3',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
