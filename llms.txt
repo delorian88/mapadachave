@@ -5,7 +5,7 @@
 ## O que é
 - Guia em PDF com as 10 etapas da compra do primeiro imóvel em checklist, do planejamento da entrada até o registro e a entrega das chaves.
 - Calculadora (Google Planilhas e Excel) com 5 ferramentas: planner da entrada, aluguel × compra, até que valor posso comprar, custo da compra (SAC e Price) e comparação de bancos pelo CET.
-- App com 14 ferramentas: até que valor posso comprar, meta da entrada, morar sozinho, aluguel × compra, antes do Pix, custo da compra, comparar bancos, documentos, gastos da compra, enxoval, imóvel na planta, comprar a dois, conversa com os pais e glossário.
+- App com 14 ferramentas: até que valor posso comprar, meta da entrada, morar sozinho, aluguel × compra, antes do Pix, custo da compra, comparar bancos, documentos, gastos da compra, itens da casa nova, imóvel na planta, comprar a dois, conversa com os pais e glossário.
 - Lista de documentos do comprador, do vendedor e do imóvel; glossário; checklist antigolpe.
 - Edição 2027, revisada em novembro de 2026: faixas do Minha Casa Minha Vida (abril/2026), isenção do IR até R$ 5 mil, CBS na venda de imóvel por empresa a partir de 2027, financiamento de até 80% na Caixa (SAC), teto do SFH de R$ 2,25 milhões, base do ITBI pelo valor da transação (STJ Tema 1113), desconto de 50% no registro da primeira aquisição pelo SFH.
 
