@@ -213,22 +213,18 @@ nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:
 
   <!-- VISÃO GERAL -->
   <section class="sec on" id="s-geral">
-    <div class="gr g5" id="kGeral"></div>
-    <div class="gr g2"><div class="p plat" id="pGoogle"></div><div class="p plat" id="pMeta"></div></div>
-    <div class="gr"><div class="p plat" id="pInsta"></div></div>
+    <div class="gr g5" id="kFunil"></div>
+    <div class="p orn" style="margin-bottom:16px"><h3>Jornada completa</h3><span class="chip" id="desde"></span><div class="fn" id="fnTotal"></div></div>
+    <div class="gr g3" id="destaques"></div>
     <div class="gr g2">
       <div class="p"><h3>Acessos ao site</h3><span class="chip pchip"></span><div id="gAcessos"></div><div class="leg" id="legAc"></div></div>
       <div class="p"><h3>De onde vêm</h3><span class="chip pchip"></span><div class="rol" id="bOrigem"></div></div>
     </div>
-    <div class="gr g2">
-      <div class="p"><h3>Páginas</h3><span class="chip pchip"></span><div class="rol"><table id="tPag"></table></div></div>
-      <div class="p"><h3>Investimento × vendas</h3><span class="chip pchip"></span><div id="gSerie"></div>
-        <div class="leg"><span><i style="background:var(--google)"></i>Google</span><span><i style="background:var(--meta)"></i>Meta</span><span><i style="background:var(--brasa)"></i>Vendas</span></div></div>
-    </div>
-    <!-- funil -->
-    <div class="gr g5" id="kFunil"></div>
-    <div class="p orn" style="margin-bottom:16px"><h3>Jornada completa</h3><span class="chip" id="desde"></span><div class="fn" id="fnTotal"></div></div>
-    <div class="gr g3" id="destaques"></div>
+    <div class="gr"><div class="p"><h3>Páginas</h3><span class="chip pchip"></span><div class="rol"><table id="tPag"></table></div></div></div>
+    <div class="gr"><div class="p plat" id="pInsta"></div></div>
+    <div class="gr g2"><div class="p plat" id="pMeta"></div><div class="p plat" id="pGoogle"></div></div>
+    <div class="gr"><div class="p"><h3>Investimento × vendas</h3><span class="chip pchip"></span><div id="gSerie"></div>
+      <div class="leg"><span><i style="background:var(--google)"></i>Google</span><span><i style="background:var(--meta)"></i>Meta</span><span><i style="background:var(--brasa)"></i>Vendas</span></div></div></div>
     </section>
 
   <!-- PÚBLICO -->
@@ -362,12 +358,6 @@ function pintar(d){
   var cpa=div(inv,V.atual.n),cpaB=div(invB,V.ant.n),roas=div(V.atual.valor,inv),roasB=div(V.ant.valor,invB);
 
   // ── VISÃO GERAL
-  $('kGeral').innerHTML=
-    kpi('Investimento',brl(inv),delta(inv,invB,0,1),'#3ef0d8')+
-    kpi('Acessos ao site',int(AC.atual.visitas),delta(AC.atual.visitas,AC.ant.visitas),'#3ef0d8')+
-    kpi('Vendas',int(V.atual.n),delta(V.atual.n,V.ant.n),'#ff9a3c')+
-    kpi('Custo por venda',isFinite(cpa)?brl(cpa):'—',isFinite(cpa)&&isFinite(cpaB)?delta(cpa,cpaB,true):'<span class="d">sem venda no período</span>','#ff9a3c')+
-    kpi('Retorno',isFinite(roas)?roas.toLocaleString('pt-BR',{maximumFractionDigits:2})+'x':'—',isFinite(roas)&&isFinite(roasB)?delta(roas,roasB):'<span class="d">'+brl(V.atual.valor)+' faturados</span>','#ff9a3c');
   var vo=V.atual.porOrigem||{};
   plat('pGoogle','Google','google_ads','google',COR.google,A,B,vo.google,d.serie);
   plat('pMeta','Meta','meta','meta',COR.meta,A,B,vo.meta,d.serie);
