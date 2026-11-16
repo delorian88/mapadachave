@@ -551,7 +551,7 @@ var RX={
  'Gastos':'Soma de todos os gastos do mês.',
  'Moradia no salário':'Quanto do salário líquido vai para parcela ou aluguel + condomínio + IPTU. Até 35% é confortável; acima de 40% aperta.','Gastos previstos':'Soma do que vai gastar por mês morando sozinho, preenchido abaixo.',
  'Comprando':'Valor do imóvel no fim − saldo devedor + o que sobrou aplicado.',
- 'Alugando e investindo':'Se, em vez de comprar, a entrada fosse aplicada e todo mês fosse investida a diferença entre a parcela e o aluguel. Gastando essa diferença, o patrimônio de quem aluga fica perto de zero.',
+ 'Alugando e investindo':'A entrada aplicada desde o início e, todo mês, a diferença entre a parcela e o aluguel investida, sem falhar.','Alugando e gastando':'O mais comum: o que sobra no mês é gasto e a entrada não fica aplicada. O aluguel não deixa patrimônio.','Para alugar e investir, guardar':'O que precisaria ser aplicado para o cenário Alugar e investir acontecer: a entrada e a diferença entre parcela e aluguel. A diferença muda todo mês com o reajuste do aluguel e a queda da parcela no SAC.',
  'Total pago de aluguel':'Soma de todos os aluguéis do período, com reajuste.',
  'Total pago de parcelas':'Soma das parcelas do financiamento no período.',
  'Total pago estimado':'Valor financiado + juros pelo CET em todo o prazo.',
@@ -628,11 +628,11 @@ function cCusto(){var p=V('preco'),av=V('precoAval')||p,cota=V('cota')/100,n=V('
  var s1=fin/n+fin*im,sN=fin/n*(1+im),pr=im>0?fin*im/(1-Math.pow(1+im,-n)):fin/n,jS=fin*im*(n+1)/2,jP=pr*n-fin;
  return {fin:fin,ent:ent,itbi:itbi,cart:cart,aval:aval,tot:tot,s1:s1,sN:sN,pr:pr,jS:jS,jP:jP,rmin:s1/0.3,extra:p?(itbi+cart+aval)/p:0}}
 function cAluguel(){var p=V('preco'),cota=V('cota')/100,n=V('prazo')||420,im=imes(V('juros')),ia=imes(V('rend')),fin=p*cota,H=Math.max(1,Math.round(V('horiz')))*12;
- var ent=p*(1-cota)+p*V('custos')/100,invA=ent,invC=0,saldo=fin,c=[],a=[],tp=0,ta=0;
+ var ent=p*(1-cota)+p*V('custos')/100,invA=ent,invC=0,saldo=fin,c=[],a=[],z=[],tp=0,ta=0,apA=0,apC=0,d1=0;
  for(var m=1;m<=H;m++){var al=V('aluguel')*Math.pow(1+V('reaj')/100,Math.floor((m-1)/12)),parc=m<=n?fin/n+saldo*im:0;saldo=Math.max(0,saldo-fin/n);
-  var g=Math.max(al,parc);invA=invA*(1+ia)+(g-al);invC=invC*(1+ia)+(g-parc);tp+=parc;ta+=al;
-  var val=p*Math.pow(1+V('valoriz')/100,m/12);if(m%12===0||m===H){c.push(val-saldo+invC);a.push(invA)}}
- return {c:c,a:a,fc:c[c.length-1],fa:a[a.length-1],tp:tp,ta:ta}}
+  var g=Math.max(al,parc);invA=invA*(1+ia)+(g-al);invC=invC*(1+ia)+(g-parc);tp+=parc;ta+=al;apA+=g-al;apC+=g-parc;if(m===1)d1=parc-al;
+  var val=p*Math.pow(1+V('valoriz')/100,m/12);if(m%12===0||m===H){c.push(val-saldo+invC);a.push(invA);z.push(0)}}
+ return {c:c,a:a,z:z,fc:c[c.length-1],fa:a[a.length-1],tp:tp,ta:ta,ent:ent,apA:apA,apC:apC,d1:d1,H:H}}
 
 /* ---------- campos ---------- */
 // [chave, rótulo, tipo r|p|n|m|a, casas]
@@ -826,9 +826,11 @@ function barrasParc(c){var a=[['SAC · 1ª',c.s1,'#EF9F27'],['SAC · última',c.
 TELAS.aluguel={html:function(){return topo('Aluguel × compra','ferramentas')+
  campos([['aluguel','Aluguel por mês','r'],['preco','Preço do imóvel','r'],['horiz','Comparar em','a']],[['reaj','Reajuste do aluguel','p'],['cota','Parte financiada','p'],['custos','Custos de compra','p'],['juros','Juros ao ano','p'],['prazo','Prazo','m'],['valoriz','Valorização ao ano','p'],['rend','Rendimento ao ano','p']])+'<div id="res" class="res"></div>'},
  liga:function(r){var f=function(){var a=cAluguel(),dif=a.fc-a.fa,win=dif>=0,n=a.c.length,xs=a.c.map(function(_,i){return i===0||i===n-1||(n>4&&i===Math.round((n-1)/2))?'ano '+(i+1):null});
-  $('#res').innerHTML='<div class="card esc"><div class="rot">Em '+num(V('horiz'))+' anos, forma mais patrimônio</div><div class="big amb">'+(win?'Comprar':'Alugar e investir')+'</div><div class="rot" style="margin-top:6px">Diferença de '+brl(Math.abs(dif))+'</div></div>'+
-  (n>1?'<div class="card"><div class="rot" style="margin-bottom:6px">Patrimônio ano a ano</div>'+gLinhas([{v:a.c,c:'#EF9F27',n:'Comprar'},{v:a.a,c:'#5E8BA8',n:'Alugar e investir'}],{x:xs,lab:function(i){return 'Ano '+(i+1)}})+'</div>':'')+
-  '<div class="card"><div class="rot" style="margin-bottom:4px">Patrimônio em '+num(V('horiz'))+' anos</div>'+lin('Comprando',brl(a.fc))+lin('Alugando e investindo',brl(a.fa))+'</div><div class="card">'+lin('Total pago de aluguel',brl(a.ta))+lin('Total pago de parcelas',brl(a.tp))+'</div>'};
+  var A=num(V('horiz'));
+  $('#res').innerHTML='<div class="card esc"><div class="rot">Estimativa · em '+A+' anos, forma mais patrimônio</div><div class="big amb">'+(win?'Comprar':'Alugar e investir')+'</div><div class="rot" style="margin-top:6px">Diferença de '+brl(Math.abs(dif))+'</div></div>'+
+  (a.apA>0?'<div class="card"><div class="rot" style="margin-bottom:4px">'+ri('Para alugar e investir, guardar')+'</div>'+lin('Entrada aplicada no início',brl(a.ent))+lin('No 1º mês',brl(Math.max(0,a.d1)))+lin('Média por mês',brl(a.apA/a.H))+'</div>':'')+
+  (n>1?'<div class="card"><div class="rot" style="margin-bottom:6px">Patrimônio ano a ano</div>'+gLinhas([{v:a.c,c:'#EF9F27',n:'Comprar'},{v:a.a,c:'#5E8BA8',n:'Alugar e investir'},{v:a.z,c:'#C4422B',n:'Alugar e gastar'}],{x:xs,lab:function(i){return 'Ano '+(i+1)}})+'</div>':'')+
+  '<div class="card"><div class="rot" style="margin-bottom:4px">Patrimônio estimado em '+A+' anos</div>'+lin('Comprando',brl(a.fc))+lin('Alugando e investindo',brl(a.fa))+lin('Alugando e gastando',brl(0))+'</div><div class="card">'+lin('Total pago de aluguel',brl(a.ta))+lin('Total pago de parcelas',brl(a.tp))+'</div>'};
   liga(r,f);f()}};
 
 /* Comparar bancos */
@@ -993,7 +995,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.17',S=null,fbOk=false;
+var VER='1.18',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
