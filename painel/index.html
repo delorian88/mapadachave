@@ -152,6 +152,18 @@ th[data-dica]:hover::after{left:auto;right:0}
 #porta input{background:transparent;border:0;border-bottom:1px solid var(--ln2);color:var(--ouro);font:600 18px 'Chakra Petch';letter-spacing:.4em;text-align:center;width:260px;padding:8px;outline:none}
 #porta input:focus{border-color:var(--ouro);box-shadow:0 8px 16px -10px rgba(232,194,122,.6)}
 #carga .runas{width:220px;margin-top:16px}
+.mg.g5c{grid-template-columns:repeat(5,1fr)}
+.mg.g5c div:not(:nth-child(4n+1)){padding-left:0;border-left:0}
+.mg.g5c div:not(:nth-child(5n+1)){padding-left:14px;border-left:1px solid var(--ln)}
+.posts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.post{display:block;text-decoration:none;color:var(--tx);border:1px solid var(--ln);border-radius:5px;padding:12px 14px;background:rgba(255,111,181,.03);transition:.2s;min-height:118px}
+.post:hover{border-color:rgba(255,111,181,.5);box-shadow:0 0 14px rgba(255,111,181,.18)}
+.post .tp{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#ff6fb5;display:flex;justify-content:space-between}
+.post .tp span{color:var(--tx3)}
+.post p{font-size:12px;color:var(--tx2);margin:8px 0 10px;line-height:1.4;height:34px;overflow:hidden}
+.post .nm{display:flex;gap:14px;font-size:12px}
+.post .nm b{font-weight:600}
+.post .nm i{font-style:normal;color:var(--tx3);font-size:10px;letter-spacing:.12em;margin-left:4px;text-transform:uppercase}
 /* ── ornamentos élficos ── */
 nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:330px;z-index:0;opacity:1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20520%27%20fill%3D%27none%27%20stroke%3D%27%23e8c27a%27%20stroke-linecap%3D%27round%27%3E%3Cg%20stroke-opacity%3D%27.42%27%3E%3Cpath%20d%3D%27M200%20520V300%27/%3E%3Cpath%20d%3D%27M200%20300C200%20220%20140%20200%20120%20130M200%20300C200%20220%20260%20200%20280%20130M200%20330C160%20300%2090%20300%2050%20240M200%20330C240%20300%20310%20300%20350%20240M200%20270C200%20200%20200%20140%20200%2060M120%20130C110%2090%20130%2060%20150%2040M280%20130C290%2090%20270%2060%20250%2040M50%20240C30%20210%2040%20180%2060%20160M350%20240C370%20210%20360%20180%20340%20160%27/%3E%3Cpath%20d%3D%27M200%20520c-30-20-70-20-110-10M200%20520c30-20%2070-20%20110-10%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.3%27%20stroke%3D%27none%27%3E%3Cellipse%20cx%3D%27150%27%20cy%3D%2740%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-40%20150%2040%29%27/%3E%3Cellipse%20cx%3D%27250%27%20cy%3D%2740%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2840%20250%2040%29%27/%3E%3Cellipse%20cx%3D%27200%27%20cy%3D%2760%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%280%20200%2060%29%27/%3E%3Cellipse%20cx%3D%2760%27%20cy%3D%27160%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-60%2060%20160%29%27/%3E%3Cellipse%20cx%3D%27340%27%20cy%3D%27160%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2860%20340%20160%29%27/%3E%3Cellipse%20cx%3D%27120%27%20cy%3D%27130%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-30%20120%20130%29%27/%3E%3Cellipse%20cx%3D%27280%27%20cy%3D%27130%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2830%20280%20130%29%27/%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%27240%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-80%2050%20240%29%27/%3E%3Cellipse%20cx%3D%27350%27%20cy%3D%27240%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2880%20350%20240%29%27/%3E%3Cellipse%20cx%3D%27170%27%20cy%3D%2790%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-20%20170%2090%29%27/%3E%3Cellipse%20cx%3D%27230%27%20cy%3D%2790%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2820%20230%2090%29%27/%3E%3Cellipse%20cx%3D%27100%27%20cy%3D%27190%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-50%20100%20190%29%27/%3E%3Cellipse%20cx%3D%27300%27%20cy%3D%27190%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2850%20300%20190%29%27/%3E%3Cellipse%20cx%3D%27140%27%20cy%3D%2760%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%28-60%20140%2060%29%27/%3E%3Cellipse%20cx%3D%27260%27%20cy%3D%2760%27%20rx%3D%277%27%20ry%3D%273%27%20transform%3D%27rotate%2860%20260%2060%29%27/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
 .p::before,.p::after{width:58px;height:58px;border:0!important;opacity:.9;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2060%2060%27%20fill%3D%27none%27%20stroke%3D%27%23e8c27a%27%20stroke-linecap%3D%27round%27%3E%3Cpath%20d%3D%27M1%2059V22C1%2010%2010%201%2022%201h37%27%20stroke-opacity%3D%27.75%27/%3E%3Cpath%20d%3D%27M6%2052V25C6%2015%2014%206%2025%206h26%27%20stroke-opacity%3D%27.35%27/%3E%3Cpath%20d%3D%27M6%2030C12%2028%2015%2023%2015%2016%27%20stroke-opacity%3D%27.7%27/%3E%3Cpath%20d%3D%27M15%2016c4-1%207%201%208%205-4%201-7-1-8-5z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.35%27/%3E%3Cpath%20d%3D%27M30%206c-1%206-6%209-12%209%27%20stroke-opacity%3D%27.7%27/%3E%3Cpath%20d%3D%27M18%2015c-1-4%201-7%205-8%201%204-1%207-5%208z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.25%27/%3E%3Cpath%20d%3D%27M6%2040c-3-3-3-7%200-10%203%203%203%207%200%2010z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.3%27/%3E%3Cpath%20d%3D%27M40%206c-3-3-7-3-10%200%203%203%207%203%2010%200z%27%20fill%3D%27%23e8c27a%27%20fill-opacity%3D%27.3%27/%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%271.6%27%20fill%3D%27%23e8c27a%27/%3E%3C/svg%3E") center/contain no-repeat}
@@ -182,7 +194,7 @@ nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:
   <a data-s="vendas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9z"/><path d="M12 11l8-4.5M12 11L4 6.5M12 11v9"/></svg>Vendas</a>
   <div class="fil"></div>
   <a data-s="dados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>Dados</a>
-  <div class="rod"><span class="elfico" data-elf="Elen síla lúmenn' omentielvo">Elen síla lúmenn' omentielvo</span><span id="gerado"></span></div>
+  <div class="rod"><span class="elfico" data-elf="Namárië">Namárië</span><span id="gerado"></span></div>
 </nav>
 <main>
   <div class="topo"><div><h1 id="tit">VISÃO GERAL</h1><div class="elfico" id="frase" data-elf="Mae govannen">Mae govannen</div></div>
@@ -192,6 +204,7 @@ nav::after{content:"";position:absolute;left:10px;right:10px;bottom:52px;height:
   <section class="sec on" id="s-geral">
     <div class="gr g5" id="kGeral"></div>
     <div class="gr g2"><div class="p plat" id="pGoogle"></div><div class="p plat" id="pMeta"></div></div>
+    <div class="gr"><div class="p plat" id="pInsta"></div></div>
     <div class="gr g2">
       <div class="p"><h3>Acessos ao site</h3><span class="chip pchip"></span><div id="gAcessos"></div><div class="leg" id="legAc"></div></div>
       <div class="p"><h3>De onde vêm</h3><span class="chip pchip"></span><div class="rol" id="bOrigem"></div></div>
@@ -257,9 +270,9 @@ function guarda(d,v){MEM[d]=v;try{localStorage.setItem('mc_d'+d,JSON.stringify(v
 function lembra(d){if(MEM[d])return MEM[d];try{var v=localStorage.getItem('mc_d'+d);return v?JSON.parse(v):null}catch(e){return null}}
 function porta(){$('carga').style.display='none';$('porta').style.display='grid';$('iChave').focus()}
 function buscar(d){return fetch(API+'?api=dados&dias='+d+'&k='+encodeURIComponent(CHAVE)).then(function(r){return r.json()})}
-var FRASE={geral:'Mae govannen',funil:'Ai na vedui',publico:'Lasto beth lammen',vendas:'Elen síla lúmenn\' omentielvo',dados:'Le suilon'};
-var TRAD={'Mae govannen':'Bem-vindo, viajante','Ai na vedui':'Enfim, chegamos','Lasto beth lammen':'Ouça as palavras da minha língua',
- 'Elen síla lúmenn\' omentielvo':'Uma estrela brilha na hora do nosso encontro','Le suilon':'Eu te saúdo','Pedo mellon a minno':'Diga amigo e entre'};
+var FRASE={geral:'Mae govannen',funil:'Noro lim',publico:'Elen síla lúmenn\' omentielvo',vendas:'Hannon le',dados:'Lasto beth lammen'};
+var TRAD={'Mae govannen':'Bem-vindo, viajante','Noro lim':'Corra, corra depressa','Elen síla lúmenn\' omentielvo':'Uma estrela brilha na hora do nosso encontro',
+ 'Hannon le':'Obrigado','Lasto beth lammen':'Ouça as palavras da minha língua','Pedo mellon a minno':'Diga amigo e entre','Namárië':'Até logo'};
 var RUN='ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ';
 function decifra(el,alvo){
   clearInterval(el._t);var de=el.textContent,n=Math.max(de.length,alvo.length),q=0,passos=18;
@@ -322,6 +335,7 @@ function pintar(d){
   var vo=V.atual.porOrigem||{};
   plat('pGoogle','Google','google_ads','google',COR.google,A,B,vo.google,d.serie);
   plat('pMeta','Meta','meta','meta',COR.meta,A,B,vo.meta,d.serie);
+  insta(d);
   acessosDia(AC.dia||[]);
   barrasO('bOrigem',AC.porOrigem||[]);
   var pg=AC.porPagina||[];
@@ -360,7 +374,7 @@ function pintar(d){
   // ── DADOS
   var f=d.fontes||{}, ultAc=(AC.dia||[]).length?AC.dia[AC.dia.length-1].d.split('-').reverse().slice(0,2).join('/'):'';
   f.site=f.site||(ultAc?{quando:ultAc,status:'OK',msg:int(AC.atual.visitas)+' acessos no período'}:null);
-  $('tFontes').innerHTML='<tr><th>Fonte</th><th>Última</th><th>Status</th><th style="text-align:left;padding-left:20px">Registro</th></tr>'+[['google_ads','Google Ads'],['meta','Meta'],['cakto','Cakto'],['site','Site']].map(function(k){var x=f[k[0]];
+  $('tFontes').innerHTML='<tr><th>Fonte</th><th>Última</th><th>Status</th><th style="text-align:left;padding-left:20px">Registro</th></tr>'+[['google_ads','Google Ads'],['meta','Meta'],['instagram','Instagram'],['cakto','Cakto'],['site','Site']].map(function(k){var x=f[k[0]];
     return '<tr><td>'+k[1]+'</td><td>'+(x?x.quando:'—')+'</td><td><span class="st '+(x?x.status:'PENDENTE')+'">'+(x?x.status:'sem registro')+'</span></td><td style="text-align:left;padding-left:20px;white-space:normal;color:var(--tx2)">'+(x?esc(x.msg):'')+'</td></tr>'}).join('');
   siglas();
 }
@@ -402,10 +416,28 @@ var DICA={'ctr':'CTR · taxa de cliques: cliques ÷ impressões','cpc':'CPC · c
  'conv.':'Conversões · ações registradas como resultado','result.':'Resultados · ação otimizada da campanha (compra ou visita ao perfil)',
  'visitas à página':'Carregamentos da página após o clique no anúncio','checkouts':'Chegadas à tela de pagamento da Cakto',
  'passagem':'Parte da etapa anterior que avançou para esta','taxa':'Cliques em comprar ÷ acessos','ticket médio':'Faturamento ÷ número de vendas',
- 'resultado':'Faturamento líquido − investimento','custo':'Investimento ÷ total da etapa','cliques em comprar':'Cliques no botão de compra da página'};
+ 'resultado':'Faturamento líquido − investimento','custo':'Investimento ÷ total da etapa','cliques em comprar':'Cliques no botão de compra da página','alcance':'Contas únicas que viram o conteúdo','visualizações':'Vezes em que o conteúdo foi exibido',
+ 'interações':'Curtidas + comentários + salvamentos + compartilhamentos','engajamento':'Interações ÷ alcance','contas engajadas':'Contas únicas que interagiram',
+ 'salvamentos':'Vezes em que guardaram o post — sinal forte de interesse','compartilhamentos':'Envios do post para outras pessoas','cliques no link':'Toques no link da bio'};
 function siglas(){document.querySelectorAll('.k .t,.mg span,th,.fxl,.fxg + svg ~ .fxg span').forEach(function(el){
   var t=el.textContent.trim().toLowerCase();if(DICA[t])el.setAttribute('data-dica',DICA[t])});
   document.querySelectorAll('.fxl').forEach(function(el){var t=el.textContent.trim().toLowerCase();if(DICA[t])el.setAttribute('data-dica',DICA[t])})}
+
+function insta(d){
+  var I=d.instagram||{},A=I.atual||{},B=I.ant||{},cor='#ff6fb5',el=$('pInsta');if(!el)return;
+  var seg=I.seguidores,dif=(seg!=null&&I.seguidoresAnt!=null)?seg-I.seguidoresAnt:null;
+  var eng=div(A.interacoes||0,A.alcance||0),engB=div(B.interacoes||0,B.alcance||0);
+  function cel(t,v,a,b,inv){return '<div><span>'+t+'</span><b>'+v+'</b></div>'}
+  var c=[['Alcance',int(A.alcance)],['Visualizações',int(A.visualizacoes)],['Interações',int(A.interacoes)],['Engajamento',pct(eng)],['Contas engajadas',int(A.contas_engajadas)],
+    ['Curtidas',int(A.curtidas)],['Comentários',int(A.comentarios)],['Salvamentos',int(A.salvamentos)],['Compartilhamentos',int(A.compartilhamentos)],['Cliques no link',int(A.cliques_link)]];
+  var top=(I.top||[]).map(function(p){return '<a class="post" href="'+esc(p.link)+'" target="_blank" rel="noopener"><div class="tp">'+esc(p.tipo)+'<span>'+(p.data?p.data.split('-').reverse().slice(0,2).join('/'):'')+'</span></div><p>'+esc(p.legenda)+'</p>'+
+    '<div class="nm"><span><b>'+int(p.interacoes)+'</b><i>inter.</i></span><span><b>'+int(p.alcance)+'</b><i>alcance</i></span><span><b>'+int(p.salvamentos)+'</b><i>salv.</i></span></div></a>'}).join('');
+  el.innerHTML='<div class="cab"><div class="nm" style="color:'+cor+';text-shadow:0 0 16px '+cor+'55"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:'+cor+';box-shadow:0 0 12px '+cor+'"></span>INSTAGRAM</div>'+
+    '<div class="inv"><b>'+glow(seg==null?'—':int(seg),cor)+'</b><span>seguidores'+(dif!=null?' · <span class="d '+(dif>0?'up':dif<0?'dn':'')+'" style="font-size:10px">'+(dif>0?'▲ +':dif<0?'▼ ':'')+int(dif)+' no período</span>':'')+'</span></div></div>'+
+    '<div class="mg g5c">'+c.map(function(x){return '<div><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('')+'</div>'+
+    (top?'<div class="posts">'+top+'</div>':'')+
+    spark(d.serie.map(function(x){return x.v['instagram.alcance']||0}),cor);
+}
 
 function plat(id,nome,p,src,cor,A,B,vendas,s){
   var i=g(A,p,'investimento'),im=g(A,p,'impressoes'),c=g(A,p,'cliques'),vv=(vendas||{}).n||0,fat=(vendas||{}).valor||0;
