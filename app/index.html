@@ -754,7 +754,7 @@ TELAS.teto={html:function(){return topo('Até que valor posso comprar','ferramen
   [['juros','Juros ao ano','p'],['prazo','Prazo','m'],['cota','Parte financiada','p'],['comp','Parcela máx. da renda','p'],['itbi','ITBI','p'],['cart','Escritura + registro','p'],['aval','Avaliação do banco','r']])+'<div id="res" class="res"></div>'},
  liga:function(r){var f=function(){var t=cTeto(),st=t.gp>0.4?'bad':t.gp>0.35?'warn':'ok';
   $('#res').innerHTML='<div class="card esc"><div class="rot">'+ri('Valor máximo')+'</div><div class="big amb">'+brl(t.teto)+'</div><div style="margin-top:10px">'+selo(t.lim==='Renda'?'warn':'ok','Limite: '+t.lim.toLowerCase())+'</div></div>'+
-  compraTeto(t)+'<div class="card"><div class="rot" style="margin-bottom:10px">Os dois limites</div>'+duasBarras([['Pela renda',t.pR],['Pela entrada',t.pD]])+'</div>'+
+  compraTeto(t)+'<div class="card"><div class="rot" style="margin-bottom:10px">Os dois limites</div>'+duasBarras([['Pela renda',t.pR,'O imóvel mais caro cuja parcela cabe no seu salário.'],['Pela entrada',t.pD,'O imóvel mais caro que o seu dinheiro (guardado + FGTS) paga de entrada e custos (ITBI, cartório e avaliação).']])+'</div>'+
   '<div class="card">'+lin('Parcela máxima',brl(t.parc))+lin('Banco empresta até',brl(t.fin))+lin('Dinheiro disponível',brl(t.din))+lin('Gasto mensal no valor máximo',brl(t.gasto))+lin('Gasto sobre a renda',selo(st,pct(t.gp)),'')+'</div>'};
   liga(r,f);f()}};
 function compraTeto(t){var T=t.teto,cota=V('cota')/100,n=V('prazo')||420,im=imes(V('juros'));if(!(T>0))return '';
@@ -765,7 +765,7 @@ function compraTeto(t){var T=t.teto,cota=V('cota')/100,n=V('prazo')||420,im=imes
   li('var(--ink)','Valor do imóvel',brl(T),'tt')+li('var(--line2)','Banco financia ('+pct(cota,0)+')','− '+brl(fin))+li('var(--amber)','Entrada',brl(ent))+li('#C4422B','Impostos e taxas','+ '+brl(cus))+
   li('var(--ink)','Do seu bolso',brl(bolso),'tt')+li('#2E8B57','Você já tem','− '+brl(din))+li(saldo<0?'var(--bad)':'var(--ok)',saldo<0?'Falta':'Sobra',brl(Math.abs(saldo)),'tt '+(saldo<0?'fb':'fo'))+'</div>'+
   '<div class="rot" style="margin:16px 0 8px">'+ri('Parcelas no valor máximo')+'</div>'+lin('SAC · 1ª parcela',brl(sac1))+lin('SAC · última parcela',brl(sacN))+lin('Price · parcela fixa',brl(pri))+'</div>'}
-function duasBarras(a){var mx=Math.max(a[0][1],a[1][1])||1,mn=Math.min(a[0][1],a[1][1]);return a.map(function(x){var low=x[1]===mn;return '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px"><span style="color:var(--ink2)">'+x[0]+'</span><b style="font-variant-numeric:tabular-nums">'+brl(x[1])+'</b></div><div class="barra" style="height:12px"><i style="width:'+(x[1]/mx*100)+'%;background:'+(low?'var(--amber)':'var(--line2)')+'"></i></div></div>'}).join('')}
+function duasBarras(a){var mx=Math.max(a[0][1],a[1][1])||1,mn=Math.min(a[0][1],a[1][1]);return a.map(function(x){var low=x[1]===mn;return '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px"><span style="color:var(--ink2)">'+x[0]+'</span><b style="font-variant-numeric:tabular-nums">'+brl(x[1])+'</b></div><div class="barra" style="height:12px"><i style="width:'+(x[1]/mx*100)+'%;background:'+(low?'var(--amber)':'var(--line2)')+'"></i></div>'+(x[2]?'<div style="font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.35">'+x[2]+'</div>':'')+'</div>'}).join('')}
 
 /* Meta da entrada */
 TELAS.meta={html:function(){return topo('Meta da entrada','ferramentas')+
@@ -993,7 +993,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.11',S=null,fbOk=false;
+var VER='1.12',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
