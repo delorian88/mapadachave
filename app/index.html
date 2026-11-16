@@ -726,7 +726,7 @@ function subTool(id){switch(id){
 TELAS.ferramentas={html:function(){
  var grupos=[['Dinheiro',['teto','meta','sozinho','aluguel']],['Compra',['golpe','custo','bancos','documentos','custos']],['Vida nova',['enxoval','planta','dois','pais','glossario']]];
  return topo('Ferramentas')+grupos.map(function(g){return '<div class="h2">'+g[0]+'</div><div class="tools">'+g[1].map(cartaoTool).join('')+'</div>'}).join('')+
- lic()+'<div class="h2">Seus dados</div><a class="tool dest" href="#dados" style="background:var(--paper);border-color:var(--line)"><span class="ic" style="background:var(--sand)">'+ic('nuvem')+'</span><span><b>Cópia de segurança</b><small>Salvar ou recuperar</small></span></a>'}};
+ '<div class="h2">Material do kit</div><div class="tools">'+[['https://drive.google.com/file/d/1dXQYCFxtTIMWYecIRsa_UNBg20HYns__/view','livro','Guia em PDF','As 10 etapas'],['https://docs.google.com/spreadsheets/d/1sbkbTUUj6HZLemWYryh_L5Rr3p328cocRq7xtzdPZ08/copy','recibo','Calculadora','Planilha Google']].map(function(k){return '<a class="tool" href="'+k[0]+'" target="_blank" rel="noopener"><span class="ic">'+ic(k[1])+'</span><span><b>'+k[2]+'</b><small>'+k[3]+'</small></span></a>'}).join('')+'</div>'+lic()+'<div class="h2">Seus dados</div><a class="tool dest" href="#dados" style="background:var(--paper);border-color:var(--line)"><span class="ic" style="background:var(--sand)">'+ic('nuvem')+'</span><span><b>Cópia de segurança</b><small>Salvar ou recuperar</small></span></a>'}};
 
 /* Quanto posso comprar */
 TELAS.teto={html:function(){return topo('Quanto posso comprar','ferramentas')+
@@ -913,7 +913,7 @@ TELAS.dados={html:function(){return topo('Cópia de segurança','ferramentas')+
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.1',S=null,fbOk=false;
+var VER='1.2',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
