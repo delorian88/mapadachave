@@ -60,14 +60,14 @@ a{color:inherit;text-decoration:none}
 .campos{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
 .cp{display:flex;align-items:center;gap:12px;padding:0 16px;min-height:56px;border-top:1px solid var(--line)}
 .cp:first-child{border-top:0}
-.cp label{flex:1;font-size:14.5px;font-weight:500;color:var(--ink)}
+.cp label{flex:1;font-size:14.5px;font-weight:500;color:var(--ink);display:flex;align-items:flex-start;gap:7px;line-height:1.3}.cp label .ib{margin:1px 0 0}
 .cp .in{display:flex;align-items:center;gap:4px;background:var(--sand);border-radius:12px;padding:0 12px;height:42px;min-width:124px;max-width:54%;border:1.5px solid transparent;transition:border-color .15s}
 .cp .in:focus-within{border-color:var(--amber);background:#fff}
 .cp .in span{font-size:13.5px;color:var(--ink3);font-weight:500;flex:none}
 .cp input{border:0;background:transparent;outline:0;width:100%;text-align:right;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;padding:0}
 .cp input[type=text].tx{text-align:left;font-weight:500}
 .cmp{border-top:1px solid var(--line)}.cmp:first-child{border-top:0}.cmp>.cp{border-top:0}.mais .cmp:first-child{border-top:1px solid var(--line)}
-.ib{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;border:1.5px solid var(--line2);font:700 11px/1 Inter,sans-serif;color:var(--ink3);margin-left:7px;vertical-align:1px;flex:none;background:#fff}
+.ib{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line2);font:700 9.5px/1 Inter,sans-serif;color:var(--ink3);margin:0 6px 0 0;vertical-align:-1px;flex:none;background:#fff;padding:0}
 .card.esc .ib{border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.75)}.ib.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .aj{display:none;margin:0 16px 14px;padding:12px 14px;background:var(--sand);border-radius:12px;font-size:13px;line-height:1.5;color:var(--ink2)}.aj.on{display:block;animation:fd .2s ease}
 .aj b{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:8px 0 2px}.aj b:first-child{margin-top:0}
@@ -204,6 +204,10 @@ a{color:inherit;text-decoration:none}
 .bt.gg{background:#fff;color:var(--ink);border:1.5px solid var(--line2)}.bt.gg svg{width:20px;height:20px}
 .porta .ok{background:var(--ok-l);color:var(--ok);border-radius:14px;padding:14px 16px;font-size:14.5px;font-weight:600;line-height:1.45;margin-bottom:12px;text-align:left}
 .porta .mail{font-weight:700;word-break:break-all}
+.nv{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:14px 16px;margin-bottom:10px}
+.nv .pt{width:10px;height:10px;border-radius:50%;background:var(--ink3);flex:none}.nv.on .pt{background:#2E9E5B;box-shadow:0 0 0 4px rgba(46,158,91,.15)}
+.nv b{display:block;font-size:15px}.nv small{font-size:12.5px;color:var(--ink3)}
+.av-nv{font-size:14px;line-height:1.5;color:var(--ink2)}.av-nv p{margin:0 0 10px}.av-nv ul{margin:0 0 14px;padding-left:18px}.av-nv li{margin-bottom:6px}
 .lic{font-size:11.5px;color:var(--ink3);text-align:center;margin:26px 0 4px;font-variant-numeric:tabular-nums}
 .erro{color:var(--bad);font-size:13.5px;font-weight:600;min-height:20px;margin-top:8px}
 .fade{animation:fd .28s ease}
@@ -566,7 +570,7 @@ var RX={
  'Renda (parcela e seguro)':'Divisão da renda que o banco considera. O seguro MIP segue essa proporção.',
  'Entrada (divisão)':'Quanto cada um colocou na entrada. Base para o percentual de cada um na matrícula.'
 };
-function ri(t){return RX[t]?t+'<button type="button" class="ib" data-ex="'+esc(t)+'" aria-label="O que é" style="width:17px;height:17px;font-size:10px;background:transparent">i</button>':t}
+function ri(t){return RX[t]?'<button type="button" class="ib" data-ex="'+esc(t)+'" aria-label="O que é" style="background:transparent">i</button>'+t:t}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-ex]');if(!b)return;e.preventDefault();e.stopPropagation();var t=b.dataset.ex;folha(esc(t),'<div class="txt" style="background:#fff">'+esc(RX[t]||'')+'</div><button class="bt" onclick="fecha()">Entendi</button>')});
 /* ---------- ferramentas ---------- */
 var TOOLS=[
@@ -619,7 +623,7 @@ function cAluguel(){var p=V('preco'),cota=V('cota')/100,n=V('prazo')||420,im=ime
 function campo(f){var k=f[0],t=f[1],ty=f[2],v=D.v[k];
  var pre=ty==='r'?'<span>R$</span>':'',suf=ty==='p'?'<span>%</span>':ty==='m'?'<span>meses</span>':ty==='a'?'<span>anos</span>':ty==='min'?'<span>min</span>':'';
  var val=ty==='r'?num(+v||0):num(+v||0,2),ph='';if(k==='precoAval'&&!(+v)){val='';ph=num(V('preco'))}
- var aj=AJ[k],sl=SL[k],h='<div class="cmp"><div class="cp"><label for="f_'+k+'">'+t+(aj?'<button type="button" class="ib" data-aj="'+k+'" aria-label="O que é">i</button>':'')+'</label><div class="in">'+pre+'<input id="f_'+k+'" data-k="'+k+'" data-ty="'+ty+'" inputmode="decimal" autocomplete="off" value="'+val+'"'+(ph?' placeholder="'+ph+'"':'')+'>'+suf+'</div></div>';
+ var aj=AJ[k],sl=SL[k],h='<div class="cmp"><div class="cp"><label for="f_'+k+'">'+(aj?'<button type="button" class="ib" data-aj="'+k+'" aria-label="O que é">i</button>':'')+'<span>'+t+'</span></label><div class="in">'+pre+'<input id="f_'+k+'" data-k="'+k+'" data-ty="'+ty+'" inputmode="decimal" autocomplete="off" value="'+val+'"'+(ph?' placeholder="'+ph+'"':'')+'>'+suf+'</div></div>';
  if(sl){var un=ty==='m'?' m':ty==='a'?' a':'%';h+='<div class="sl" id="sl_'+k+'"><input type="range" data-r="'+k+'" min="'+sl[0]+'" max="'+sl[1]+'" step="'+sl[2]+'" value="'+(+v||0)+'" aria-label="'+esc(t)+'"><div class="mm"><span>'+num(sl[0],1)+un+'</span>'+(sl[3]!=null?'<span style="position:absolute;left:'+((sl[3]-sl[0])/(sl[1]-sl[0])*100)+'%;transform:translateX(-50%);color:var(--bad)">'+num(sl[3],1)+un+'</span>':'')+'<span>'+num(sl[1],1)+un+'</span></div></div><div class="av" id="av_'+k+'">'+esc(sl[4])+'</div>'}
  if(aj)h+='<div class="aj" id="aj_'+k+'">'+aj[0]+(aj[1]?'<b>Onde achar</b>'+aj[1]:'')+(aj[2]?'<b>O que faz variar</b>'+aj[2]:'')+'</div>';
  return h+'</div>'}
@@ -900,20 +904,27 @@ TELAS.imovel={html:function(id){var x=D.imv.filter(function(y){return y.id===id}
   $('#apaga').addEventListener('click',function(){if(!confirm('Apagar este imóvel?'))return;D.imv=D.imv.filter(function(y){return y.id!==id});salva();vai('imoveis');toast('Imóvel apagado')});f()}};
 
 /* Dados */
-TELAS.dados={html:function(){return topo('Cópia de segurança','ferramentas')+
- '<div class="nota cz"><b>Onde ficam seus dados</b>Neste aparelho, neste navegador. Para trocar de celular, salve a cópia e abra no novo.</div>'+
+TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de segurança','ferramentas')+
+ '<div class="nota cz"><b>Onde ficam seus dados</b>Neste aparelho, neste navegador. Para trocar de celular, salve a cópia e abra no novo, ou ligue a cópia na nuvem.</div>'+
+ '<div class="h2">Cópia na nuvem</div><div class="nv'+(on?' on':'')+'"><span class="pt"></span><div><b>'+(on?'Ligada':'Desligada')+'</b><small id="nvst">'+(on?nuvem.quando():'Só neste aparelho')+'</small></div></div>'+
+ (on?'<button class="bt cl" id="nvs" style="margin-bottom:10px">'+ic('envia')+'Salvar agora</button><button class="bt cl" id="nvr" style="margin-bottom:10px">'+ic('nuvem')+'Recuperar da nuvem</button><button class="bt cl" id="nvd" style="color:var(--bad);margin-bottom:24px">Desligar e apagar da nuvem</button>'
+  :'<button class="bt" id="nvl" style="margin-bottom:24px">'+ic('nuvem')+'Ligar cópia na nuvem</button>')+
+ '<div class="h2">Cópia em arquivo</div>'+
  '<button class="bt" id="exp" style="margin-bottom:10px">'+ic('envia')+'Salvar cópia</button><label class="bt cl" style="margin-bottom:24px">'+ic('nuvem')+'Recuperar cópia<input type="file" id="imp" accept="application/json,.json" style="display:none"></label>'+
  '<button class="bt cl" id="limpa" style="color:var(--bad);margin-bottom:10px">'+ic('lixo')+'Apagar tudo e começar de novo</button><button class="bt cl" id="sair">Sair</button>'+lic()},
  liga:function(){$('#exp').addEventListener('click',function(){var t=JSON.stringify(D),n='mapa-da-chave-'+hoje()+'.json';var f=null;try{f=new File([t],n,{type:'application/json'})}catch(e){}
    if(f&&navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:'Mapa da Chave'}).catch(function(){})}else{var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'application/json'}));a.download=n;a.click()}});
   $('#imp').addEventListener('change',function(e){var fl=e.target.files[0];if(!fl)return;var rd=new FileReader();rd.onload=function(){try{var o=JSON.parse(rd.result);if(!o||!o.v)throw 0;localStorage.setItem('mc_app',JSON.stringify(o));carrega();toast('Cópia recuperada');vai('inicio')}catch(x){toast('Arquivo inválido')}};rd.readAsText(fl)});
   $('#sair').addEventListener('click',function(){if(confirm('Sair deste aparelho?'))sair()});
+  var nb=function(id,f){var b=$('#'+id);if(b)b.addEventListener('click',f)};
+  nb('nvl',nuvem.aviso);nb('nvs',function(){nuvem.salvar(true)});nb('nvr',function(){nuvem.recuperar(true)});
+  nb('nvd',function(){if(confirm('Desligar a cópia na nuvem e apagar a cópia guardada? Os dados deste aparelho continuam.'))nuvem.desligar()});
   $('#limpa').addEventListener('click',function(){if(!confirm('Apagar todos os seus dados deste aparelho?'))return;localStorage.removeItem('mc_app');carrega();toast('Tudo zerado');vai('inicio')})}};
 
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.3',S=null,fbOk=false;
+var VER='1.4',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
@@ -939,7 +950,7 @@ function linkEmail(){var em=($('#pe').value||'').trim().toLowerCase();if(!/^[^@\
  carregaFB(function(){firebase.auth().sendSignInLinkToEmail(em,{url:location.origin+location.pathname+'?e='+encodeURIComponent(em),handleCodeInApp:true}).then(function(){ocupado(false);
   $('#fp').innerHTML=LOGO+'<h1>Mapa da Chave</h1><div class="ok">Link enviado para <span class="mail">'+esc(em)+'</span></div><button type="button" class="bt cl" id="bv">Usar outro e-mail</button>';$('#bv').addEventListener('click',porta)}).catch(function(){ocupado(false);portaMsg('erro','Não foi possível enviar. Tente de novo.')})})}
 function valida(user){return user.getIdToken().then(function(t){return fetch(API+'?app=entrar&t='+encodeURIComponent(t)).then(function(r){return r.json()})}).then(function(o){
-  if(o&&o.ok){gravaS({e:o.email,s:o.s,n:o.nome||'',ts:Date.now()});try{firebase.auth().signOut()}catch(e){}marcaUrl();render();uso.abre();return}
+  if(o&&o.ok){gravaS({e:o.email,s:o.s,n:o.nome||'',ts:Date.now()});marcaUrl();render();uso.abre();nuvem.depoisLogin();return}
   ocupado(false);try{firebase.auth().signOut()}catch(e){}
   if(o&&o.motivo==='compra'){porta();portaMsg('erro','Nenhuma compra com '+(o.email||'este e-mail'))}
   else if(o&&o.motivo==='bloqueado'){porta();portaMsg('erro','Acesso encerrado para '+(o.email||'este e-mail'))}
@@ -958,12 +969,52 @@ var uso=(function(){var ult=0;function hojeK(){return hoje()}
  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')envia(true)});
  return {abre:function(){base().ab++;salva();setTimeout(function(){envia(true)},1500)},tela:function(r){var t=r.split('/')[0];if(!t||t==='inicio')return;var u=base();u.f[t]=(u.f[t]||0)+1;salva();envia(false)}}})();
 window.addEventListener('hashchange',function(){if(S)uso.tela((location.hash||'').slice(1))});
+/* ---------- cópia na nuvem ---------- */
+var nuvem=(function(){var fs=null,t=null,suja=false,ocup=false;
+ function fsOk(cb,erro){carregaFB(function(){if(fs)return cb();var sc=document.createElement('script');sc.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js';
+  sc.onload=function(){try{fs=firebase.firestore()}catch(e){}fs?cb():erro&&erro()};sc.onerror=function(){erro&&erro()};document.head.appendChild(sc)})}
+ function usuario(cb){fsOk(function(){var au=firebase.auth(),off=au.onAuthStateChanged(function(u){off();if(u&&S&&u.email&&u.email.toLowerCase()!==S.e){au.signOut();u=null}cb(u)})},function(){cb(null,'rede')})}
+ function doc(u){return fs.collection('copias').doc(u.uid)}
+ function quando(){var n=D.ui.nts;if(!n)return 'Ainda sem cópia';var d=new Date(n);return 'Última cópia '+String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+' às '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+ function st(){var el=$('#nvst');if(el)el.textContent=quando()}
+ function grava(u,avisa){D.ui.nts=Date.now();return doc(u).set({d:JSON.stringify(D),ts:firebase.firestore.FieldValue.serverTimestamp(),v:VER}).then(function(){suja=false;try{localStorage.setItem('mc_app',JSON.stringify(D))}catch(e){}st();if(avisa)toast('Cópia salva na nuvem')})}
+ function entrar(depois){var em=S.e;
+  folha('Confirme o acesso','<div class="av-nv"><p>Para ligar a cópia, confirme que a conta é sua.</p></div><button class="bt gg" id="nvg" style="margin-bottom:10px">'+GLOGO+'Continuar com Google</button><button class="bt cl" id="nve">Receber link em '+esc(em)+'</button><div class="erro" id="nverr" style="margin-top:10px"></div>',function(r){
+   $('#nvg',r).addEventListener('click',function(){var pv=new firebase.auth.GoogleAuthProvider();pv.setCustomParameters({prompt:'select_account',login_hint:em});
+    firebase.auth().signInWithPopup(pv).then(function(x){if((x.user.email||'').toLowerCase()!==em){firebase.auth().signOut();$('#nverr').textContent='Use a conta '+em;return}fecha();depois(x.user)}).catch(function(e){if(e&&e.code==='auth/popup-closed-by-user')return;$('#nverr').textContent='Não abriu. Use o link por e-mail.'})});
+   $('#nve',r).addEventListener('click',function(){try{localStorage.setItem('mc_em',em);localStorage.setItem('mc_nv','1')}catch(e){}
+    firebase.auth().sendSignInLinkToEmail(em,{url:location.origin+location.pathname+'?e='+encodeURIComponent(em),handleCodeInApp:true}).then(function(){$('#fc').innerHTML='<h3>Link enviado</h3><div class="av-nv"><p>Abra o link enviado para '+esc(em)+' neste aparelho. A cópia liga em seguida.</p></div><button class="bt cl" id="nvok">Ok</button>';$('#nvok').addEventListener('click',fecha)}).catch(function(){$('#nverr').textContent='Não foi possível enviar. Tente de novo.'})})})}
+ function comUsuario(f){if(ocup)return;ocup=true;usuario(function(u,e){ocup=false;if(e){toast('Sem conexão');return}if(u)f(u);else entrar(f)})}
+ function ligar(){comUsuario(function(u){D.ui.nuvem=1;grava(u,true).then(function(){if(R.rota==='dados')vai('dados')}).catch(function(){D.ui.nuvem=0;toast('Não foi possível salvar')})})}
+ function aviso(){folha('Cópia na nuvem','<div class="av-nv"><p>Os dados do app ficam guardados neste celular. Com a cópia ligada, uma cópia também fica no Firebase, serviço do Google que o app usa, ligada ao seu login.</p><ul>'+
+  '<li>Serve para recuperar tudo ao trocar de celular, limpar o navegador ou perder o aparelho.</li>'+
+  '<li>O Mapa da Chave não lê, não analisa e não usa esses dados. Este aviso existe só porque a cópia sai do aparelho.</li>'+
+  '<li>A cópia é atualizada sozinha enquanto estiver ligada.</li>'+
+  '<li>Dá para desligar e apagar a cópia da nuvem a qualquer momento, nesta tela.</li></ul></div>'+
+  '<button class="bt" id="nvsim" style="margin-bottom:10px">Ligar cópia na nuvem</button><button class="bt cl" id="nvnao">Agora não</button>',function(r){
+   $('#nvsim',r).addEventListener('click',function(){fecha();ligar()});$('#nvnao',r).addEventListener('click',fecha)})}
+ function salvar(avisa){comUsuario(function(u){grava(u,avisa).catch(function(){if(avisa)toast('Não foi possível salvar')})})}
+ function aplica(o){var x=JSON.parse(o.d);x.ui=x.ui||{};x.ui.nuvem=1;x.ui.nts=Date.now();localStorage.setItem('mc_app',JSON.stringify(x));carrega();toast('Cópia recuperada');vai('inicio')}
+ function dataDoc(o){var d=o.ts&&o.ts.toDate?o.ts.toDate():null;return d?String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+' às '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'):''}
+ function recuperar(){comUsuario(function(u){doc(u).get().then(function(g){if(!g.exists){toast('Nenhuma cópia na nuvem');return}var o=g.data();
+  if(confirm('Trocar os dados deste aparelho pela cópia da nuvem'+(dataDoc(o)?' de '+dataDoc(o):'')+'?'))aplica(o)}).catch(function(){toast('Sem conexão')})})}
+ function desligar(){comUsuario(function(u){doc(u).delete().then(function(){D.ui.nuvem=0;delete D.ui.nts;try{localStorage.setItem('mc_app',JSON.stringify(D))}catch(e){}toast('Cópia da nuvem apagada');vai('dados')}).catch(function(){toast('Sem conexão')})})}
+ function vazio(){return !D.ui.nts&&!Object.keys(D.ck).length&&!D.dep.length&&!D.imv.length}
+ function depoisLogin(){try{if(localStorage.getItem('mc_nv')){localStorage.removeItem('mc_nv');ligar();return}}catch(e){}
+  if(!vazio())return;usuario(function(u){if(!u)return;doc(u).get().then(function(g){if(!g.exists)return;var o=g.data();
+   folha('Cópia encontrada','<div class="av-nv"><p>Existe uma cópia sua na nuvem'+(dataDoc(o)?' de '+dataDoc(o):'')+'.</p></div><button class="bt" id="nvrs" style="margin-bottom:10px">Recuperar meus dados</button><button class="bt cl" id="nvrn">Começar do zero</button>',function(r){
+    $('#nvrs',r).addEventListener('click',function(){fecha();aplica(o)});$('#nvrn',r).addEventListener('click',fecha)})}).catch(function(){})})}
+ function link(){carregaFB(function(){var au=firebase.auth();if(!au.isSignInWithEmailLink(location.href))return;var em=S.e;
+  au.signInWithEmailLink(em,location.href).then(function(){history.replaceState(null,'',location.pathname+location.hash);marcaUrl();var p=false;try{p=!!localStorage.getItem('mc_nv');localStorage.removeItem('mc_nv')}catch(e){}if(p)ligar()}).catch(function(){history.replaceState(null,'',location.pathname+location.hash);toast('Link vencido. Peça outro.')})})}
+ var sv=salva;salva=function(){sv();if(!D.ui.nuvem)return;suja=true;clearTimeout(t);t=setTimeout(function(){if(suja)usuario(function(u){if(u)grava(u,false).catch(function(){})})},20000)};
+ document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'&&suja&&D.ui.nuvem&&fs){var u=firebase.auth().currentUser;if(u)grava(u,false).catch(function(){})}});
+ return {aviso:aviso,salvar:salvar,recuperar:recuperar,desligar:desligar,quando:quando,depoisLogin:depoisLogin,link:link}})();
 /* ---------- partida ---------- */
 (function(){var q=new URLSearchParams(location.search),a=q.get('a');
  if(location.hostname==='localhost'&&q.get('dev')){gravaS({e:'teste@mapadachave.com.br',s:'x',n:'Fulana de Tal',ts:Date.now()})}
  if(a&&!lerS()){var p=a.split('.'),em=de64(p[0]);if(em&&p[1])gravaS({e:em,s:p[1],n:'',ts:0})}
  S=lerS();
- if(S){render();marcaUrl();uso.abre();revalida();return}
+ if(S){var lk=/[?&](oobCode|mode=signIn)/.test(location.search);render();if(lk)nuvem.link();else marcaUrl();uso.abre();revalida();return}
  if(/[?&](oobCode|mode=signIn)/.test(location.search)){carregaFB(function(){var au=firebase.auth();if(!au.isSignInWithEmailLink(location.href)){porta();return}
    var em=q.get('e');try{em=em||localStorage.getItem('mc_em')}catch(e){}if(!em)em=(prompt('Confirme o e-mail da compra')||'').trim().toLowerCase();
    $('#app').innerHTML='<div class="porta"><form>'+LOGO+'<h1>Mapa da Chave</h1><div class="ok">Entrando…</div></form></div>';
