@@ -176,7 +176,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div>
     <div class="tag">Edição 2027 · celular e computador</div>
     <h1 id="h1">Da casa dos pais à chave do seu <em>primeiro imóvel</em>.</h1>
-    <p class="lead" id="lead">Para quem nunca comprou e não tem quem explique em casa. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão.</p>
+    <p class="lead" id="lead">Para quem nunca comprou, não tem quem explique em casa ou gosta de ter cada passo anotado. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão.</p>
     <div class="preco-linha">
       <a class="btn comprar" href="#oferta">Quero o Mapa da Chave <span class="seta">→</span></a>
       <div class="preco">Acesso imediato<b>R$ 47</b></div>
@@ -255,6 +255,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="lista sim"><h3>Para quem é</h3><ul>
     <li>Mora com os pais e quer o próprio espaço</li>
     <li>Nunca comprou imóvel e não tem quem oriente em casa</li>
+    <li>Gosta de se organizar e ter cada passo anotado</li>
     <li>Mora de aluguel e quer parar de pagar para morar</li>
     <li>Quer saber quanto pode gastar antes de procurar</li>
     <li>Ainda está juntando a entrada e quer um prazo real</li>
@@ -323,7 +324,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <script>
 const V = {
   aluguel: ["Do aluguel à chave do seu <em>primeiro imóvel</em>.", "Quanto o aluguel já levou e quanto daria de entrada. As 10 etapas da compra e 14 ferramentas no celular e no computador, com aluguel × compra, meta da entrada e o que conferir antes do Pix."],
-  pais: ["Da casa dos pais à chave do seu <em>primeiro imóvel</em>.", "Para quem nunca comprou e não tem quem explique em casa. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão."]
+  pais: ["Da casa dos pais à chave do seu <em>primeiro imóvel</em>.", "Para quem nunca comprou, não tem quem explique em casa ou gosta de ter cada passo anotado. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão."]
 };
 const p = new URLSearchParams(location.search).get("publico");
 if (V[p]) { document.getElementById("h1").innerHTML = V[p][0]; document.getElementById("lead").textContent = V[p][1]; }
