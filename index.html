@@ -157,7 +157,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   header .btn{display:none}
 }
 #calc{padding-top:40px}.qcalc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}.cin{display:flex;flex-direction:column;gap:14px}.cin label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}.cin label span{display:flex;align-items:center;gap:8px;border:1.5px solid var(--ink);border-radius:10px;padding:0 14px;background:#fff}.cin i{font-style:normal;color:var(--ink2);font-weight:600}.cin input{border:0;outline:0;font:inherit;font-size:20px;font-weight:700;padding:14px 0;width:100%;background:transparent;color:var(--ink)}.cout{background:var(--ink);color:#fff;border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}.cl small{display:block;font-size:13px;color:#C9C7BE}.cl b{font-size:34px;color:var(--amber);letter-spacing:-1px}.cg{display:flex;justify-content:space-between;gap:10px;font-size:14.5px;border-top:1px solid #4a4a47;padding-top:9px}.cg span{color:#C9C7BE}.cnota{font-size:12.5px;color:var(--ink2);margin-top:12px;max-width:720px}@media(max-width:760px){.qcalc{grid-template-columns:1fr}}
-.foto img{display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 24px 60px rgba(44,44,42,.18)}.hero .foto{max-width:440px;justify-self:center}.pq{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center}@media(max-width:860px){.pq{grid-template-columns:1fr}.hero .foto{max-width:360px}.pq .foto{max-width:360px;margin:0 auto}}
+.foto img{display:block;width:100%;height:auto}.hero .wrap{align-items:end}.hero .foto{max-width:520px;justify-self:center;align-self:end;margin-bottom:-56px}.pq{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:end}.pq .foto{align-self:end;margin-bottom:-56px}@media(max-width:860px){.pq{grid-template-columns:1fr}.hero .foto{max-width:380px;margin:0 auto -40px}.pq .foto{max-width:380px;margin:0 auto}}
+.pubs{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 24px}.pubs span{border:1.5px solid var(--ink);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600;background:#fff}.foto img{-webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent)}
 </style>
 <!-- Meta Pixel -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1373264678051720');fbq('track','PageView');fbq('track','ViewContent',{content_name:'Mapa da Chave 2027',value:47,currency:'BRL'});</script>
@@ -175,8 +176,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <section class="hero" style="padding-top:56px"><div class="wrap">
   <div>
     <div class="tag">Edição 2027 · celular e computador</div>
-    <h1 id="h1">Da casa dos pais à chave do seu <em>primeiro imóvel</em>.</h1>
-    <p class="lead" id="lead">Para quem nunca comprou, não tem quem explique em casa ou gosta de ter cada passo anotado. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão.</p>
+    <h1 id="h1">Seu <em>primeiro imóvel</em>, do primeiro real guardado à chave na mão.</h1>
+    <p class="lead" id="lead">Tudo o que a compra pede, num lugar só e na ordem certa: quanto juntar, até que valor dá para comprar e o que conferir antes do Pix. As 10 etapas e 14 ferramentas, no celular e no computador.</p>
+    <div class="pubs" id="pubs"><span>Saindo da casa dos pais</span><span>Saindo do aluguel</span><span>Comprando a dois</span><span>Quem gosta de tudo anotado</span></div>
     <div class="preco-linha">
       <a class="btn comprar" href="#oferta">Quero o Mapa da Chave <span class="seta">→</span></a>
       <div class="preco">Acesso imediato<b>R$ 47</b></div>
@@ -254,13 +256,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="dois" style="grid-template-columns:1fr">
   <div class="lista sim"><h3>Para quem é</h3><ul>
     <li>Mora com os pais e quer o próprio espaço</li>
-    <li>Nunca comprou imóvel e não tem quem oriente em casa</li>
-    <li>Gosta de se organizar e ter cada passo anotado</li>
     <li>Mora de aluguel e quer parar de pagar para morar</li>
-    <li>Quer saber quanto pode gastar antes de procurar</li>
-    <li>Ainda está juntando a entrada e quer um prazo real</li>
+    <li>Vai comprar a dois e quer tudo combinado</li>
+    <li>Gosta de se organizar e ter cada passo anotado</li>
+    <li>Nunca comprou imóvel e não tem quem oriente em casa</li>
     <li>Vai financiar, usar FGTS ou entrar no Minha Casa Minha Vida</li>
-    <li>Quer conferir sozinho o que o corretor e o banco apresentam</li>
   </ul></div>
   <div class="lista nao"><h3>Para quem não é</h3><ul>
     <li>Quem busca investimento em leilão ou renda de aluguel</li>
@@ -323,8 +323,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 <script>
 const V = {
-  aluguel: ["Do aluguel à chave do seu <em>primeiro imóvel</em>.", "Quanto o aluguel já levou e quanto daria de entrada. As 10 etapas da compra e 14 ferramentas no celular e no computador, com aluguel × compra, meta da entrada e o que conferir antes do Pix."],
-  pais: ["Da casa dos pais à chave do seu <em>primeiro imóvel</em>.", "Para quem nunca comprou, não tem quem explique em casa ou gosta de ter cada passo anotado. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador, do primeiro real guardado até a chave na mão."]
+  pais: ["Da casa dos pais à chave do seu <em>primeiro imóvel</em>.", "Para quem nunca comprou e não tem quem explique em casa. Quanto juntar, até que valor dá para comprar e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador."],
+  aluguel: ["Do aluguel à chave do seu <em>primeiro imóvel</em>.", "Quanto o aluguel já levou e quanto daria de entrada. Aluguel × compra, meta da entrada e o que conferir antes do Pix: as 10 etapas e 14 ferramentas, no celular e no computador."],
+  casal: ["Comprar o <em>primeiro imóvel</em> a dois, com tudo combinado.", "Quanto cada um entra na entrada e na parcela, até que valor dá para comprar e o que fica no papel. As 10 etapas e 14 ferramentas, no celular e no computador."],
+  organizar: ["A compra do <em>primeiro imóvel</em>, organizada do início ao fim.", "Cada etapa com checklist, documentos, visitas, gastos e prazos anotados num lugar só. As 10 etapas e 14 ferramentas, no celular e no computador."]
 };
 const p = new URLSearchParams(location.search).get("publico");
 if (V[p]) { document.getElementById("h1").innerHTML = V[p][0]; document.getElementById("lead").textContent = V[p][1]; }
