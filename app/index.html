@@ -895,11 +895,16 @@ TELAS.planta={html:function(){return topo('Imóvel na planta','ferramentas')+'<d
   liga(r,f);f();c()}};
 
 /* Comprar a dois */
-TELAS.dois={html:function(){return topo('Comprar a dois','ferramentas')+'<div class="h2" style="margin-top:6px">Quanto é de cada um</div>'+campos([['aRenda','Renda de quem 1','r'],['bRenda','Renda de quem 2','r'],['aEnt','Entrada de quem 1','r'],['bEnt','Entrada de quem 2','r']])+'<div id="res"></div><div class="h2">Combinados</div><div id="cl"></div>'},
+function nDois(i){var n=((D.ui.nomes||[])[i]||'').trim();return n||('Pessoa '+(i+1))}
+function cNome(i){var v=(D.ui.nomes||[])[i]||'';return '<div class="cmp"><div class="cp"><label for="n_'+i+'"><span>Nome '+(i+1)+'</span></label><div class="in"><input id="n_'+i+'" data-nome="'+i+'" type="text" autocomplete="off" maxlength="18" placeholder="Pessoa '+(i+1)+'" value="'+esc(v)+'"></div></div></div>'}
+TELAS.dois={html:function(){return topo('Comprar a dois','ferramentas')+'<div class="h2" style="margin-top:6px">Quem vai comprar</div><div class="campos">'+cNome(0)+cNome(1)+'</div><div class="h2">Quanto é de cada um</div>'+campos([['aRenda','Renda de '+esc(nDois(0)),'r'],['bRenda','Renda de '+esc(nDois(1)),'r'],['aEnt','Entrada de '+esc(nDois(0)),'r'],['bEnt','Entrada de '+esc(nDois(1)),'r']])+'<div id="res"></div><div class="h2">Combinados</div><div id="cl"></div>'},
  liga:function(r){var f=function(){var ra=V('aRenda'),rb=V('bRenda'),ea=V('aEnt'),eb=V('bEnt'),tr=ra+rb||1,te=ea+eb||1,pa=tr?ra/tr:0,ea_=te?ea/te:0;
-  $('#res').innerHTML='<div class="card"><div class="rot" style="margin-bottom:8px">'+ri('Renda (parcela e seguro)')+'</div><div class="pilha"><i style="width:'+(pa*100)+'%;background:#EF9F27" data-t="Quem 1 · <b>'+pct(pa)+'</b>"></i><i style="width:'+((1-pa)*100)+'%;background:#5E8BA8" data-t="Quem 2 · <b>'+pct(1-pa)+'</b>"></i></div><div style="display:flex;justify-content:space-between;font-weight:700;font-variant-numeric:tabular-nums"><span style="color:#BA7517">'+pct(pa)+'</span><span style="color:#5E8BA8">'+pct(1-pa)+'</span></div>'+
-  '<div class="rot" style="margin:16px 0 8px">'+ri('Entrada (divisão)')+'</div><div class="pilha"><i style="width:'+(ea_*100)+'%;background:#EF9F27" data-t="Quem 1 · <b>'+brl(ea)+'</b>"></i><i style="width:'+((1-ea_)*100)+'%;background:#5E8BA8" data-t="Quem 2 · <b>'+brl(eb)+'</b>"></i></div><div style="display:flex;justify-content:space-between;font-weight:700;font-variant-numeric:tabular-nums"><span style="color:#BA7517">'+pct(ea_)+'</span><span style="color:#5E8BA8">'+pct(1-ea_)+'</span></div></div>'};
-  var c=function(){$('#cl').innerHTML=ckLista('dois',DOIS);ligaCk($('#cl'),c)};liga(r,f);f();c()}};
+  $('#res').innerHTML='<div class="card"><div class="rot" style="margin-bottom:8px">'+ri('Renda (parcela e seguro)')+'</div><div class="pilha"><i style="width:'+(pa*100)+'%;background:#EF9F27" data-t="'+esc(nDois(0))+' · <b>'+pct(pa)+'</b>"></i><i style="width:'+((1-pa)*100)+'%;background:#5E8BA8" data-t="'+esc(nDois(1))+' · <b>'+pct(1-pa)+'</b>"></i></div><div style="display:flex;justify-content:space-between;font-weight:700;font-variant-numeric:tabular-nums"><span style="color:#BA7517">'+esc(nDois(0))+' · '+pct(pa)+'</span><span style="color:#5E8BA8">'+esc(nDois(1))+' · '+pct(1-pa)+'</span></div>'+
+  '<div class="rot" style="margin:16px 0 8px">'+ri('Entrada (divisão)')+'</div><div class="pilha"><i style="width:'+(ea_*100)+'%;background:#EF9F27" data-t="'+esc(nDois(0))+' · <b>'+brl(ea)+'</b>"></i><i style="width:'+((1-ea_)*100)+'%;background:#5E8BA8" data-t="'+esc(nDois(1))+' · <b>'+brl(eb)+'</b>"></i></div><div style="display:flex;justify-content:space-between;font-weight:700;font-variant-numeric:tabular-nums"><span style="color:#BA7517">'+esc(nDois(0))+' · '+pct(ea_)+'</span><span style="color:#5E8BA8">'+esc(nDois(1))+' · '+pct(1-ea_)+'</span></div></div>'};
+  var c=function(){$('#cl').innerHTML=ckLista('dois',DOIS);ligaCk($('#cl'),c)};
+  var rot=function(){[['aRenda','Renda de ',0],['bRenda','Renda de ',1],['aEnt','Entrada de ',0],['bEnt','Entrada de ',1]].forEach(function(x){var l=r.querySelector('label[for="f_'+x[0]+'"] span');if(l)l.textContent=x[1]+nDois(x[2])})};
+  $$('input[data-nome]',r).forEach(function(inp){inp.addEventListener('input',function(){D.ui.nomes=D.ui.nomes||['',''];D.ui.nomes[+inp.dataset.nome]=inp.value;salva();rot();f()});inp.addEventListener('keydown',function(e){if(e.key==='Enter')inp.blur()})});
+  liga(r,f);f();c()}};
 
 /* Conversa com os pais */
 function textoPais(){var m=cMeta(),s=cSoz(),t=cTeto();
@@ -995,7 +1000,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.19',S=null,fbOk=false;
+var VER='1.20',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
