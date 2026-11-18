@@ -331,6 +331,7 @@ const V = {
 };
 const p = new URLSearchParams(location.search).get("publico");
 if (V[p]) { document.getElementById("h1").innerHTML = V[p][0]; document.getElementById("lead").textContent = V[p][1]; }
+if (p === "casal") { const a = document.querySelector(".hero .foto img"), b = document.querySelector('img[src="a/casal.webp"]'); if (a && b) { const s = a.getAttribute("src"), w = a.width, h = a.height; a.src = "a/casal.webp"; a.width = 701; a.height = 916; a.alt = b.alt; b.src = s; b.width = w; b.height = h; } }
 const CHECKOUT_URL = "https://pay.cakto.com.br/3acg5f5_1323827";
 const q = new URLSearchParams(location.search), fwd = new URLSearchParams();
 ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid","gclid"].forEach(k => { if (q.get(k)) fwd.set(k, q.get(k)); });

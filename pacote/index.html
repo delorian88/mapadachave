@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa da Chave · Pacote completo por R$ 35</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#2C2C2A">
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<meta property="og:title" content="Mapa da Chave · Pacote completo por R$ 35">
+<meta property="og:image" content="https://mapadachave.com.br/a/rmk/og_pacote.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://pay.cakto.com.br">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2C2C2A;--ink2:#5F5E5A;--line:#D3D1C7;--paper:#FFFFFF;--sand:#F7F5EF;--amber:#EF9F27;--amber-d:#BA7517;--amber-l:#FAEEDA}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.5px}
+.logo span{color:var(--amber-d)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;padding:16px 26px;border-radius:10px;font-size:17px;transition:transform .15s,background .15s}
+.btn:hover{background:#000;transform:translateY(-1px)}
+.btn.sm{padding:10px 16px;font-size:14px}
+.btn .seta{color:var(--amber)}
+.hero{padding:64px 0 56px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.tag{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--amber-d);margin-bottom:16px}
+h1{font-size:46px;line-height:1.06;letter-spacing:-1.6px;font-weight:800;margin-bottom:18px}
+h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--amber-l) 62%)}
+.lead{font-size:19px;color:var(--ink2);margin-bottom:28px;max-width:520px}
+.preco-linha{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.preco{font-size:15px;color:var(--ink2)}
+.preco b{display:block;font-size:28px;color:var(--ink);letter-spacing:-.5px}
+.selos{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:var(--ink2)}
+.selos span::before{content:"✓ ";color:var(--amber-d);font-weight:700}
+/* mockup do kit */
+.kit{position:relative;height:420px}
+.folha{overflow:hidden;position:absolute;background:#fff;border:1.5px solid var(--ink);border-radius:8px;padding:18px 18px 0;box-shadow:6px 6px 0 var(--amber-l)}
+.folha.a{width:250px;height:340px;left:0;top:40px;transform:rotate(-4deg)}
+.folha.b{width:260px;height:350px;right:0;top:0;transform:rotate(3deg)}
+.folha .mini{font-size:10px;font-weight:700;letter-spacing:-.2px}
+.folha .mini span{color:var(--amber-d)}
+.folha h4{font-size:15px;margin:14px 0 10px;line-height:1.2}
+.folha .ck{display:flex;gap:8px;align-items:flex-start;font-size:11px;padding:5px 0;border-bottom:1px solid var(--line)}
+.folha .ck i{flex:0 0 11px;height:11px;border:1.4px solid var(--ink);border-radius:2px;margin-top:2px}
+.folha .ck i.ok{background:var(--ink);position:relative}
+.folha .ck i.ok::after{content:"";position:absolute;left:3px;top:0;width:3px;height:6px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(45deg)}
+.folha .rota{border-left:1.5px dashed var(--ink);margin:6px 0 0 5px;padding-left:14px}
+.folha .rota div{position:relative;font-size:11px;padding:3px 0}
+.folha .rota div::before{content:"";position:absolute;left:-19.5px;top:7px;width:8px;height:8px;border:1.4px solid var(--ink);border-radius:50%;background:#fff}
+.folha .rota div.at::before{background:var(--amber)}
+.calc{position:absolute;left:70px;bottom:0;width:250px;background:var(--ink);color:#fff;border-radius:10px;padding:16px 18px;transform:rotate(-1deg)}
+.calc small{display:block;font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:#B4B2A9}
+.calc b{display:block;font-size:26px;letter-spacing:-.5px;margin:2px 0 8px}
+.calc .l{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-top:1px solid #444441}
+/* celular */
+.cel{position:relative;background:#1B1B1B;border-radius:34px;padding:9px;box-shadow:0 24px 60px rgba(44,44,42,.22)}
+.cel img{display:block;width:100%;height:auto;border-radius:26px}
+.cels{position:relative;height:520px}
+.cels .cel{position:absolute;width:240px}
+.cels .c1{left:10px;top:40px;transform:rotate(-4deg)}
+.cels .c2{right:10px;top:0;transform:rotate(3deg);z-index:2}
+.ferr{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.fr{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.fr .cel{border-radius:24px;padding:6px;box-shadow:none}
+.fr .cel img{border-radius:19px}
+.fr small{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--amber-d)}
+.fr b{font-size:16px;line-height:1.3}
+.fr p{font-size:14px;color:var(--ink2);line-height:1.45}
+/* secoes */
+section{padding:72px 0}
+.sand{background:var(--sand)}
+h2{font-size:34px;line-height:1.12;letter-spacing:-1px;font-weight:800;margin-bottom:14px;max-width:720px}
+.sub{color:var(--ink2);font-size:18px;max-width:640px;margin-bottom:36px}
+.dores{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.dor{border:1.5px solid var(--ink);border-radius:12px;padding:22px;background:#fff}
+.dor b{display:block;font-size:17px;margin-bottom:6px;line-height:1.3}
+.dor p{font-size:15px;color:var(--ink2)}
+.itens{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}
+.item .n{font-size:13px;font-weight:700;color:var(--amber-d);letter-spacing:.6px}
+.item h3{font-size:20px;letter-spacing:-.3px;margin:6px 0 10px;line-height:1.25}
+.item ul{list-style:none}
+.item li{font-size:15px;color:var(--ink2);padding:6px 0;border-top:1px solid var(--line)}
+.etapas{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;border-left:2px dashed var(--ink);padding-left:28px;margin-left:8px}
+.et{position:relative;padding:12px 0;border-bottom:1px solid var(--line)}
+.et::before{content:"";position:absolute;left:-37px;top:19px;width:14px;height:14px;border:2px solid var(--ink);border-radius:50%;background:#fff}
+.etapas .et:nth-child(odd)::before{display:block}
+.etapas .et:nth-child(even)::before{display:none}
+.et b{font-size:13px;color:var(--amber-d);margin-right:8px}
+.et span{font-weight:600}
+.et p{font-size:14px;color:var(--ink2)}
+.dois{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.lista{border:1.5px solid var(--ink);border-radius:12px;padding:24px;background:#fff}
+.lista h3{font-size:18px;margin-bottom:10px}
+.lista li{list-style:none;padding:7px 0 7px 26px;position:relative;font-size:15px;border-top:1px solid var(--line)}
+.lista.sim li::before{content:"✓";position:absolute;left:2px;color:var(--amber-d);font-weight:800}
+.lista.nao li::before{content:"✕";position:absolute;left:2px;color:var(--ink2);font-weight:700}
+.oferta{border:2px solid var(--ink);border-radius:18px;padding:40px;display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center;background:#fff;box-shadow:10px 10px 0 var(--amber-l)}
+.oferta ul{list-style:none}
+.oferta li{padding:9px 0;border-top:1px solid var(--line);font-size:16px;display:flex;justify-content:space-between;gap:12px}
+.oferta li em{font-style:normal;color:var(--ink2);font-size:14px;white-space:nowrap}
+.valor{text-align:center}
+.valor .de{color:var(--ink2);font-size:15px}
+.valor .por{font-size:56px;font-weight:800;letter-spacing:-2px;line-height:1}
+.valor .por small{font-size:24px;letter-spacing:-.5px}
+.valor .parc{color:var(--ink2);font-size:15px;margin:6px 0 20px}
+.valor .btn{width:100%;justify-content:center}
+.garantia{display:flex;gap:16px;align-items:center;margin-top:26px;font-size:15px;color:var(--ink2)}
+.garantia b{color:var(--ink)}
+.garantia .g{flex:0 0 58px;height:58px;border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:var(--ink)}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";font-size:22px;line-height:1;color:var(--amber-d)}
+details[open] summary::after{content:"–"}
+details p{color:var(--ink2);margin-top:10px;font-size:16px;max-width:760px}
+footer{border-top:1px solid var(--line);padding:36px 0 90px;font-size:13px;color:var(--ink2)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.barra{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px;display:none;justify-content:space-between;align-items:center;z-index:9}
+.barra b{font-size:20px}
+@media (max-width:860px){
+  body{font-size:16px}
+  .hero{padding:36px 0 40px}
+  .hero .wrap,.oferta,.dois{grid-template-columns:1fr}
+  h1{font-size:34px;letter-spacing:-1px}
+  h2{font-size:27px}
+  .kit{height:360px;max-width:360px;margin:0 auto;width:100%}
+  .folha.a{width:200px;height:290px}
+  .folha.b{width:210px;height:300px}
+  .calc{left:40px;width:220px}
+  .dores,.itens{grid-template-columns:1fr}
+  .cels{height:440px;max-width:380px;margin:0 auto;width:100%}
+  .cels .cel{width:200px}
+  .ferr{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -22px;padding:0 22px 8px}
+  .fr{flex:0 0 72%;scroll-snap-align:start}
+  .etapas{grid-template-columns:1fr}
+  .etapas .et:nth-child(even)::before{display:block}
+  section{padding:52px 0}
+  .oferta{padding:26px}
+  .barra{display:flex}
+  header .btn{display:none}
+}
+#calc{padding-top:40px}.qcalc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}.cin{display:flex;flex-direction:column;gap:14px}.cin label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px}.cin label span{display:flex;align-items:center;gap:8px;border:1.5px solid var(--ink);border-radius:10px;padding:0 14px;background:#fff}.cin i{font-style:normal;color:var(--ink2);font-weight:600}.cin input{border:0;outline:0;font:inherit;font-size:20px;font-weight:700;padding:14px 0;width:100%;background:transparent;color:var(--ink)}.cout{background:var(--ink);color:#fff;border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}.cl small{display:block;font-size:13px;color:#C9C7BE}.cl b{font-size:34px;color:var(--amber);letter-spacing:-1px}.cg{display:flex;justify-content:space-between;gap:10px;font-size:14.5px;border-top:1px solid #4a4a47;padding-top:9px}.cg span{color:#C9C7BE}.cnota{font-size:12.5px;color:var(--ink2);margin-top:12px;max-width:720px}@media(max-width:760px){.qcalc{grid-template-columns:1fr}}
+.foto img{display:block;width:100%;height:auto}.hero .wrap{align-items:end}.hero .foto{max-width:520px;justify-self:center;align-self:end;margin-bottom:-56px}.pq{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:end}.pq .foto{align-self:end;margin-bottom:-56px}@media(max-width:860px){.pq{grid-template-columns:1fr}.hero .foto{max-width:380px;margin:0 auto -40px}.pq .foto{max-width:380px;margin:0 auto}}
+.pubs{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 24px}.pubs span{border:1.5px solid var(--ink);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600;background:#fff}.foto img{-webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent)}
+.fh{position:relative}.fh img,.pq .foto img{-webkit-mask-image:none;mask-image:none}.chip{position:absolute;background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:10px 14px;box-shadow:0 12px 30px rgba(44,44,42,.15);line-height:1.15}.chip small{display:block;font-size:11.5px;color:var(--ink2)}.chip b{font-size:20px;letter-spacing:-.4px}.chip.c1{right:-6%;top:30%;transform:rotate(3deg)}.chip.c1 b{color:var(--amber-d)}.chip.c2{left:2%;bottom:24%;transform:rotate(-3deg)}@media(max-width:860px){.chip b{font-size:16px}.chip.c1{right:0}}
+</style>
+<style>
+.pk-hero{padding:40px 0 28px}
+.pk-tag{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:99px;margin-bottom:14px}
+.pk-hero h1{font-size:clamp(30px,6vw,46px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px}
+.pk-hero h1 em{font-style:normal;color:var(--amber-d)}
+.pk-g{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.pk-conta{background:var(--sand);border-radius:20px;padding:22px 22px 18px;margin:18px 0}
+.pk-l{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:16px}
+.pk-l s{color:var(--ink2);white-space:nowrap;margin-left:12px}
+.pk-t{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px}
+.pk-t b{font-size:40px;letter-spacing:-.02em}
+.pk-t span{font-weight:700;color:var(--amber-d)}
+.pk-eco{display:inline-block;background:var(--ink);color:#fff;font-weight:700;font-size:14px;padding:6px 12px;border-radius:99px;margin-top:6px}
+.pk-it{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.pk-c{border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff}
+.pk-c b{display:block;font-size:17px;margin-bottom:4px}
+.pk-c p{font-size:15px;color:var(--ink2)}
+.pk-c small{display:block;margin-top:8px;font-weight:700;color:var(--amber-d);font-size:13px}
+.pk-tel{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 14px;scroll-snap-type:x mandatory}
+.pk-tel figure{flex:0 0 200px;scroll-snap-align:start}
+.pk-tel img{width:200px;border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.12);display:block}
+.pk-tel figcaption{font-size:14px;font-weight:600;margin-top:8px;text-align:center}
+@media(max-width:820px){.pk-g{grid-template-columns:1fr}.pk-g>.foto{display:none}.pk-it{grid-template-columns:1fr}}
+</style>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1373264678051720');fbq('track','PageView');fbq('track','ViewContent',{content_name:'Pacote completo',value:35,currency:'BRL'});</script>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="logo">mapa da <span>chave</span></div>
+  <a class="btn sm comprar" href="https://pay.cakto.com.br/3dwz4cv_1341009" data-checkout>R$ 35 <span class="seta">→</span></a>
+</div></header>
+
+<section class="pk-hero"><div class="wrap pk-g">
+  <div>
+    <div class="pk-tag">Pacote completo · Edição 2027</div>
+    <h1>O app, o guia e o Planner no Notion por <em>R$ 35</em>.</h1>
+    <p class="lead">Separados, o Mapa da Chave e o Planner custam R$ 64. Juntos, no pacote, saem por R$ 35, com acesso imediato no e-mail da compra.</p>
+    <div class="pk-conta">
+      <div class="pk-l"><span>App + guia em PDF + planilha</span><s>R$ 47</s></div>
+      <div class="pk-l"><span>Planner do primeiro imóvel no Notion</span><s>R$ 17</s></div>
+      <div class="pk-l"><span>Separados</span><s>R$ 64</s></div>
+      <div class="pk-t"><span>Pacote completo</span><b>R$ 35</b></div>
+      <div class="pk-eco">R$ 29 a menos · 45% de desconto</div>
+    </div>
+    <a class="btn comprar" href="https://pay.cakto.com.br/3dwz4cv_1341009" data-checkout>Quero o pacote por R$ 35 <span class="seta">→</span></a>
+    <div class="selos" style="margin-top:14px"><span>Pix ou cartão</span><span>Acesso imediato</span><span>7 dias de garantia</span></div>
+  </div>
+  <div class="foto"><img src="../a/hero.webp" alt="Jovem mostrando o app Mapa da Chave no celular" width="827" height="1104" style="width:100%;border-radius:24px"></div>
+</div></section>
+
+<section class="sand"><div class="wrap">
+  <h2>O que vem no pacote</h2>
+  <div class="pk-it">
+    <div class="pk-c"><b>App Mapa da Chave</b><p>14 ferramentas: até que valor comprar, meta da entrada, aluguel × compra, comparar bancos, custo da compra, imóvel na planta, comprar a dois e antes do Pix.</p><small>Celular e computador</small></div>
+    <div class="pk-c"><b>As 10 etapas da compra</b><p>Da primeira simulação à chave na mão, cada etapa com checklist, documentos e o que conferir antes de assinar.</p><small>No app e no guia em PDF</small></div>
+    <div class="pk-c"><b>Planner no Notion</b><p>Template pronto para duplicar: meta e depósitos, imóveis visitados, documentos, comparar bancos, imóvel na planta e checklist da mudança.</p><small>Duplica com 1 clique</small></div>
+    <div class="pk-c"><b>Guia em PDF e planilha</b><p>O passo a passo em checklist para imprimir ou consultar, e a calculadora de compra no Google Planilhas.</p><small>Material complementar</small></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Telas do app</h2>
+  <div class="pk-tel">
+    <figure><img src="../a/app/teto.webp" alt="Até que valor comprar" loading="lazy"><figcaption>Até que valor comprar</figcaption></figure>
+    <figure><img src="../a/app/meta.webp" alt="Meta da entrada" loading="lazy"><figcaption>Meta da entrada</figcaption></figure>
+    <figure><img src="../a/app/etapas.webp" alt="As 10 etapas" loading="lazy"><figcaption>As 10 etapas</figcaption></figure>
+    <figure><img src="../a/app/bancos.webp" alt="Comparar bancos" loading="lazy"><figcaption>Comparar bancos</figcaption></figure>
+    <figure><img src="../a/app/custo.webp" alt="Custo da compra" loading="lazy"><figcaption>Custo da compra</figcaption></figure>
+    <figure><img src="../a/app/golpe.webp" alt="Antes do Pix" loading="lazy"><figcaption>Antes do Pix</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="sand" id="oferta"><div class="wrap">
+  <div class="oferta">
+    <div>
+      <h2 style="font-size:28px">Pacote completo · Edição 2027</h2>
+      <ul>
+        <li>App com 14 ferramentas <em>celular e computador</em></li>
+        <li>Guia das 10 etapas em checklist <em>PDF</em></li>
+        <li>Planner do primeiro imóvel <em>Notion</em></li>
+        <li>Calculadora de compra <em>Google Planilhas</em></li>
+      </ul>
+      <div class="garantia"><div class="g">7d</div><div><b>Garantia de 7 dias.</b> Reembolso integral pela plataforma de pagamento, sem perguntas.</div></div>
+    </div>
+    <div class="valor">
+      <div class="de">De <s>R$ 64</s> por</div>
+      <div class="por"><small>R$</small>35</div>
+      <div class="parc">no Pix ou no cartão</div>
+      <a class="btn comprar" href="https://pay.cakto.com.br/3dwz4cv_1341009" data-checkout>Quero o pacote <span class="seta">→</span></a>
+      <div style="font-size:13px;color:var(--ink2);margin-top:12px">Acesso com o e-mail da compra, logo após o pagamento.</div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div><div class="logo" style="font-size:16px">mapa da <span>chave</span></div>Material informativo. Não constitui assessoria jurídica ou financeira.</div>
+  <div>Contato: <a href="mailto:mapadachaveoficial@gmail.com">mapadachaveoficial@gmail.com</a></div>
+</div></footer>
+<div class="barra"><div><small style="color:var(--ink2);font-size:12px"><s>R$ 64</s></small><br><b>R$ 35</b></div><a class="btn sm comprar" href="https://pay.cakto.com.br/3dwz4cv_1341009" data-checkout>Quero o pacote <span class="seta">→</span></a></div>
+<script>
+const CK="https://pay.cakto.com.br/3dwz4cv_1341009",q=new URLSearchParams(location.search),fwd=new URLSearchParams();
+["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid"].forEach(k=>{if(q.get(k))fwd.set(k,q.get(k))});
+if(!fwd.get("utm_content"))fwd.set("utm_content","pacote35");
+document.querySelectorAll("[data-checkout]").forEach(a=>{a.href=CK+"?"+fwd;a.addEventListener("click",()=>{if(window.fbq)fbq("track","InitiateCheckout",{value:35,currency:"BRL",content_name:"Pacote completo"})})});
+</script>
+</body>
+</html>
