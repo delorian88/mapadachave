@@ -19,7 +19,7 @@
 :root{--ink:#2C2C2A;--ink2:#5F5E5A;--ink3:#8C8A83;--line:#E4E1D6;--line2:#D3D1C7;--paper:#FFFFFF;--sand:#F7F5EF;--sand2:#EFECE3;--amber:#EF9F27;--amber-d:#BA7517;--amber-l:#FAEEDA;--ok:#2E8B57;--ok-l:#E3F2E8;--warn:#C98A12;--warn-l:#FBF1DA;--bad:#C4422B;--bad-l:#F9E3DE;--r:18px;--sb:env(safe-area-inset-bottom,0px);--st:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--sand);color:var(--ink);font:400 15px/1.45 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
-body{min-height:100dvh;overscroll-behavior-y:none}
+body{min-height:100svh;overscroll-behavior-y:none}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none;padding:0}
 a{color:inherit;text-decoration:none}
@@ -710,7 +710,9 @@ function nav(){var a=[['inicio','casa','Início'],['ferramentas','grade','Ferram
  return '<nav class="nav"><div>'+a.map(function(x){return '<a href="#'+x[0]+'" class="'+(grupo===x[0]?'on':'')+'">'+ic(x[1])+x[2]+'</a>'}).join('')+'</div></nav>'}
 var TELAS={};
 function render(){fecha();var h=(location.hash||'#inicio').slice(1)||'inicio';R.rota=h;var p=h.split('/'),f=TELAS[p[0]]||TELAS.inicio;if(toolT(p[0]).t){D.ui.ult=D.ui.ult||{};D.ui.ult[p[0]]=Date.now();try{localStorage.setItem('mc_app',JSON.stringify(D))}catch(e){}}
- var app=$('#app');app.innerHTML='<div class="wrap fade">'+f.html(p[1])+'</div>'+nav();if(f.liga)f.liga(app,p[1]);window.scrollTo(0,0)}
+ var app=$('#app');app.innerHTML='<div class="wrap fade">'+f.html(p[1])+'</div>'+nav();if(f.liga)f.liga(app,p[1]);topo0()}
+function topo0(){window.scrollTo(0,0);requestAnimationFrame(function(){window.scrollTo(0,0);setTimeout(function(){if(window.scrollY&&document.documentElement.scrollHeight<=innerHeight+80)window.scrollTo(0,0)},350)})}
+try{history.scrollRestoration='manual'}catch(e){}
 window.addEventListener('hashchange',render);
 
 /* ---------- telas ---------- */
@@ -1002,7 +1004,7 @@ TELAS.dados={html:function(){var on=!!D.ui.nuvem;return topo('Cópia de seguran�
 /* ---------- acesso ---------- */
 var API='https://script.google.com/macros/s/AKfycbzTbsy948uaQNDFYe3fN5g9bkyHBIV4rncoNuGaclEId2uIyPGiXk08ejP1A-9eEQ22Bw/exec';
 var FB={apiKey:'AIzaSyCrhKNk0ULzZH8Fc10QhTxLHGQcdCcC7wU',authDomain:'mapa-da-chave-app.firebaseapp.com',projectId:'mapa-da-chave-app',appId:'1:214886719248:web:5dc5a20cca352aaa4f0f95'};
-var VER='1.20',S=null,fbOk=false;
+var VER='1.21',S=null,fbOk=false;
 function lerS(){try{return JSON.parse(localStorage.getItem('mc_s')||'null')}catch(e){return null}}
 function gravaS(o){S=o;try{localStorage.setItem('mc_s',JSON.stringify(o))}catch(e){}}
 function sair(){try{localStorage.removeItem('mc_s')}catch(e){}S=null;try{fbOk&&firebase.auth().signOut()}catch(e){}history.replaceState(null,'',location.pathname);porta()}
