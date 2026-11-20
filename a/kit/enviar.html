@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Mapa da Chave</title></head>
+<body style="font-family:sans-serif;padding:24px">
+<p id="s">Enviando imagens...</p>
+<script>
+(async () => {
+  const s = document.getElementById("s");
+  try {
+    const n = +(new URLSearchParams(location.search).get("n") || 17);
+    const kit = [];
+    for (let i = 1; i <= n; i++) {
+      const nome = "mc_kit_" + String(i).padStart(2, "0") + ".jpg";
+      const r = await fetch(nome, { cache: "no-store" });
+      kit.push({ nome, blob: await r.blob() });
+    }
+    if (!window.opener) { s.textContent = "Sem janela de origem."; return; }
+    window.opener.postMessage({ kit }, "*");
+    s.textContent = "Enviado: " + kit.length + " imagens. Pode fechar esta aba.";
+    setTimeout(() => window.close(), 1500);
+  } catch (e) { s.textContent = "Erro: " + e; }
+})();
+</script>
+</body>
+</html>
