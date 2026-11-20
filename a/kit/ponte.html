@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Mapa da Chave</title></head>
+<body style="font-family:sans-serif;padding:24px">
+<p id="s">Carregando...</p>
+<script>
+// Busca arquivos (?u=url|nome repetido) e entrega à janela que abriu esta aba.
+(async () => {
+  const s = document.getElementById("s");
+  try {
+    const q = new URLSearchParams(location.search).getAll("u");
+    const arq = [];
+    for (const item of q) {
+      const i = item.lastIndexOf("|");
+      const url = item.slice(0, i), nome = item.slice(i + 1);
+      const r = await fetch(url);
+      arq.push({ nome, blob: await r.blob() });
+    }
+    if (!window.opener) { s.textContent = "Sem janela de origem."; return; }
+    window.opener.postMessage({ kit: arq }, "*");
+    s.textContent = "Enviado: " + arq.length + ". Pode fechar.";
+    setTimeout(() => window.close(), 1500);
+  } catch (e) { s.textContent = "Erro: " + e; }
+})();
+</script>
+</body>
+</html>
